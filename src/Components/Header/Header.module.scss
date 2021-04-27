@@ -1,0 +1,74 @@
+.Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    background: rgb(241, 241, 241);
+    box-shadow: 0 0 5px 0 gray;
+    transform: translateX(-300px);
+    transition: transform 0.3s ease-in-out;
+    z-index: 10;
+
+    &.open {
+        transform: translateX(0);
+        z-index: 100;
+    }
+
+    .cross {
+        position: absolute;
+        right: -50px;
+        top: 30px;
+        cursor: pointer;
+        font-size: 25px;
+    }
+
+    ul {
+        list-style: none;
+        margin-top: 70px;
+
+        li {
+            font-size: 20px;
+            margin: 20px;
+            cursor: pointer;
+            vertical-align: middle;
+
+            a {
+                color: black;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                &.active {
+                    color: coral;
+                }
+
+                i {
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: none;
+    transition: background 0.3s ease-in-out;
+    z-index: 0;
+
+    &.open {
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+    }
+
+    &.hidden {
+        display: none;
+    }
+}

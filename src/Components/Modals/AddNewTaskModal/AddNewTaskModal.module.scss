@@ -1,0 +1,85 @@
+.Overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+
+    .Modal {
+        background-color: #fff;
+        width: 500px;
+        height: 550px;
+        border-radius: 25px;
+        box-sizing: border-box;
+        padding: 25px;
+        position: relative;
+
+        .Cross {
+            cursor: pointer;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 20px;
+            transition: all 0.1s ease-in;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 27px;
+            padding: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 35px;
+            padding: 15px;
+
+            input,
+            textarea {
+                width: 95%;
+                background-color: transparent;
+                border: none;
+                border-bottom: 1px solid #000;
+                outline: none;
+                font-family: inherit;
+                font-size: 18px;
+                box-sizing: border-box;
+                padding-left: 10px;
+
+                &:invalid:focus {
+                    border-bottom: 1px solid red;
+                }
+            }
+
+            textarea {
+                border: 1px solid #000;
+                height: 70px !important;
+                resize: none;
+                border-radius: 5px;
+            }
+
+            button {
+                border: none;
+                border-radius: 15px;
+                align-self: center;
+                font-family: inherit;
+                font-size: 15px;
+                padding: 10px;
+                cursor: pointer;
+                background: lightgray;
+
+                &:hover {
+                    box-shadow: 0 0 3px 0 rgb(148, 148, 148);
+                }
+            }
+        }
+    }
+}

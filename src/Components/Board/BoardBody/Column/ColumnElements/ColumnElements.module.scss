@@ -1,0 +1,47 @@
+.ColumnElements {
+    list-style: none;
+
+    .Element {
+        border-radius: 10px;
+        box-shadow: 3px 3px 2px 0 grey;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        cursor: pointer;
+        background: white;
+        word-wrap: break-word;
+
+        &.dragging {
+            //box-shadow: -3px -3px 2px 0 grey;
+            //background: rgb(238, 238, 238);
+        }
+
+        h3 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 12px;
+            margin-bottom: 0;
+
+            span {
+                padding: 2px 5px;
+                border-radius: 7px;
+
+                &.High {
+                    background: orangered;
+                }
+
+                &.Medium {
+                    background: orange;
+                }
+
+                &.Low {
+                    background: greenyellow;
+                }
+            }
+        }
+    }
+}

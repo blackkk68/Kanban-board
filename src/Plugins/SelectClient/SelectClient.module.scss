@@ -1,0 +1,66 @@
+.Select {
+    width: 95%;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+
+    .SelectInput {
+        .Input {
+            width: 100%;
+        }
+
+        .Img {
+            position: absolute;
+            font-size: 18px;
+            padding: 3px;
+            right: 0;
+            top: 0;
+            color: gray;
+            transition: color 0.1s ease-in;
+
+            &:hover {
+                color: black;
+            }
+        }
+    }
+
+    .SelectOptions {
+        overflow: hidden;
+        border-radius: 10px;
+        border: 1px solid gray;
+        width: 99.5%;
+        position: absolute;
+
+        &.hidden {
+            display: none;
+        }
+
+        .OptionsList {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            max-height: 100px;
+
+            &.Scrollable {
+                overflow-y: scroll;
+            }
+
+            li {
+                padding: 5px 15px;
+                border-bottom: 1px solid gray;
+                height: 20px;
+                background: white;
+                transition: background 0.1s ease-in;
+                font-size: 15px;
+
+                &:last-child {
+                    border: none;
+                }
+
+                &:hover {
+                    background: rgb(243, 243, 243);
+                }
+            }
+        }
+    }
+}
