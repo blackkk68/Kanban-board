@@ -1,0 +1,52 @@
+.Button {
+    padding: 10px 15px;
+    font-size: 17px;
+    font-family: inherit;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+.Button.primary {
+    color: rgb(2, 255, 179);
+    border: 2px solid rgb(2, 255, 179);
+
+    &:hover {
+        color: white;
+        background: rgb(2, 255, 179);
+    }
+
+    &:active {
+        box-shadow: 0 0 1px 0 darken(rgb(2, 255, 179), 25%);
+    }
+}
+
+.Button.delete {
+    color: rgb(255, 68, 0);
+    border: 2px solid rgb(255, 68, 0);
+
+    &:hover {
+        color: white;
+        background: rgb(255, 68, 0);
+    }
+
+    &:active {
+        box-shadow: 0 0 1px 0 darken(rgb(255, 68, 0), 25%);
+    }
+}
+
+.Button.cancel {
+    color: lightsteelblue;
+    border: 2px solid lightsteelblue;
+
+    &:hover {
+        color: white;
+        background: lightsteelblue;
+    }
+
+    &:active {
+        box-shadow: 0 0 1px 0 darken(lightsteelblue, 25%);
+    }
+}

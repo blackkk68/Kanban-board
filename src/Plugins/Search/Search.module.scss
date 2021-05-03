@@ -4,7 +4,7 @@
     border-radius: 10px;
 
     &.open {
-        outline: 2px solid rgb(167, 167, 167);
+        outline: 2px solid #5f6080;
     }
 
     .searchInput {
@@ -15,7 +15,9 @@
         font-family: inherit;
         font-weight: 400;
         width: 0;
+        color: inherit;
         transition: width 0.3s ease-in-out;
+        background-color: transparent;
 
         &.open {
             width: 250px;
@@ -25,22 +27,14 @@
     i {
         cursor: pointer;
         font-size: 35px;
-        color: lightslategray;
-        transition: background 0.15s ease-in;
+        color: #5f6080;
+        transition: color 0.1s ease-in;
         border-radius: 10px;
         padding: 5px;
         box-sizing: border-box;
 
         &:hover {
-            background: rgb(238, 238, 238);
-        }
-
-        &:active {
-            color: darken(lightslategray, 10%);
-        }
-
-        &.searchIcon.open:hover {
-            background: none;
+            color: lighten(#5f6080, 20%);
         }
 
         &.cross {

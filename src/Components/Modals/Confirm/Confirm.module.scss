@@ -1,0 +1,52 @@
+.Overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: opacity 0.2s;
+
+    .Modal {
+        background-color: #fff;
+        width: 420px;
+        height: 250px;
+        border-radius: 15px;
+        box-sizing: border-box;
+        padding: 25px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        i {
+            cursor: pointer;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 27px;
+            padding: 5px;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        p {
+            text-align: center;
+            line-height: 25px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+}

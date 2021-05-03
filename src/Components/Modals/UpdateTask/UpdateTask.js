@@ -1,9 +1,13 @@
 import React, { useState, useRef } from 'react';
-import classes from './UpdateTaskModal.module.scss';
+import classes from './UpdateTask.module.scss';
 import SelectClient from '../../../Plugins/SelectClient/SelectClient';
 import SelectPrioprity from '../../../Plugins/SelectPriority/SelectPriority';
+import Input from '../../../Plugins/Input/Input';
+import Textarea from '../../../Plugins/Textarea/Textarea';
+import Button from '../../../Plugins/Button/Button';
 
-function UpdateCurrentTask(props) {
+function UpdateTask(props) {
+    const archive = JSON.parse(localStorage.getItem('archive'));
     const columns = JSON.parse(localStorage.getItem('columns'));
     const column = columns.find(item => item.id === props.colId);
     const tasks = column.tasks;
@@ -35,7 +39,10 @@ function UpdateCurrentTask(props) {
 
     function removeTask() {
         const taskIndex = tasks.findIndex(item => item.id === task.id);
-        tasks.splice(taskIndex, 1);
+        const archiveItem = tasks.splice(taskIndex, 1)[0];
+        archiveItem.columnId = props.colId;
+        archive.push(archiveItem);
+        localStorage.setItem('archive', JSON.stringify(archive));
         props.updateColumns(columns);
     }
 
@@ -62,31 +69,25 @@ function UpdateCurrentTask(props) {
                 <i className={`fa fa-times ${classes.Cross}`} onClick={() => updateTask()}></i>
                 <h2>Задача</h2>
                 <form onKeyDown={keyHandler}>
-                    <input
-                        type='text'
-                        id='task-heading'
+                    <Input
                         placeholder='Название'
                         value={taskHeading}
                         onChange={evt => setTaskHeading(evt.target.value)}
                         autoFocus={true}
                         required />
-                    <input
-                        type='text'
-                        id='task-text'
+                    <Input
                         placeholder='Описание'
                         value={taskText}
                         onChange={evt => setTaskText(evt.target.value)} />
                     <SelectPrioprity currentValue={priority} updatePriority={updatePriority} />
                     <SelectClient currentValue={client} updateClient={updateClient} />
-                    <textarea
-                        type='text'
-                        id='task-comment'
+                    <Textarea
                         placeholder='Комментарий'
                         value={taskComment}
                         onChange={evt => setTaskComment(evt.target.value)} />
-                    <div className={classes.Buttons}>
-                        <button onClick={() => updateTask()} className={classes.accept}>Принять</button>
-                        <button onClick={deleteClickHandler} className={classes.delete}>Удалить</button>
+                    <div className={classes.buttons}>
+                        <Button cls='primary' onClick={() => updateTask()} className={classes.accept} text='Сохранить' />
+                        <Button cls='delete' onClick={deleteClickHandler} className={classes.delete} text='Удалить' />
                     </div>
                 </form>
             </div>
@@ -94,4 +95,4 @@ function UpdateCurrentTask(props) {
     )
 }
 
-export default UpdateCurrentTask;
+export default UpdateTask;

@@ -4,16 +4,16 @@
     grid-template-rows: auto 1fr;
 
     .header {
-        width: 90%;
+        width: 87%;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid #000;
-        padding: 20px;
+        border-bottom: 1px solid #5f6080;
+        padding: 20px 45px;
 
         .heading {
-            margin: 0 35px;
+            margin: 0;
             font-size: 37px;
             text-align: left;
         }
@@ -26,18 +26,14 @@
             i {
                 cursor: pointer;
                 font-size: 35px;
-                color: lightslategray;
-                transition: background 0.15s ease-in;
+                color: #5f6080;
+                transition: color 0.1s ease-in;
                 border-radius: 10px;
                 padding: 5px;
                 box-sizing: border-box;
 
                 &:hover {
-                    background: rgb(238, 238, 238);
-                }
-
-                &:active {
-                    color: darken(lightslategray, 10%);
+                    color: lighten(#5f6080, 20%);
                 }
             }
         }

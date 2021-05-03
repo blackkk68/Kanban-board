@@ -1,102 +1,95 @@
 import React, { useState, useRef } from 'react';
-import classes from './AddNewClientModal.module.scss';
+import classes from './UpdateClient.module.scss';
+import Input from '../../../Plugins/Input/Input';
+import Textarea from '../../../Plugins/Textarea/Textarea';
+import Button from '../../../Plugins/Button/Button';
 
-function AddNewClientModal(props) {
-    const [companyTitle, setCompanyTitle] = useState('');
-    const [contact, setContact] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
-    const [comment, setComment] = useState('');
+function UpdateClient(props) {
+    const clients = JSON.parse(localStorage.getItem('clients'));
+    const currentClientIndex = clients.findIndex(item => item.id === props.clientId);
+    const client = clients[currentClientIndex] || {};
+    const [companyTitle, setCompanyTitle] = useState(client.companyTitle);
+    const [contact, setContact] = useState(client.contact);
+    const [phone, setPhone] = useState(client.phone);
+    const [email, setEmail] = useState(client.email);
+    const [address, setAddress] = useState(client.address);
+    const [comment, setComment] = useState(client.comment);
     const overlayRef = useRef(null);
 
-    class Client {
-        constructor(options) {
-            this.companyTitle = options.companyTitle;
-            this.contact = options.contact;
-            this.phone = options.phone;
-            this.email = options.email;
-            this.address = options.address;
-            this.comment = options.comment;
-            this.id = new Date().getTime();
-        }
-    }
-
-    function addNewClient() {
-        const clients = JSON.parse(localStorage.getItem('clients'));
-        const newClient = new Client({ companyTitle, contact, phone, email, address, comment });
-        clients.push(newClient);
-        clients.sort((a, b) => a.companyTitle > b.companyTitle);
+    function updateClient() {
+        client.companyTitle = companyTitle;
+        client.contact = contact;
+        client.phone = phone;
+        client.email = email;
+        client.address = address;
+        client.comment = comment;
         props.updateClients(clients);
-    }
-
-    function resetStates() {
-        setCompanyTitle('');
-        setContact('');
-        setPhone('');
-        setEmail('');
-        setAddress('');
-        setComment('');
     }
 
     function overlayClickHandler(evt) {
         if (evt.target.contains(overlayRef.current)) {
+            updateClient();
             props.closeModal();
         }
     }
 
     function crossClickHandler() {
+        updateClient();
         props.closeModal();
+    }
+
+    function deleteClient() {
+        clients.splice(currentClientIndex, 1);
+        props.updateClients(clients);
     }
 
     function submitHandler(evt) {
         evt.preventDefault();
-        addNewClient();
+        updateClient();
         props.closeModal();
-        resetStates();
     }
 
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal}>
                 <i className="fa fa-times" onClick={crossClickHandler}></i>
-                <h2>Новый клиент</h2>
+                <h2>Редактировать данные клиента</h2>
                 <form onSubmit={submitHandler}>
-                    <input
-                        type='text'
+                    <Input
                         placeholder='Название организации'
                         autoFocus={true} value={companyTitle}
                         onChange={evt => setCompanyTitle(evt.target.value)}
                         required />
-                    <input
-                        type='text'
+                    <Input
                         placeholder='Контактное лицо'
                         value={contact}
                         onChange={evt => setContact(evt.target.value)} />
-                    <input
+                    <Input
                         type='tel'
                         placeholder='Телефон'
                         value={phone}
                         onChange={evt => setPhone(evt.target.value)} />
-                    <input
+                    <Input
                         type='email'
                         placeholder='Email'
                         value={email}
                         onChange={evt => setEmail(evt.target.value)} />
-                    <input
-                        ype='text' placeholder='Адрес'
+                    <Input
+                        placeholder='Адрес'
                         value={address}
                         onChange={evt => setAddress(evt.target.value)} />
-                    <textarea
-                        type='text'
+                    <Textarea
                         placeholder='Комментарий'
                         value={comment}
                         onChange={evt => setComment(evt.target.value)} />
-                    <button type='submit'>Добавить</button>
+                    <div className={classes.buttons}>
+                        <Button cls='primary' type='submit' text='Сохранить' />
+                        <Button cls='delete' onClick={deleteClient} text='Удалить' />
+                    </div>
                 </form>
             </div>
         </div>
     )
 }
 
-export default AddNewClientModal;
+export default UpdateClient;

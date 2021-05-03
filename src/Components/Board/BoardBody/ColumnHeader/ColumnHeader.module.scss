@@ -1,0 +1,54 @@
+.ColumnHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    .headerContainer {
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 10px 25px 0 25px;
+
+        .heading {
+            height: 30px;
+            font-size: 27px;
+            margin: 15px 0;
+            padding: 7px 5px;
+            font-family: inherit;
+            font-weight: 600;
+            outline: none;
+            color: inherit;
+
+            &.input {
+                background-color: transparent;
+                border: none;
+                width: 250px;
+            }
+
+            &.text {
+                border: none;
+                cursor: default;
+                max-width: 240px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                background: #f7f8fc;
+            }
+        }
+
+        i {
+            display: inline-block;
+            font-size: 25px;
+            cursor: pointer;
+            padding: 1px;
+
+            &.hidden {
+                display: none;
+            }
+        }
+    }
+}

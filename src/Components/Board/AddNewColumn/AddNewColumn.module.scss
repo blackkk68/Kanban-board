@@ -5,7 +5,7 @@
     align-items: center;
 
     &.open {
-        outline: 2px solid rgb(167, 167, 167);
+        outline: 2px solid #5f6080;
     }
 
     .input {
@@ -16,7 +16,9 @@
         box-sizing: border-box;
         outline: none;
         width: 0;
+        color: inherit;
         transition: width 0.3s ease-in-out;
+        background-color: transparent;
 
         &.open {
             width: 250px;
@@ -27,14 +29,14 @@
     .plus {
         cursor: pointer;
         font-size: 35px;
-        color: lightslategray;
-        transition: background 0.15s ease-in;
+        color: #5f6080;
+        transition: color 0.1s ease-in;
         border-radius: 10px;
         padding: 5px;
         box-sizing: border-box;
 
         &:hover {
-            background: rgb(238, 238, 238);
+            color: lighten(#5f6080, 20%);
         }
     }
 }

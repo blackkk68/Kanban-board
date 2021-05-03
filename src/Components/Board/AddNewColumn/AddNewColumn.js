@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import classes from './AddNewColumn.module.scss';
 
 function AddNewColumn(props) {
+    const columns = JSON.parse(localStorage.getItem('columns'));
+    const newColIndex = columns ? ++columns.length : 1;
     const [inputValue, setInputValue] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const componentRef = useRef(null);
@@ -24,13 +26,14 @@ function AddNewColumn(props) {
             this.id = new Date().getTime();
             this.heading = heading;
             this.tasks = [];
+            this.index = newColIndex;
         }
     }
 
     function addColumn() {
         const newColumn = new Column(inputValue);
         const columns = JSON.parse(localStorage.getItem('columns'));
-        if (columns) {
+        if (!!columns) {
             columns.push(newColumn);
             props.updateColumns(columns);
         } else {
@@ -39,15 +42,17 @@ function AddNewColumn(props) {
     }
 
     function plusClickHandler() {
-        if (inputValue) {
-            addColumn();
-            setIsOpen(false);
-            setInputValue('');
-        } else {
-            isOpen ? setIsOpen(false) : setIsOpen(true);
-            setTimeout(() => {
-                inputRef.current.focus();
-            }, 0);
+        if (columns.length <= 6) {
+            if (inputValue) {
+                addColumn();
+                setIsOpen(false);
+                setInputValue('');
+            } else {
+                isOpen ? setIsOpen(false) : setIsOpen(true);
+                setTimeout(() => {
+                    inputRef.current.focus();
+                }, 0);
+            }
         }
     }
 

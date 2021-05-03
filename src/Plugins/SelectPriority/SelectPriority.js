@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import classes from './SelectPriority.module.scss';
+import Input from '../Input/Input';
 
 function Select(props) {
     const [isSelectOpen, setIsSelectOpen] = useState(false);
@@ -7,7 +8,9 @@ function Select(props) {
     const ref = useRef(null);
 
     function inputClickHandler() {
-        setIsSelectOpen(isSelectOpen ? false : true);
+        if (!props.disabled) {
+            setIsSelectOpen(isSelectOpen ? false : true);
+        }
     }
 
     function priorityClickHandler(value) {
@@ -44,11 +47,11 @@ function Select(props) {
     return (
         <div className={classes.Select} ref={ref}>
             <div className={classes.SelectInput}>
-                <input className={classes.Input} onClick={inputClickHandler} value={inputValue} placeholder='Приоритет' readOnly />
-                {inputValue ? <i className={`fa fa-times ${classes.Img}`} onClick={resetSelect} id='cross'></i> : null}
+                <Input onClick={inputClickHandler} value={inputValue} placeholder='Приоритет' readOnly />
+                {inputValue && !props.disabled ? <i className={`fa fa-times ${classes.cross}`} onClick={resetSelect} id='cross'></i> : null}
             </div>
-            <div className={`${classes.SelectOptions} ${isSelectOpen ? '' : classes.hidden}`}>
-                <ul className={classes.OptionsList}>
+            <div className={`${classes.selectOptions} ${isSelectOpen ? '' : classes.hidden}`}>
+                <ul className={classes.optionsList}>
                     <li onClick={() => priorityClickHandler('Низкий')}>Низкий</li>
                     <li onClick={() => priorityClickHandler('Средний')}>Средний</li>
                     <li onClick={() => priorityClickHandler('Высокий')}>Высокий</li>

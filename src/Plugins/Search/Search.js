@@ -37,6 +37,8 @@ function Search(props) {
             props.setSearchClients(value);
         } else if (props.setColumnsSearch) {
             props.setColumnsSearch(value);
+        } else if (props.setArchiveSearch) {
+            props.setArchiveSearch(value);
         }
     }
 
@@ -50,7 +52,8 @@ function Search(props) {
                 value={searchInputValue}
                 onChange={inputChangeHndler}
                 onBlur={searchInputBlurHandler}
-                placeholder='Искать...' />
+                placeholder='Искать...'
+                readOnly={!isSearchInputOpen} />
             {isSearchInputOpen
                 ? <i className={`fa fa-times ${classes.cross} ${searchInputValue ? classes.shown : ''}`} onClick={crossClickHandler}></i>
                 : null}

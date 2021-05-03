@@ -26,8 +26,8 @@ function ColumnElements(props) {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}>
+                            {item.priority ? <p className={cls}>{`${item.priority} приоритет`}</p> : null}
                             <h3>{item.heading}</h3>
-                            {item.priority ? <p>Приоритет: <span className={cls}>{item.priority.toLowerCase()}</span></p> : null}
                         </li>
                     )
                 }}
@@ -36,7 +36,7 @@ function ColumnElements(props) {
     })
 
     function elemClickHandler(taskId) {
-        props.openCurrentTaskModal(true, props.columnId, taskId);
+        props.openCurrentTaskModal(props.columnId, taskId);
     }
 
     return (

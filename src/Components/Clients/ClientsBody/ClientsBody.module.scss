@@ -3,7 +3,7 @@
     box-sizing: border-box;
     position: relative;
 
-    .ClientsListHeader {
+    .clientsListHeader {
         margin: 0 150px;
         padding: 0 15px;
         display: flex;
@@ -31,9 +31,51 @@
         }
     }
 
-    .ClientsList {
+    .clientsList {
         list-style: none;
         margin: 0;
         padding: 0;
+
+        .client {
+            margin: 0 150px;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid rgb(165, 165, 165);
+            border-radius: 10px;
+            margin-bottom: 1px;
+            cursor: pointer;
+            transition: background 0.1s ease-in;
+
+            &:hover {
+                background: darken(#f7f8fc, 5%);
+            }
+
+            p {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                box-sizing: border-box;
+                padding-right: 10px;
+
+                &:nth-child(1) {
+                    width: 30%;
+                }
+
+                &:nth-child(2) {
+                    width: 30%;
+                }
+
+                &:nth-child(3) {
+                    width: 20%;
+                }
+
+                &:nth-child(4) {
+                    width: 20%;
+                    text-align: right;
+                    padding-right: 0;
+                }
+            }
+        }
     }
 }

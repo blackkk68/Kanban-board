@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import classes from './SelectClient.module.scss';
+import Input from '../Input/Input';
 
 function Select(props) {
     const clients = JSON.parse(localStorage.getItem('clients'));
@@ -10,7 +11,9 @@ function Select(props) {
     const ref = useRef(null);
 
     function inputClickHandler() {
-        setIsSelectOpen(isSelectOpen ? false : true);
+        if (!props.disabled) {
+            setIsSelectOpen(isSelectOpen ? false : true);
+        }
     }
 
     function inputChangeHandler(evt) {
@@ -54,17 +57,17 @@ function Select(props) {
 
     return (
         <div className={classes.Select} ref={ref}>
-            <div className={classes.SelectInput}>
-                <input
-                    className={classes.Input}
+            <div>
+                <Input
                     placeholder='Назначить клиента'
                     value={inputValue}
                     onChange={inputChangeHandler}
-                    onClick={inputClickHandler} />
-                {inputValue ? <i className={`fa fa-times ${classes.Img}`} onClick={resetSelect} id='cross'></i> : null}
+                    onClick={inputClickHandler}
+                    readOnly={props.disabled} />
+                {inputValue && !props.disabled ? <i className={`fa fa-times ${classes.cross}`} onClick={resetSelect} id='cross'></i> : null}
             </div>
-            <div className={`${classes.SelectOptions} ${(isSelectOpen && filteredClientsList.length) ? '' : classes.hidden}`}>
-                <ul className={`${classes.OptionsList} ${filteredClientsList.length > 3 ? classes.Scrollable : ''}`}>
+            <div className={`${classes.selectOptions} ${(isSelectOpen && filteredClientsList.length) ? '' : classes.hidden}`}>
+                <ul className={`${classes.optionsList} ${filteredClientsList.length > 3 ? classes.scrollable : ''}`}>
                     {filteredClientsList.map(item => {
                         return <li onClick={() => clientClickHandler(item)} key={item.id}>{item.companyTitle}</li>
                     })}

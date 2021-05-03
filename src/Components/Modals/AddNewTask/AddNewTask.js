@@ -1,9 +1,12 @@
 import React, { useState, useRef } from 'react';
-import classes from './AddNewTaskModal.module.scss';
+import classes from './AddNewTask.module.scss';
 import SelectClient from '../../../Plugins/SelectClient/SelectClient';
 import SelectPrioprity from '../../../Plugins/SelectPriority/SelectPriority';
+import Input from '../../../Plugins/Input/Input';
+import Textarea from '../../../Plugins/Textarea/Textarea';
+import Button from '../../../Plugins/Button/Button';
 
-function AddNewTaskModal(props) {
+function AddNewTask(props) {
     const [taskHeading, setTaskHeading] = useState('');
     const [taskText, setTaskText] = useState('');
     const [taskComment, setTaskComment] = useState('');
@@ -74,36 +77,33 @@ function AddNewTaskModal(props) {
         }
     }
 
-    const modal = <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
-        <div className={classes.Modal}>
-            <i className={`fa fa-times ${classes.Cross}`} onClick={crossClickHandler}></i>
-            <h2>Новая задача</h2>
-            <form onSubmit={submitHandler} onKeyDown={keyHandler}>
-                <input
-                    type='text'
-                    value={taskHeading}
-                    onChange={evt => setTaskHeading(evt.target.value)}
-                    placeholder='Название'
-                    autoFocus={true}
-                    required />
-                <input
-                    type='text'
-                    value={taskText}
-                    onChange={evt => setTaskText(evt.target.value)}
-                    placeholder='Описание' />
-                <SelectPrioprity addPriority={addPriority} />
-                <SelectClient addClient={addClient} />
-                <textarea
-                    type='text'
-                    value={taskComment}
-                    onChange={evt => setTaskComment(evt.target.value)}
-                    placeholder='Комментарий' />
-                <button type='submit'>Добавить</button>
-            </form>
+    return (
+        <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
+            <div className={classes.Modal}>
+                <i className={`fa fa-times ${classes.Cross}`} onClick={crossClickHandler}></i>
+                <h2>Новая задача</h2>
+                <form onSubmit={submitHandler} onKeyDown={keyHandler}>
+                    <Input
+                        value={taskHeading}
+                        onChange={evt => setTaskHeading(evt.target.value)}
+                        placeholder='Название'
+                        autoFocus={true}
+                        required />
+                    <Input
+                        value={taskText}
+                        onChange={evt => setTaskText(evt.target.value)}
+                        placeholder='Описание' />
+                    <SelectPrioprity addPriority={addPriority} />
+                    <SelectClient addClient={addClient} />
+                    <Textarea
+                        value={taskComment}
+                        onChange={evt => setTaskComment(evt.target.value)}
+                        placeholder='Комментарий' />
+                    <Button cls='primary' type='submit' text='Добавить' />
+                </form>
+            </div>
         </div>
-    </div>;
-
-    return props.isOpen ? modal : null;
+    )
 }
 
-export default AddNewTaskModal;
+export default AddNewTask;

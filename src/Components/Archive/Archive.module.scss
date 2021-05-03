@@ -1,4 +1,4 @@
-.Board {
+.Archive {
     height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr;
@@ -16,12 +16,6 @@
             margin: 0;
             font-size: 37px;
             text-align: left;
-        }
-
-        .buttons {
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
     }
 }

@@ -1,35 +1,10 @@
 import React, { useState } from 'react';
 import classes from './BoardBody.module.scss';
-import Column from './Column/Column';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import AddNewTaskModal from '../../Modals/AddNewTaskModal/AddNewTaskModal';
-import UpdateTask from '../../Modals/UpdateTaskModal/UpdateTaskModal';
+import ColumnHeader from './ColumnHeader/ColumnHeader';
+import ColumnElements from './ColumnElements/ColumnElements';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function BoardBody(props) {
-    const [isAddNewTaskModalOpen, setIsAddNewTaskModalOpen] = useState(false);
-    const [isCurrentTaskModalOpen, setIsCurrentTaskModalOpen] = useState(false);
-    const [currentColumnId, setCurrentColumnId] = useState('');
-    const [currentTaskId, setCurrentTaskId] = useState('');
-
-    function openAddNewTaskModal(bool, colId) {
-        setIsAddNewTaskModalOpen(bool);
-        setCurrentColumnId(colId);
-    }
-
-    function closeAddNewTaskModal(bool) {
-        setIsAddNewTaskModalOpen(bool);
-    }
-
-    function openCurrentTaskModal(bool, colId, taskId) {
-        setIsCurrentTaskModalOpen(bool);
-        setCurrentColumnId(colId);
-        setCurrentTaskId(taskId)
-    }
-
-    function closeCurrentTaskModal(bool) {
-        setIsCurrentTaskModalOpen(bool);
-    }
-
     function onDragEnd(result) {
         const { destination, source, type } = result;
 
@@ -64,40 +39,55 @@ function BoardBody(props) {
         props.updateColumns(columns);
     }
 
-    return (
-        <React.Fragment>
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId='columns' direction='horizontal' type='column'>
+    const cls = [classes.first, classes.second, classes.third, classes.fourth, classes.fifth, classes.sixth, classes.seventh];
+    const columns = props.columns
+        ? props.columns.map((item, index) => {
+            return (
+                <Draggable draggableId={String(item.id)} index={index} key={item.id}>
                     {provided => {
                         return (
-                            <section className={classes.BoardBody}
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}>
-                                <Column
-                                    columns={props.columns}
+                            <div className={`${classes.column} ${cls[item.index - 1]}`}
+                                key={item.id}
+                                {...provided.draggableProps}
+                                ref={provided.innerRef}
+                                {...provided.dragHandleProps}>
+                                <ColumnHeader
+                                    id={item.id}
+                                    heading={item.heading}
+                                    updateColumns={props.updateColumns} />
+                                <ColumnElements
+                                    tasks={item.tasks}
+                                    columnId={item.id}
                                     updateColumns={props.updateColumns}
-                                    openAddNewTaskModal={openAddNewTaskModal}
-                                    openCurrentTaskModal={openCurrentTaskModal}
+                                    openCurrentTaskModal={props.openCurrentTaskModal}
                                     searchValue={props.searchValue} />
-                                {provided.placeholder}
-                            </section>
+                                <div className={classes.actions}>
+                                    <i className="fa fa-trash-o" onClick={() => props.openConfirmModal(item.id)}></i>
+                                    <i className={`fa fa-plus-square-o ${classes.Plus}`} onClick={() => props.openAddNewTaskModal(item.id)}></i>
+                                </div>
+                            </div>
                         )
                     }}
-                </Droppable>
-            </DragDropContext >
-            <AddNewTaskModal
-                isOpen={isAddNewTaskModalOpen}
-                colId={currentColumnId}
-                closeAddNewTaskModal={closeAddNewTaskModal}
-                updateColumns={props.updateColumns} />
-            {isCurrentTaskModalOpen
-                ? <UpdateTask
-                    updateColumns={props.updateColumns}
-                    closeCurrentTaskModal={closeCurrentTaskModal}
-                    colId={currentColumnId}
-                    taskId={currentTaskId} />
-                : null}
-        </React.Fragment>
+                </Draggable>
+            )
+        })
+        : null;
+
+    return (
+        <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId='columns' direction='horizontal' type='column'>
+                {provided => {
+                    return (
+                        <section className={classes.BoardBody}
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}>
+                            {columns}
+                            {provided.placeholder}
+                        </section>
+                    )
+                }}
+            </Droppable>
+        </DragDropContext >
     )
 }
 
