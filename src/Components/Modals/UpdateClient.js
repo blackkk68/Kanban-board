@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import classes from './UpdateClient.module.scss';
-import Input from '../../../Plugins/Input/Input';
-import Textarea from '../../../Plugins/Textarea/Textarea';
-import Button from '../../../Plugins/Button/Button';
+import classes from './Modal.module.scss';
+import Input from '../../Plugins/Input/Input';
+import Textarea from '../../Plugins/Textarea/Textarea';
+import Button from '../../Plugins/Button/Button';
 
 function UpdateClient(props) {
     const clients = JSON.parse(localStorage.getItem('clients'));
@@ -52,7 +52,7 @@ function UpdateClient(props) {
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal}>
-                <i className="fa fa-times" onClick={crossClickHandler}></i>
+                <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
                 <h2>Редактировать данные клиента</h2>
                 <form onSubmit={submitHandler}>
                     <Input

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import classes from './Confirm.module.scss';
-import Button from '../../../Plugins/Button/Button';
+import classes from './Modal.module.scss';
+import Button from '../../Plugins/Button/Button';
 
 function Confirm(props) {
     const overlayRef = useRef(null);
@@ -21,8 +21,8 @@ function Confirm(props) {
 
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
-            <div className={classes.Modal}>
-                <i className="fa fa-times" onClick={() => props.closeModal()}></i>
+            <div className={classes.Modal} style={{ width: '420px' }}>
+                <i className={`fa fa-times ${classes.cross}`} onClick={() => props.closeModal()}></i>
                 <h2>Удалить этап?</h2>
                 <p>Вы уверены, что хотите удалить этап? Все задачи будут также удалены.</p>
                 <div className={classes.buttons}>

@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import classes from './AddNewTask.module.scss';
-import SelectClient from '../../../Plugins/SelectClient/SelectClient';
-import SelectPrioprity from '../../../Plugins/SelectPriority/SelectPriority';
-import Input from '../../../Plugins/Input/Input';
-import Textarea from '../../../Plugins/Textarea/Textarea';
-import Button from '../../../Plugins/Button/Button';
+import classes from './Modal.module.scss';
+import SelectClient from '../../Plugins/SelectClient/SelectClient';
+import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
+import Input from '../../Plugins/Input/Input';
+import Textarea from '../../Plugins/Textarea/Textarea';
+import Button from '../../Plugins/Button/Button';
 
 function AddNewTask(props) {
     const [taskHeading, setTaskHeading] = useState('');
@@ -79,8 +79,8 @@ function AddNewTask(props) {
 
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
-            <div className={classes.Modal}>
-                <i className={`fa fa-times ${classes.Cross}`} onClick={crossClickHandler}></i>
+            <div className={classes.Modal} style={{ width: '500px' }}>
+                <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
                 <h2>Новая задача</h2>
                 <form onSubmit={submitHandler} onKeyDown={keyHandler}>
                     <Input
@@ -99,7 +99,9 @@ function AddNewTask(props) {
                         value={taskComment}
                         onChange={evt => setTaskComment(evt.target.value)}
                         placeholder='Комментарий' />
-                    <Button cls='primary' type='submit' text='Добавить' />
+                    <div className={classes.buttons}>
+                        <Button cls='primary' type='submit' text='Добавить' style={{}} />
+                    </div>
                 </form>
             </div>
         </div>

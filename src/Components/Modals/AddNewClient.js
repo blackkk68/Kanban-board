@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import classes from './AddNewClient.module.scss';
-import Input from '../../../Plugins/Input/Input';
-import Textarea from '../../../Plugins/Textarea/Textarea';
-import Button from '../../../Plugins/Button/Button';
+import classes from './Modal.module.scss';
+import Input from '../../Plugins/Input/Input';
+import Textarea from '../../Plugins/Textarea/Textarea';
+import Button from '../../Plugins/Button/Button';
 
 function AddNewClient(props) {
     const [companyTitle, setCompanyTitle] = useState('');
@@ -62,7 +62,7 @@ function AddNewClient(props) {
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal}>
-                <i className="fa fa-times" onClick={crossClickHandler}></i>
+                <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
                 <h2>Новый клиент</h2>
                 <form onSubmit={submitHandler}>
                     <Input
@@ -93,7 +93,9 @@ function AddNewClient(props) {
                         placeholder='Комментарий'
                         value={comment}
                         onChange={evt => setComment(evt.target.value)} />
-                    <Button cls='primary' type='submit' text='Добавить' />
+                    <div className={classes.buttons}>
+                        <Button cls='primary' type='submit' text='Добавить' />
+                    </div>
                 </form>
             </div>
         </div>

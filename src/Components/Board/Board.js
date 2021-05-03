@@ -3,9 +3,9 @@ import classes from './Board.module.scss';
 import BoardBody from './BoardBody/BoardBody';
 import AddNewColumn from './AddNewColumn/AddNewColumn';
 import Search from '../../Plugins/Search/Search';
-import AddNewTask from '../Modals/AddNewTask/AddNewTask';
-import UpdateTask from '../Modals/UpdateTask/UpdateTask';
-import Confirm from '../Modals/Confirm/Confirm';
+import AddNewTask from '../Modals/AddNewTask';
+import UpdateTask from '../Modals/UpdateTask';
+import Confirm from '../Modals/Confirm';
 
 function Board() {
     const [columns, setColumns] = useState(JSON.parse(localStorage.getItem('columns')));

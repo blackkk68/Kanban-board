@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import classes from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
+import AuthAndReg from '../Modals/Auth&Reg';
 
 function Header() {
     const [isHeaderOpen, setIsHeaderOpen] = useState(false);
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
     function toggleHeader() {
         setIsHeaderOpen(isHeaderOpen ? false : true);
@@ -11,6 +13,15 @@ function Header() {
 
     function closeHeader() {
         setIsHeaderOpen(false);
+    }
+
+    function enterClickHandler() {
+        setIsAuthModalOpen(true);
+        toggleHeader();
+    }
+
+    function closeModal() {
+        setIsAuthModalOpen(false);
     }
 
     return (
@@ -22,6 +33,10 @@ function Header() {
             <header className={`${classes.Header} ${isHeaderOpen ? classes.open : ''}`}>
                 <li className={`fa ${classes.cross} ${isHeaderOpen ? 'fa-times' : 'fa-bars'}`}
                     onClick={toggleHeader} />
+                <div className={classes.authorization}>
+                    <div className={classes.userIcon}><i className="fa fa-user-o"></i></div>
+                    <div className={classes.userInform} onClick={enterClickHandler}>Войти</div>
+                </div>
                 <nav className={classes.navigation}>
                     <ul>
                         <li onClick={() => setIsHeaderOpen(false)}>
@@ -36,6 +51,9 @@ function Header() {
                     </ul>
                 </nav>
             </header>
+            {isAuthModalOpen
+                ? <AuthAndReg closeModal={closeModal} />
+                : null}
         </React.Fragment>
     )
 }

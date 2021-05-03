@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import classes from './Clients.module.scss';
 import ClientsBody from './ClientsBody/ClientsBody';
 import Search from '../../Plugins/Search/Search';
-import AddNewClient from '../Modals/AddNewClient/AddNewClient';
-import UpdateClient from '../Modals/UpdateClient/UpdateClient';
+import AddNewClient from '../Modals/AddNewClient';
+import UpdateClient from '../Modals/UpdateClient';
 
 function Clients() {
     const [clients, setClients] = useState(JSON.parse(localStorage.getItem('clients')) ? JSON.parse(localStorage.getItem('clients')) : []);
@@ -22,8 +22,9 @@ function Clients() {
         setIsAddClientModalOpen(false);
     }
 
-    function openUpdateClientModal() {
+    function openUpdateClientModal(clientId) {
         setIsUpdateClientModalOpen(true);
+        setCurrentClientId(clientId);
     }
 
     function closeUpdateClientModal() {
@@ -32,10 +33,6 @@ function Clients() {
 
     function updateClients(newClients) {
         setClients(newClients);
-    }
-
-    function setClientId(clientId) {
-        setCurrentClientId(clientId);
     }
 
     localStorage.setItem('clients', JSON.stringify(clients));
@@ -53,8 +50,7 @@ function Clients() {
                 searchValue={searchValue}
                 isAddClientModalOpen={isAddClientModalOpen}
                 clients={filteredClients}
-                openModal={openUpdateClientModal}
-                setClientId={setClientId} />
+                openModal={openUpdateClientModal} />
             {isAddClientModalOpen
                 ? <AddNewClient
                     closeModal={closeAddClientModal}

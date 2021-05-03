@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
-import classes from './UpdateArchivedTask.module.scss';
-import SelectClient from '../../../Plugins/SelectClient/SelectClient';
-import SelectPrioprity from '../../../Plugins/SelectPriority/SelectPriority';
-import Input from '../../../Plugins/Input/Input';
-import Textarea from '../../../Plugins/Textarea/Textarea';
-import Button from '../../../Plugins/Button/Button';
+import classes from './Modal.module.scss';
+import SelectClient from '../../Plugins/SelectClient/SelectClient';
+import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
+import Input from '../../Plugins/Input/Input';
+import Textarea from '../../Plugins/Textarea/Textarea';
+import Button from '../../Plugins/Button/Button';
 
 function UpdateArchiveTask(props) {
     const archive = JSON.parse(localStorage.getItem('archive'));
@@ -49,7 +49,7 @@ function UpdateArchiveTask(props) {
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal}>
-                <i className={`fa fa-times ${classes.Cross}`} onClick={() => props.closeModal()}></i>
+                <i className={`fa fa-times ${classes.cross}`} onClick={() => props.closeModal()}></i>
                 <h2>Задача</h2>
                 <form onSubmit={submitHandler}>
                     <Input

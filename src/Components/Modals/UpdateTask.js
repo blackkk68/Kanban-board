@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import classes from './UpdateTask.module.scss';
-import SelectClient from '../../../Plugins/SelectClient/SelectClient';
-import SelectPrioprity from '../../../Plugins/SelectPriority/SelectPriority';
-import Input from '../../../Plugins/Input/Input';
-import Textarea from '../../../Plugins/Textarea/Textarea';
-import Button from '../../../Plugins/Button/Button';
+import classes from './Modal.module.scss';
+import SelectClient from '../../Plugins/SelectClient/SelectClient';
+import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
+import Input from '../../Plugins/Input/Input';
+import Textarea from '../../Plugins/Textarea/Textarea';
+import Button from '../../Plugins/Button/Button';
 
 function UpdateTask(props) {
     const archive = JSON.parse(localStorage.getItem('archive'));
@@ -65,8 +65,8 @@ function UpdateTask(props) {
 
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
-            <div className={classes.Modal}>
-                <i className={`fa fa-times ${classes.Cross}`} onClick={() => updateTask()}></i>
+            <div className={classes.Modal} style={{ width: '500px' }}>
+                <i className={`fa fa-times ${classes.cross}`} onClick={() => updateTask()}></i>
                 <h2>Задача</h2>
                 <form onKeyDown={keyHandler}>
                     <Input

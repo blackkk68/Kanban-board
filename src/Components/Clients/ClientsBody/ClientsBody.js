@@ -3,8 +3,7 @@ import classes from './ClientsBody.module.scss';
 
 function ClientsBody(props) {
     function clickHandler(clientId) {
-        props.openModal();
-        props.setClientId(clientId);
+        props.openModal(clientId);
     }
 
     return (

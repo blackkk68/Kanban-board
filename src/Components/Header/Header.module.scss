@@ -8,6 +8,11 @@
     transform: translateX(-300px);
     transition: transform 0.3s ease-in-out;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding-top: 50px;
 
     &.open {
         transform: translateX(0);
@@ -22,10 +27,30 @@
         font-size: 25px;
     }
 
+    .authorization {
+        display: flex;
+        align-items: baseline;
+        gap: 25px;
+
+        .userIcon {
+            font-size: 50px;
+        }
+
+        .userInform {
+            font-size: 30px;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
     .navigation {
         ul {
             list-style: none;
             padding: 0;
+            margin: 0;
 
             li {
                 font-size: 20px;
@@ -34,8 +59,10 @@
                 vertical-align: middle;
 
                 a {
+                    display: inline-block;
                     color: inherit;
                     text-decoration: none;
+                    width: 100%;
 
                     &:hover {
                         text-decoration: underline;

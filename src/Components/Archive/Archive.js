@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classes from './Archive.module.scss';
 import Search from '../../Plugins/Search/Search';
 import ArchiveBody from './ArchiveBody/ArchiveBody';
-import UpdateArchivedTask from '../Modals/UpdateArchivedTask/UpdateArchivedTask';
+import UpdateArchivedTask from '../Modals/UpdateArchivedTask';
 
 function Archive() {
     const [archive, setArchive] = useState(localStorage.getItem('archive') ? JSON.parse(localStorage.getItem('archive')) : []);
@@ -30,6 +30,7 @@ function Archive() {
     }
 
     localStorage.setItem('archive', JSON.stringify(archive));
+
     return (
         <React.Fragment>
             <section className={classes.Archive}>
