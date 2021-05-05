@@ -8,7 +8,7 @@ function ClientsBody(props) {
 
     return (
         <section className={classes.ClientsBody}>
-            {props.clients
+            {props.clients.length
                 ? <React.Fragment>
                     <div className={classes.clientsListHeader}>
                         <p>Компания</p>

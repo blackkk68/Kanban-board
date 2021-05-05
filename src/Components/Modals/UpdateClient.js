@@ -7,7 +7,7 @@ import Button from '../../Plugins/Button/Button';
 function UpdateClient(props) {
     const clients = JSON.parse(localStorage.getItem('clients'));
     const currentClientIndex = clients.findIndex(item => item.id === props.clientId);
-    const client = clients[currentClientIndex] || {};
+    const client = clients[currentClientIndex];
     const [companyTitle, setCompanyTitle] = useState(client.companyTitle);
     const [contact, setContact] = useState(client.contact);
     const [phone, setPhone] = useState(client.phone);
@@ -41,12 +41,13 @@ function UpdateClient(props) {
     function deleteClient() {
         clients.splice(currentClientIndex, 1);
         props.updateClients(clients);
+        props.closeModal();
     }
 
     function submitHandler(evt) {
         evt.preventDefault();
-        updateClient();
         props.closeModal();
+        updateClient();
     }
 
     return (

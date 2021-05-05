@@ -50,3 +50,17 @@
         box-shadow: 0 0 1px 0 darken(lightsteelblue, 25%);
     }
 }
+
+.Button.auth {
+    color: #531f6e;
+    border: 2px solid #531f6e;
+
+    &:hover {
+        color: white;
+        background: #531f6e;
+    }
+
+    &:active {
+        box-shadow: 0 0 1px 0 darken(#531f6e, 25%);
+    }
+}

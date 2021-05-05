@@ -40,7 +40,7 @@ function BoardBody(props) {
     }
 
     const cls = [classes.first, classes.second, classes.third, classes.fourth, classes.fifth, classes.sixth, classes.seventh];
-    const columns = props.columns
+    const columns = props.columns.length
         ? props.columns.map((item, index) => {
             return (
                 <Draggable draggableId={String(item.id)} index={index} key={item.id}>
@@ -56,14 +56,19 @@ function BoardBody(props) {
                                     heading={item.heading}
                                     updateColumns={props.updateColumns} />
                                 <ColumnElements
-                                    tasks={item.tasks}
+                                    tasks={item.tasks ? item.tasks : []}
                                     columnId={item.id}
                                     updateColumns={props.updateColumns}
                                     openCurrentTaskModal={props.openCurrentTaskModal}
                                     searchValue={props.searchValue} />
                                 <div className={classes.actions}>
-                                    <i className="fa fa-trash-o" onClick={() => props.openConfirmModal(item.id)}></i>
-                                    <i className={`fa fa-plus-square-o ${classes.Plus}`} onClick={() => props.openAddNewTaskModal(item.id)}></i>
+                                    {item.deletable
+                                        ? <i className="fa fa-trash-o" onClick={() => props.openConfirmModal(item.id)}></i>
+                                        : <span />}
+                                    <i className={`fa fa-plus-square-o ${classes.Plus}`} onClick={() => {
+                                        console.log(item.id);
+                                        props.openAddNewTaskModal(item.id)
+                                    }}></i>
                                 </div>
                             </div>
                         )

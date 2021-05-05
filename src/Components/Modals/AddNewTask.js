@@ -49,7 +49,15 @@ function AddNewTask(props) {
     function addNewTask() {
         if (taskHeading) {
             const columns = JSON.parse(localStorage.getItem('columns'));
-            const colIndex = columns.findIndex(item => item.id === props.colId);
+            const colIndex = columns.findIndex(item => {
+                console.log(item.id);
+                return item.id === props.colId
+            });
+            console.log('props.colId: ', props.colId);
+            console.log('colIndex: ', colIndex);
+            if (!columns[colIndex].tasks) {
+                columns[colIndex].tasks = [];
+            }
             const tasks = columns[colIndex].tasks;
             const newTask = new Task({ taskHeading, taskText, taskComment, client, priority });
             tasks.push(newTask);

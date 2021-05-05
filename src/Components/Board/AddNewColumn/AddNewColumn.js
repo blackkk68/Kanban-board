@@ -27,6 +27,7 @@ function AddNewColumn(props) {
             this.heading = heading;
             this.tasks = [];
             this.index = newColIndex;
+            this.deletable = true;
         }
     }
 

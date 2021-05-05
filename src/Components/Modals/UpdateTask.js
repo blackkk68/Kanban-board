@@ -7,7 +7,7 @@ import Textarea from '../../Plugins/Textarea/Textarea';
 import Button from '../../Plugins/Button/Button';
 
 function UpdateTask(props) {
-    const archive = JSON.parse(localStorage.getItem('archive'));
+    const archive = JSON.parse(localStorage.getItem('archive')) || [];
     const columns = JSON.parse(localStorage.getItem('columns'));
     const column = columns.find(item => item.id === props.colId);
     const tasks = column.tasks;
@@ -42,7 +42,7 @@ function UpdateTask(props) {
         const archiveItem = tasks.splice(taskIndex, 1)[0];
         archiveItem.columnId = props.colId;
         archive.push(archiveItem);
-        localStorage.setItem('archive', JSON.stringify(archive));
+        props.updateArchive(archive);
         props.updateColumns(columns);
     }
 

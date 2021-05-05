@@ -5,11 +5,10 @@ import Search from '../../Plugins/Search/Search';
 import AddNewClient from '../Modals/AddNewClient';
 import UpdateClient from '../Modals/UpdateClient';
 
-function Clients() {
-    const [clients, setClients] = useState(JSON.parse(localStorage.getItem('clients')) ? JSON.parse(localStorage.getItem('clients')) : []);
+function Clients(props) {
     const [searchValue, setSearchValue] = useState('');
     const regexp = new RegExp(`${searchValue}`, 'gi');
-    const filteredClients = clients.filter(item => item.companyTitle.match(regexp));
+    const filteredClients = props.clients.filter(item => item.companyTitle.match(regexp));
     const [isUpdateClientModalOpen, setIsUpdateClientModalOpen] = useState(false);
     const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
     const [currentClientId, setCurrentClientId] = useState('');
@@ -31,12 +30,6 @@ function Clients() {
         setIsUpdateClientModalOpen(false);
     }
 
-    function updateClients(newClients) {
-        setClients(newClients);
-    }
-
-    localStorage.setItem('clients', JSON.stringify(clients));
-
     return (
         <section className={classes.Clients}>
             <div className={classes.header}>
@@ -54,12 +47,12 @@ function Clients() {
             {isAddClientModalOpen
                 ? <AddNewClient
                     closeModal={closeAddClientModal}
-                    updateClients={updateClients} />
+                    updateClients={props.updateClients} />
                 : null}
             {isUpdateClientModalOpen
                 ? <UpdateClient
                     closeModal={closeUpdateClientModal}
-                    updateClients={updateClients}
+                    updateClients={props.updateClients}
                     clientId={currentClientId} />
                 : null}
         </section>

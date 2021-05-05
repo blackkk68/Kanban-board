@@ -41,8 +41,11 @@ function UpdateArchiveTask(props) {
     }
 
     function restoreHandler() {
+        if (!column.tasks) {
+            column.tasks = [];
+        }
         column.tasks.push(task);
-        localStorage.setItem('columns', JSON.stringify(columns));
+        props.updateColumns(columns);
         deleteHandler();
     }
 

@@ -7,18 +7,13 @@ import AddNewTask from '../Modals/AddNewTask';
 import UpdateTask from '../Modals/UpdateTask';
 import Confirm from '../Modals/Confirm';
 
-function Board() {
-    const [columns, setColumns] = useState(JSON.parse(localStorage.getItem('columns')));
+function Board(props) {
     const [isAddNewTaskModalOpen, setIsAddNewTaskModalOpen] = useState(false);
     const [isCurrentTaskModalOpen, setIsCurrentTaskModalOpen] = useState(false);
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [currentColumnId, setCurrentColumnId] = useState('');
     const [currentTaskId, setCurrentTaskId] = useState('');
     const [searchValue, setSearchValue] = useState('');
-
-    function updateColumns(cols) {
-        setColumns(cols);
-    }
 
     function setColumnsSearch(value) {
         setSearchValue(value);
@@ -52,21 +47,19 @@ function Board() {
         setIsConfirmModalOpen(false);
     }
 
-    localStorage.setItem('columns', JSON.stringify(columns));
-
     return (
         <section className={classes.Board}>
             <div className={classes.header}>
                 <h1 className={classes.heading}>Доска задач</h1>
                 <div className={classes.buttons}>
                     <Search setColumnsSearch={setColumnsSearch} />
-                    <AddNewColumn updateColumns={updateColumns} />
+                    <AddNewColumn updateColumns={props.updateColumns} />
                 </div>
             </div>
             <BoardBody
                 searchValue={searchValue}
-                columns={columns}
-                updateColumns={updateColumns}
+                columns={props.columns}
+                updateColumns={props.updateColumns}
                 openAddNewTaskModal={openAddNewTaskModal}
                 openCurrentTaskModal={openCurrentTaskModal}
                 openConfirmModal={openConfirmModal} />
@@ -74,20 +67,21 @@ function Board() {
                 ? <AddNewTask
                     colId={currentColumnId}
                     closeAddNewTaskModal={closeAddNewTaskModal}
-                    updateColumns={updateColumns} />
+                    updateColumns={props.updateColumns} />
                 : null}
             {isCurrentTaskModalOpen
                 ? <UpdateTask
-                    updateColumns={updateColumns}
+                    updateColumns={props.updateColumns}
                     closeCurrentTaskModal={closeCurrentTaskModal}
                     colId={currentColumnId}
-                    taskId={currentTaskId} />
+                    taskId={currentTaskId}
+                    updateArchive={props.updateArchive} />
                 : null}
             {isConfirmModalOpen
                 ? <Confirm
                     closeModal={closeConfirmModal}
                     colId={currentColumnId}
-                    updateColumns={updateColumns} />
+                    updateColumns={props.updateColumns} />
                 : null}
         </section>
     )

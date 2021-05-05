@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './Archive.module.scss';
 import Search from '../../Plugins/Search/Search';
 import ArchiveBody from './ArchiveBody/ArchiveBody';
 import UpdateArchivedTask from '../Modals/UpdateArchivedTask';
 
-function Archive() {
-    const [archive, setArchive] = useState(localStorage.getItem('archive') ? JSON.parse(localStorage.getItem('archive')) : []);
+function Archive(props) {
     const [searchValue, setSearchValue] = useState('');
     const regexp = new RegExp(`${searchValue}`, 'gi');
-    const filteredArchive = archive.filter(item => item.heading.match(regexp));
+    const filteredArchive = props.archive.filter(item => item.heading.match(regexp));
     const [isUpdateArchivedTaskModalOpen, setIsUpdateArchivedTaskModalOpen] = useState(false);
     const [currentItemId, setCurrentItemId] = useState('');
 
@@ -21,15 +20,9 @@ function Archive() {
         setIsUpdateArchivedTaskModalOpen(false);
     }
 
-    function updateArchive(newArchive) {
-        setArchive(newArchive);
-    }
-
     function setArchiveSearch(value) {
         setSearchValue(value);
     }
-
-    localStorage.setItem('archive', JSON.stringify(archive));
 
     return (
         <React.Fragment>
@@ -41,7 +34,7 @@ function Archive() {
                 <ArchiveBody archive={filteredArchive} openModal={openModal} />
             </section>
             {isUpdateArchivedTaskModalOpen
-                ? <UpdateArchivedTask taskId={currentItemId} closeModal={closeModal} updateArchive={updateArchive} />
+                ? <UpdateArchivedTask taskId={currentItemId} closeModal={closeModal} updateArchive={props.updateArchive} updateColumns={props.updateColumns} />
                 : null}
         </React.Fragment>
     )

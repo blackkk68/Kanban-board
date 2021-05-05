@@ -1,0 +1,35 @@
+.GreetingScreen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #aac4ff 0%, #c98ab7 30%, #f6f2c5 60%, #bf59eb 100%);
+    z-index: 10;
+
+    .container {
+        margin-left: 150px;
+        margin-top: 175px;
+
+        h1 {
+            color: #531f6e;
+            font-size: 60px;
+            width: 200px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 30px;
+            width: 750px;
+            line-height: 40px;
+            margin-bottom: 35px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 35px;
+
+            button {
+                font-size: 25px;
+            }
+        }
+    }
+}

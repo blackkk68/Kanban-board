@@ -3,7 +3,8 @@ import classes from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
 import AuthAndReg from '../Modals/Auth&Reg';
 
-function Header() {
+function Header(props) {
+    const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
     const [isHeaderOpen, setIsHeaderOpen] = useState(false);
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
@@ -24,6 +25,15 @@ function Header() {
         setIsAuthModalOpen(false);
     }
 
+    function updateUserName(value) {
+        setUserName(value);
+    }
+
+    function logOutHandler() {
+        props.updateIsLogined(false);
+        setIsHeaderOpen(false);
+    }
+
     return (
         <React.Fragment>
             <div
@@ -35,7 +45,9 @@ function Header() {
                     onClick={toggleHeader} />
                 <div className={classes.authorization}>
                     <div className={classes.userIcon}><i className="fa fa-user-o"></i></div>
-                    <div className={classes.userInform} onClick={enterClickHandler}>Войти</div>
+                    {props.isLogined
+                        ? <div className={classes.userInform} onClick={logOutHandler}>{userName}</div>
+                        : <div className={classes.userInform} onClick={enterClickHandler}>Войти</div>}
                 </div>
                 <nav className={classes.navigation}>
                     <ul>
@@ -52,7 +64,7 @@ function Header() {
                 </nav>
             </header>
             {isAuthModalOpen
-                ? <AuthAndReg closeModal={closeModal} />
+                ? <AuthAndReg closeModal={closeModal} updateIsLogined={props.updateIsLogined} updateUserName={updateUserName} />
                 : null}
         </React.Fragment>
     )
