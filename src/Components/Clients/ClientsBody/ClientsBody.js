@@ -1,9 +1,15 @@
 import React from 'react'
 import classes from './ClientsBody.module.scss';
+import Icon from '@material-ui/core/Icon';
+import plus from '../../../Img/no-clients-plus.svg';
 
 function ClientsBody(props) {
-    function clickHandler(clientId) {
-        props.openModal(clientId);
+    function clientClickHandler(clientId) {
+        props.openUpdateClientModal(clientId);
+    }
+
+    function plusClickHandler() {
+        props.openAddClientModal();
     }
 
     return (
@@ -17,9 +23,9 @@ function ClientsBody(props) {
                         <p>Email</p>
                     </div>
                     <ul className={classes.clientsList}>
-                        {props.clients.map(item => {
+                        {props.filteredClients.map(item => {
                             return (
-                                <li onClick={() => clickHandler(item.id)} className={classes.client} key={item.id}>
+                                <li onClick={() => clientClickHandler(item.id)} className={classes.client} key={item.id}>
                                     <p>{item.companyTitle}</p>
                                     <p>{item.contact}</p>
                                     <p>{item.phone}</p>
@@ -29,7 +35,12 @@ function ClientsBody(props) {
                         })}
                     </ul>
                 </React.Fragment>
-                : null}
+                : <div className={classes.noClientsPlaceholder}>
+                    <Icon>
+                        <img src={plus} onClick={plusClickHandler} alt='Кнопка добавить' />
+                    </Icon>
+                    <p>У вас пока нет клиентов.<br /> Нажмите на кнопку и добавьте их!</p>
+                </div>}
         </section>
     )
 }

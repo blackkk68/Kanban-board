@@ -3,7 +3,7 @@
 
     .Element {
         border-radius: 5px;
-        box-shadow: 0 0 5px -3px rgb(185, 185, 185);
+        box-shadow: 0 0 5px 1px lighten(#5f6080, 45%);
         width: 100%;
         padding: 10px;
         margin-bottom: 15px;

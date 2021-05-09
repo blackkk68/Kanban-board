@@ -2,18 +2,21 @@
     position: fixed;
     width: 100%;
     height: 100%;
+    display: flex;
+    gap: 50px;
+    align-items: center;
     background: linear-gradient(45deg, #aac4ff 0%, #c98ab7 30%, #f6f2c5 60%, #bf59eb 100%);
     z-index: 10;
 
-    .container {
+    .textContainer {
         margin-left: 150px;
-        margin-top: 175px;
 
         h1 {
             color: #531f6e;
             font-size: 60px;
             width: 200px;
             text-transform: uppercase;
+            margin: 0;
         }
 
         p {
@@ -31,5 +34,9 @@
                 font-size: 25px;
             }
         }
+    }
+
+    img {
+        width: 750px;
     }
 }

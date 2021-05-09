@@ -4,7 +4,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@
     transition: opacity 0.2s;
 
     .Modal {
-        background-color: #fff;
+        background: #f7f8fc;
         width: 520px;
         height: auto;
         border-radius: 15px;
@@ -58,6 +58,12 @@
             width: 100%;
             display: flex;
             justify-content: space-around;
+        }
+
+        .error {
+            color: red;
+            padding: 0;
+            margin: 0;
         }
     }
 }

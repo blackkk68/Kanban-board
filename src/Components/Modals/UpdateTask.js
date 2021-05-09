@@ -3,7 +3,6 @@ import classes from './Modal.module.scss';
 import SelectClient from '../../Plugins/SelectClient/SelectClient';
 import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
 import Input from '../../Plugins/Input/Input';
-import Textarea from '../../Plugins/Textarea/Textarea';
 import Button from '../../Plugins/Button/Button';
 
 function UpdateTask(props) {
@@ -81,7 +80,8 @@ function UpdateTask(props) {
                         onChange={evt => setTaskText(evt.target.value)} />
                     <SelectPrioprity currentValue={priority} updatePriority={updatePriority} />
                     <SelectClient currentValue={client} updateClient={updateClient} />
-                    <Textarea
+                    <Input
+                        style={{ height: '56px' }}
                         placeholder='Комментарий'
                         value={taskComment}
                         onChange={evt => setTaskComment(evt.target.value)} />

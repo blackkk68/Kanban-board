@@ -10,7 +10,7 @@
         display: flex;
         flex-direction: column;
         background: #f7f8fc;
-        box-shadow: 0 0 7px 1px darken(#f7f8fc, 15%);
+        box-shadow: 0 0 7px 1px lighten(#5f6080, 35%);
         border-radius: 5px;
         box-sizing: border-box;
         position: relative;
@@ -32,19 +32,19 @@
             background: linear-gradient(90deg, #ed765e 0%, #fea858 100%);
         }
         &.third::after {
-            background: linear-gradient(90deg, #eae5c9 0%, #6cc6cb 100%);
+            background: linear-gradient(90deg, #3aee70 0%, #2dd1ff 100%);
         }
         &.fourth::after {
             background: linear-gradient(90deg, #c22ed0 0%, #5ffae0 100%);
         }
         &.fifth::after {
-            background: linear-gradient(90deg, #64d2a3 0%, #76d0e8 100%);
+            background: linear-gradient(90deg, #0ccda3 0%, #c1fcd3 100%);
         }
         &.sixth::after {
             background: linear-gradient(90deg, #f6ea41 0%, #f048c6 100%);
         }
         &.seventh::after {
-            background: linear-gradient(90deg, #0ccda3 0%, #c1fcd3 100%);
+            background: linear-gradient(90deg, #eae5c9 0%, #6cc6cb 100%);
         }
 
         ul {
@@ -54,10 +54,11 @@
         .actions {
             display: flex;
             justify-content: space-between;
-            padding: 0 5px;
 
-            i {
-                font-size: 25px;
+            .plus,
+            .trash {
+                width: 30px;
+                height: 30px;
                 align-self: flex-end;
                 cursor: pointer;
                 padding: 25px;

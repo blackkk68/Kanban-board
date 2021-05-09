@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
 import classes from './ColumnHeader.module.scss';
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 
 function ColumnHeader(props) {
     const [isHeading, setIsHeading] = useState(true);
     const [headingValue, setHeadingValue] = useState(props.heading.trim());
     const inputRef = useRef(null);
-    const kebabRef = useRef(null);
 
     function changeHeadingTag() {
         setIsHeading(false);
@@ -35,7 +35,7 @@ function ColumnHeader(props) {
                     onChange={inputChangeHandler}
                     readOnly={isHeading}
                     onBlur={blurHeadingHandler} />
-                <i className={['fa', 'fa-pencil', isHeading ? '' : classes.hidden].join(' ')} onClick={changeHeadingTag} ref={kebabRef}></i>
+                <CreateOutlinedIcon className={`${classes.pencil} ${isHeading ? null : classes.hidden}`} onClick={changeHeadingTag} />
             </div>
         </div>
     )

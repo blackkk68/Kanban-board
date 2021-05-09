@@ -4,6 +4,7 @@ import ClientsBody from './ClientsBody/ClientsBody';
 import Search from '../../Plugins/Search/Search';
 import AddNewClient from '../Modals/AddNewClient';
 import UpdateClient from '../Modals/UpdateClient';
+import Plus from '../../Plugins/Plus/Plus';
 
 function Clients(props) {
     const [searchValue, setSearchValue] = useState('');
@@ -30,20 +31,28 @@ function Clients(props) {
         setIsUpdateClientModalOpen(false);
     }
 
+    function openAddClientModal() {
+        setIsAddClientModalOpen(true);
+    }
+
     return (
         <section className={classes.Clients}>
             <div className={classes.header}>
                 <h1 className={classes.heading}>Клиенты</h1>
-                <div className={classes.buttons}>
-                    <Search setSearchClients={setSearchClients} />
-                    <i onClick={() => setIsAddClientModalOpen(true)} className='fa fa-plus-circle' />
-                </div>
+                {props.clients.length
+                    ? <div className={classes.buttons}>
+                        <Search setSearchClients={setSearchClients} />
+                        <Plus onClick={() => setIsAddClientModalOpen(true)} />
+                    </div>
+                    : null}
             </div>
             <ClientsBody
                 searchValue={searchValue}
                 isAddClientModalOpen={isAddClientModalOpen}
-                clients={filteredClients}
-                openModal={openUpdateClientModal} />
+                filteredClients={filteredClients}
+                openUpdateClientModal={openUpdateClientModal}
+                openAddClientModal={openAddClientModal}
+                clients={props.clients} />
             {isAddClientModalOpen
                 ? <AddNewClient
                     closeModal={closeAddClientModal}

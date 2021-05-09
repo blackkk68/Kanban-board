@@ -9,58 +9,66 @@
     transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
 }
 
-.Button.primary {
-    color: rgb(2, 255, 179);
-    border: 2px solid rgb(2, 255, 179);
-
-    &:hover {
-        color: white;
-        background: rgb(2, 255, 179);
-    }
-
-    &:active {
-        box-shadow: 0 0 1px 0 darken(rgb(2, 255, 179), 25%);
-    }
-}
+$delete-color: rgb(255, 68, 0);
 
 .Button.delete {
-    color: rgb(255, 68, 0);
-    border: 2px solid rgb(255, 68, 0);
+    color: $delete-color;
+    border: 2px solid $delete-color;
 
     &:hover {
         color: white;
-        background: rgb(255, 68, 0);
+        background: $delete-color;
     }
 
     &:active {
-        box-shadow: 0 0 1px 0 darken(rgb(255, 68, 0), 25%);
+        box-shadow: 0 0 1px 0 darken($delete-color, 25%);
     }
 }
+
+$cancel-color: lightsteelblue;
 
 .Button.cancel {
-    color: lightsteelblue;
-    border: 2px solid lightsteelblue;
+    color: $cancel-color;
+    border: 2px solid $cancel-color;
 
     &:hover {
         color: white;
-        background: lightsteelblue;
+        background: $cancel-color;
     }
 
     &:active {
-        box-shadow: 0 0 1px 0 darken(lightsteelblue, 25%);
+        box-shadow: 0 0 1px 0 darken($cancel-color, 25%);
     }
 }
 
+$auth-color: #531f6e;
+
 .Button.auth {
-    color: #531f6e;
-    border: 2px solid #531f6e;
+    color: $auth-color;
+    border: 2px solid $auth-color;
 
     &:hover {
         color: white;
-        background: #531f6e;
+        background: $auth-color;
     }
 
     &:active {
-        box-shadow: 0 0 1px 0 darken(#531f6e, 25%);
+        box-shadow: 0 0 1px 0 darken($auth-color, 25%);
+    }
+}
+
+$primary-color: rgb(0, 255, 200);
+
+.Button.primary {
+    color: $primary-color;
+    border: 2px solid $primary-color;
+
+    &:hover {
+        color: white;
+        background: $primary-color;
+    }
+
+    &:active {
+        box-shadow: 0 0 1px 0 darken($primary-color, 25%);
     }
 }

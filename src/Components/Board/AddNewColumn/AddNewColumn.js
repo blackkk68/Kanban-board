@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classes from './AddNewColumn.module.scss';
+import Plus from '../../../Plugins/Plus/Plus';
+
 
 function AddNewColumn(props) {
     const columns = JSON.parse(localStorage.getItem('columns'));
@@ -73,7 +75,7 @@ function AddNewColumn(props) {
                 ref={inputRef}
                 readOnly={!isOpen}
                 onKeyDown={keyHandler} />
-            <i className={`fa fa-plus-circle ${classes.plus}`} onClick={plusClickHandler}></i>
+            <Plus onClick={plusClickHandler} />
         </div>
     )
 }

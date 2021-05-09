@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
 import Input from '../../Plugins/Input/Input';
-import Textarea from '../../Plugins/Textarea/Textarea';
 import Button from '../../Plugins/Button/Button';
 
 function UpdateClient(props) {
@@ -79,7 +78,8 @@ function UpdateClient(props) {
                         placeholder='Адрес'
                         value={address}
                         onChange={evt => setAddress(evt.target.value)} />
-                    <Textarea
+                    <Input
+                        style={{ height: '56px' }}
                         placeholder='Комментарий'
                         value={comment}
                         onChange={evt => setComment(evt.target.value)} />

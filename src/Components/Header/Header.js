@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import classes from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
-import AuthAndReg from '../Modals/Auth&Reg';
+import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined';
+import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
+import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
+import AccountTreeOutlinedIcon from '@material-ui/icons/AccountTreeOutlined';
+import PermContactCalendarOutlinedIcon from '@material-ui/icons/PermContactCalendarOutlined';
 
 function Header(props) {
-    const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
     const [isHeaderOpen, setIsHeaderOpen] = useState(false);
-    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
     function toggleHeader() {
         setIsHeaderOpen(isHeaderOpen ? false : true);
@@ -14,19 +16,6 @@ function Header(props) {
 
     function closeHeader() {
         setIsHeaderOpen(false);
-    }
-
-    function enterClickHandler() {
-        setIsAuthModalOpen(true);
-        toggleHeader();
-    }
-
-    function closeModal() {
-        setIsAuthModalOpen(false);
-    }
-
-    function updateUserName(value) {
-        setUserName(value);
     }
 
     function logOutHandler() {
@@ -41,32 +30,44 @@ function Header(props) {
                 onClick={closeHeader}>
             </div>
             <header className={`${classes.Header} ${isHeaderOpen ? classes.open : ''}`}>
-                <li className={`fa ${classes.cross} ${isHeaderOpen ? 'fa-times' : 'fa-bars'}`}
-                    onClick={toggleHeader} />
+                <MenuOutlinedIcon className={classes.burger} onClick={toggleHeader} />
                 <div className={classes.authorization}>
-                    <div className={classes.userIcon}><i className="fa fa-user-o"></i></div>
-                    {props.isLogined
-                        ? <div className={classes.userInform} onClick={logOutHandler}>{userName}</div>
-                        : <div className={classes.userInform} onClick={enterClickHandler}>Войти</div>}
+                    <i className={`fa fa-user-o ${classes.userIcon}`} />
+                    <span className={classes.userName} onClick={logOutHandler}>{props.userName}</span>
+                </div>
+                <div className={classes.spaces}>
+                    <span className={classes.currentSpace}>{props.activeSpace.title}</span>
                 </div>
                 <nav className={classes.navigation}>
                     <ul>
                         <li onClick={() => setIsHeaderOpen(false)}>
-                            <NavLink to='/' exact activeClassName={classes.active}><i className="fa fa-tasks"></i> Доска заданий</NavLink>
+                            <NavLink to={`/${props.activeSpace.id}/`} exact activeClassName={classes.active}>
+                                <DashboardOutlinedIcon />
+                                <span>Доска заданий</span>
+                            </NavLink>
                         </li>
                         <li onClick={() => setIsHeaderOpen(false)}>
-                            <NavLink to='/clients' activeClassName={classes.active}><i className="fa fa-address-book-o"></i> Клиенты</NavLink>
+                            <NavLink to={`/${props.activeSpace.id}/clients`} activeClassName={classes.active}>
+                                <PermContactCalendarOutlinedIcon />
+                                <span>Клиенты</span>
+                            </NavLink>
                         </li>
                         <li onClick={() => setIsHeaderOpen(false)}>
-                            <NavLink to='/archive' activeClassName={classes.active}><i className="fa fa-archive"></i>Архив</NavLink>
+                            <NavLink to={`/${props.activeSpace.id}/archive`} activeClassName={classes.active}>
+                                <ArchiveOutlinedIcon />
+                                <span>Архив</span>
+                            </NavLink>
+                        </li>
+                        <li onClick={() => setIsHeaderOpen(false)}>
+                            <NavLink to='/spaces' activeClassName={classes.active}>
+                                <AccountTreeOutlinedIcon />
+                                <span>Пространства</span>
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>
             </header>
-            {isAuthModalOpen
-                ? <AuthAndReg closeModal={closeModal} updateIsLogined={props.updateIsLogined} updateUserName={updateUserName} />
-                : null}
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 

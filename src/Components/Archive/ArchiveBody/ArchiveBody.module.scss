@@ -28,8 +28,28 @@
 
             &:hover {
                 border-radius: 5px;
-                background: darken(#f7f8fc, 5%);
+                background: #d2ebf1;
             }
+        }
+    }
+
+    .noArchivePlaceholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            width: 200px;
+            height: 200px;
+        }
+
+        p {
+            font-size: 22px;
+            line-height: 27px;
+            text-align: center;
         }
     }
 }

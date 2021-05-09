@@ -49,7 +49,7 @@
             transition: background 0.1s ease-in;
 
             &:hover {
-                background: darken(#f7f8fc, 5%);
+                background: #d2ebf1;
             }
 
             p {
@@ -77,6 +77,27 @@
                     padding-right: 0;
                 }
             }
+        }
+    }
+
+    .noClientsPlaceholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+        }
+
+        p {
+            font-size: 22px;
+            line-height: 27px;
+            text-align: center;
         }
     }
 }

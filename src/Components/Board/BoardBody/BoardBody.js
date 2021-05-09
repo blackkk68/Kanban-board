@@ -2,6 +2,8 @@ import React from 'react';
 import classes from './BoardBody.module.scss';
 import ColumnHeader from './ColumnHeader/ColumnHeader';
 import ColumnElements from './ColumnElements/ColumnElements';
+import AddBoxOutlinedIcon from '@material-ui/icons/AddBoxOutlined';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function BoardBody(props) {
@@ -63,12 +65,9 @@ function BoardBody(props) {
                                     searchValue={props.searchValue} />
                                 <div className={classes.actions}>
                                     {item.deletable
-                                        ? <i className="fa fa-trash-o" onClick={() => props.openConfirmModal(item.id)}></i>
+                                        ? <DeleteOutlineOutlinedIcon className={classes.trash} onClick={() => props.openConfirmModal(item.id)} />
                                         : <span />}
-                                    <i className={`fa fa-plus-square-o ${classes.Plus}`} onClick={() => {
-                                        console.log(item.id);
-                                        props.openAddNewTaskModal(item.id)
-                                    }}></i>
+                                    <AddBoxOutlinedIcon className={classes.plus} onClick={() => props.openAddNewTaskModal(item.id)} />
                                 </div>
                             </div>
                         )

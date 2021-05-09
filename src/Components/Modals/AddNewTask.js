@@ -3,7 +3,6 @@ import classes from './Modal.module.scss';
 import SelectClient from '../../Plugins/SelectClient/SelectClient';
 import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
 import Input from '../../Plugins/Input/Input';
-import Textarea from '../../Plugins/Textarea/Textarea';
 import Button from '../../Plugins/Button/Button';
 
 function AddNewTask(props) {
@@ -50,11 +49,8 @@ function AddNewTask(props) {
         if (taskHeading) {
             const columns = JSON.parse(localStorage.getItem('columns'));
             const colIndex = columns.findIndex(item => {
-                console.log(item.id);
                 return item.id === props.colId
             });
-            console.log('props.colId: ', props.colId);
-            console.log('colIndex: ', colIndex);
             if (!columns[colIndex].tasks) {
                 columns[colIndex].tasks = [];
             }
@@ -103,7 +99,8 @@ function AddNewTask(props) {
                         placeholder='Описание' />
                     <SelectPrioprity addPriority={addPriority} />
                     <SelectClient addClient={addClient} />
-                    <Textarea
+                    <Input
+                        style={{ height: '56px' }}
                         value={taskComment}
                         onChange={evt => setTaskComment(evt.target.value)}
                         placeholder='Комментарий' />

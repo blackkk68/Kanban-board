@@ -3,7 +3,6 @@ import classes from './Modal.module.scss';
 import SelectClient from '../../Plugins/SelectClient/SelectClient';
 import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
 import Input from '../../Plugins/Input/Input';
-import Textarea from '../../Plugins/Textarea/Textarea';
 import Button from '../../Plugins/Button/Button';
 
 function UpdateArchiveTask(props) {
@@ -65,7 +64,8 @@ function UpdateArchiveTask(props) {
                         readOnly />
                     <SelectPrioprity currentValue={priority} disabled={true} />
                     <SelectClient currentValue={client} disabled={true} />
-                    <Textarea
+                    <Input
+                        style={{ height: '56px' }}
                         placeholder='Комментарий'
                         value={taskComment}
                         readOnly />

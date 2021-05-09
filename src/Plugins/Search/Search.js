@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import classes from './Search.module.scss';
+import SearchIcon from '@material-ui/icons/Search';
+import ClearIcon from '@material-ui/icons/Clear';
 
 function Search(props) {
     const [isSearchInputOpen, setIsSearchInputOpen] = useState(false);
@@ -44,7 +46,7 @@ function Search(props) {
 
     return (
         <div className={`${classes.Search} ${isSearchInputOpen ? classes.open : ''}`} ref={searchRef} >
-            <i className={`fa fa-search ${classes.searchIcon} ${isSearchInputOpen ? classes.open : ''}`} onClick={searchIconClickHandler} />
+            <SearchIcon className={`${classes.searchIcon} ${isSearchInputOpen ? classes.open : ''}`} onClick={searchIconClickHandler} />
             <input
                 type='text'
                 className={`${classes.searchInput} ${isSearchInputOpen ? classes.open : ''}`}
@@ -55,7 +57,7 @@ function Search(props) {
                 placeholder='Искать...'
                 readOnly={!isSearchInputOpen} />
             {isSearchInputOpen
-                ? <i className={`fa fa-times ${classes.cross} ${searchInputValue ? classes.shown : ''}`} onClick={crossClickHandler}></i>
+                ? <ClearIcon className={`${classes.cross} ${searchInputValue ? classes.shown : ''}`} onClick={crossClickHandler} />
                 : null}
         </div>
     )

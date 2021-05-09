@@ -11,6 +11,7 @@
     .input {
         border: none;
         font-size: 30px;
+        line-height: 42px;
         font-family: inherit;
         font-weight: 400;
         box-sizing: border-box;
@@ -19,24 +20,11 @@
         color: inherit;
         transition: width 0.3s ease-in-out;
         background-color: transparent;
+        align-self: flex-end;
 
         &.open {
             width: 250px;
             padding-left: 5px;
-        }
-    }
-
-    .plus {
-        cursor: pointer;
-        font-size: 35px;
-        color: #5f6080;
-        transition: color 0.1s ease-in;
-        border-radius: 10px;
-        padding: 5px;
-        box-sizing: border-box;
-
-        &:hover {
-            color: lighten(#5f6080, 20%);
         }
     }
 }

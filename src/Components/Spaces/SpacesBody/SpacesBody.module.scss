@@ -1,0 +1,42 @@
+.SpacesBody {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+    box-sizing: border-box;
+
+    .list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+
+        .item {
+            width: 70%;
+            height: 35px;
+            border-radius: 5px;
+            padding: 15px;
+            background: #f7f8fc;
+            box-shadow: 0 0 7px 1px darken(#f7f8fc, 15%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+
+            span {
+                font-size: 18px;
+            }
+
+            i {
+                cursor: pointer;
+                font-size: 20px;
+                padding: 5px;
+            }
+        }
+    }
+}
