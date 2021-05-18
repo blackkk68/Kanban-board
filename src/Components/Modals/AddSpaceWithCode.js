@@ -2,13 +2,12 @@ import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
-import { Space } from '../../StaticData';
+import axios from 'axios';
 
 function AddNewTask(props) {
     const spaces = JSON.parse(localStorage.getItem('spaces'));
     const userData = JSON.parse(localStorage.getItem('userData'));
-    const [titleValue, setTitleValue] = useState('');
-    const [descriptionValue, setDescriptionValue] = useState('');
+    const [codeValue, setCodeValue] = useState('');
     const overlayRef = useRef(null);
 
     function submitHandler(evt) {
@@ -17,26 +16,28 @@ function AddNewTask(props) {
     }
 
     function resetStates() {
-        setTitleValue('');
-        setDescriptionValue('');
+        setCodeValue('');
     }
 
     function crossClickHandler() {
-        props.toggleAddNewSpaceModal();
+        props.toggleAddSpaceWithCodeModal();
         resetStates();
     }
 
-    function addSpace() {
-        const newSpace = new Space(titleValue, descriptionValue, userData, false);
+    async function addSpace() {
+        const token = localStorage.getItem('token');
+        const data = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${codeValue}.json?auth=${token}`);
+        const newSpace = data.data.spaceData;
+        newSpace.users.push(userData);
         spaces.push(newSpace);
         props.updateSpaces(spaces);
         resetStates();
-        props.toggleAddNewSpaceModal();
+        props.toggleAddSpaceWithCodeModal();
     }
 
     function overlayClickHandler(evt) {
         if (evt.target.contains(overlayRef.current)) {
-            props.toggleAddNewSpaceModal();
+            props.toggleAddSpaceWithCodeModal();
             resetStates();
         }
     }
@@ -51,19 +52,14 @@ function AddNewTask(props) {
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal} style={{ width: '500px' }}>
                 <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
-                <h2>Новое пространство</h2>
+                <h2>Добавить по коду</h2>
                 <form onSubmit={submitHandler} onKeyDown={keyHandler}>
                     <Input
-                        value={titleValue}
-                        onChange={evt => setTitleValue(evt.target.value)}
-                        label='Название'
+                        value={codeValue}
+                        onChange={evt => setCodeValue(evt.target.value)}
+                        label='Код'
                         autoFocus={true}
                         required />
-                    <Input
-                        style={{ height: '56px' }}
-                        value={descriptionValue}
-                        onChange={evt => setDescriptionValue(evt.target.value)}
-                        label='Описание' />
                     <div className={classes.buttons}>
                         <Button cls='primary' type='submit' text='Добавить' />
                     </div>

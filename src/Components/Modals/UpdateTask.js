@@ -69,20 +69,20 @@ function UpdateTask(props) {
                 <h2>Задача</h2>
                 <form onKeyDown={keyHandler}>
                     <Input
-                        placeholder='Название'
+                        label='Название'
                         value={taskHeading}
                         onChange={evt => setTaskHeading(evt.target.value)}
                         autoFocus={true}
                         required />
                     <Input
-                        placeholder='Описание'
+                        label='Описание'
                         value={taskText}
                         onChange={evt => setTaskText(evt.target.value)} />
                     <SelectPrioprity currentValue={priority} updatePriority={updatePriority} />
                     <SelectClient currentValue={client} updateClient={updateClient} />
                     <Input
                         style={{ height: '56px' }}
-                        placeholder='Комментарий'
+                        label='Комментарий'
                         value={taskComment}
                         onChange={evt => setTaskComment(evt.target.value)} />
                     <div className={classes.buttons}>

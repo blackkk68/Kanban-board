@@ -55,18 +55,18 @@ function UpdateArchiveTask(props) {
                 <h2>Задача</h2>
                 <form onSubmit={submitHandler}>
                     <Input
-                        placeholder='Название'
+                        label='Название'
                         value={taskHeading}
                         readOnly />
                     <Input
-                        placeholder='Описание'
+                        label='Описание'
                         value={taskText}
                         readOnly />
                     <SelectPrioprity currentValue={priority} disabled={true} />
                     <SelectClient currentValue={client} disabled={true} />
                     <Input
                         style={{ height: '56px' }}
-                        placeholder='Комментарий'
+                        label='Комментарий'
                         value={taskComment}
                         readOnly />
                     <div className={classes.buttons}>

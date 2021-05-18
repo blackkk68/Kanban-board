@@ -90,20 +90,20 @@ function AddNewTask(props) {
                     <Input
                         value={taskHeading}
                         onChange={evt => setTaskHeading(evt.target.value)}
-                        placeholder='Название'
+                        label='Название'
                         autoFocus={true}
                         required />
                     <Input
                         value={taskText}
                         onChange={evt => setTaskText(evt.target.value)}
-                        placeholder='Описание' />
+                        label='Описание' />
                     <SelectPrioprity addPriority={addPriority} />
                     <SelectClient addClient={addClient} />
                     <Input
                         style={{ height: '56px' }}
                         value={taskComment}
                         onChange={evt => setTaskComment(evt.target.value)}
-                        placeholder='Комментарий' />
+                        label='Комментарий' />
                     <div className={classes.buttons}>
                         <Button cls='primary' type='submit' text='Добавить' style={{}} />
                     </div>

@@ -28,7 +28,7 @@ function BoardBody(props) {
                 newTasks.splice(destination.index, 0, task);
             } else if (destination.droppableId !== source.droppableId) {
                 const destinationColumn = columns.find(item => Number(item.id) === Number(destination.droppableId));
-                const destinationTasks = destinationColumn.tasks;
+                const destinationTasks = destinationColumn.tasks ? destinationColumn.tasks : [];
                 const newDestinationTasks = destinationTasks.slice();
                 newDestinationTasks.splice(destination.index, 0, task);
                 destinationColumn.tasks = newDestinationTasks.slice();

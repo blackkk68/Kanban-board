@@ -59,11 +59,13 @@ function Select(props) {
         <div className={classes.Select} ref={ref}>
             <div>
                 <Input
-                    placeholder='Назначить клиента'
+                    label='Назначить клиента'
                     value={inputValue}
                     onChange={inputChangeHandler}
                     onClick={inputClickHandler}
-                    readOnly={props.disabled} />
+                    readOnly={props.disabled}
+                    placeholder={clients.length ? '' : 'У вас нет созданных клиентов'}
+                    disabled={clients.length ? false : true} />
                 {inputValue && !props.disabled ? <i className={`fa fa-times ${classes.cross}`} onClick={resetSelect} id='cross'></i> : null}
             </div>
             <div className={`${classes.selectOptions} ${(isSelectOpen && filteredClientsList.length) ? '' : classes.hidden}`}>

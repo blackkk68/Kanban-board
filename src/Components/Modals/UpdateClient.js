@@ -56,31 +56,31 @@ function UpdateClient(props) {
                 <h2>Редактировать данные клиента</h2>
                 <form onSubmit={submitHandler}>
                     <Input
-                        placeholder='Название организации'
+                        label='Название организации'
                         autoFocus={true} value={companyTitle}
                         onChange={evt => setCompanyTitle(evt.target.value)}
                         required />
                     <Input
-                        placeholder='Контактное лицо'
+                        label='Контактное лицо'
                         value={contact}
                         onChange={evt => setContact(evt.target.value)} />
                     <Input
                         type='tel'
-                        placeholder='Телефон'
+                        label='Телефон'
                         value={phone}
                         onChange={evt => setPhone(evt.target.value)} />
                     <Input
                         type='email'
-                        placeholder='Email'
+                        label='Email'
                         value={email}
                         onChange={evt => setEmail(evt.target.value)} />
                     <Input
-                        placeholder='Адрес'
+                        label='Адрес'
                         value={address}
                         onChange={evt => setAddress(evt.target.value)} />
                     <Input
                         style={{ height: '56px' }}
-                        placeholder='Комментарий'
+                        label='Комментарий'
                         value={comment}
                         onChange={evt => setComment(evt.target.value)} />
                     <div className={classes.buttons}>

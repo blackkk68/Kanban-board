@@ -47,7 +47,7 @@ function Select(props) {
     return (
         <div className={classes.Select} ref={ref}>
             <div className={classes.SelectInput}>
-                <Input onClick={inputClickHandler} value={inputValue} placeholder='Приоритет' readOnly />
+                <Input onClick={inputClickHandler} value={inputValue} label='Приоритет' readOnly />
                 {inputValue && !props.disabled ? <i className={`fa fa-times ${classes.cross}`} onClick={resetSelect} id='cross'></i> : null}
             </div>
             <div className={`${classes.selectOptions} ${isSelectOpen ? '' : classes.hidden}`}>

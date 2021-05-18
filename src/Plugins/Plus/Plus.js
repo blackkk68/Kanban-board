@@ -4,7 +4,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 function Plus(props) {
     return (
-        <AddCircleOutlineIcon className={classes.Plus} onClick={props.onClick} />
+        <AddCircleOutlineIcon style={{ width: '39px', height: '39px' }} className={classes.Plus} onClick={props.onClick} />
     )
 }
 

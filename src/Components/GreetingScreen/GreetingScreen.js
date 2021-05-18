@@ -42,10 +42,10 @@ function GreetingScreen(props) {
                     closeModal={closeModal}
                     isRegModalCurrent={isRegModalCurrent}
                     updateIsLogined={props.updateIsLogined}
-                    updateUserName={props.updateUserName}
+                    updateUserData={props.updateUserData}
                     updateSpaces={props.updateSpaces}
                     updateActiveSpace={props.updateActiveSpace}
-                    updateToken={props.updateToken} />
+                    updateTokenData={props.updateTokenData} />
                 : null}
         </React.Fragment>
     )

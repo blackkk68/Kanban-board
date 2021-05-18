@@ -3,27 +3,19 @@ import classes from './Modal.module.scss';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
 import { useHistory } from 'react-router-dom';
-import { Space } from '../../StaticData';
+import { UserDataServer, UserDataLocal, Space } from '../../StaticData';
 import axios from 'axios';
 
 function AuthAndReg(props) {
     const [nameValue, setNameValue] = useState('');
+    const [surnameValue, setSurnameValue] = useState('');
+    const [sexValue, setSexValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
     const [isError, setIsError] = useState(false);
     const apiKey = 'AIzaSyAwu9n1vxYzjojiWKrVsrkhLQZllm3uOAQ';
     const history = useHistory();
     const overlayRef = useRef(null);
-
-    class UserData {
-        constructor(nameValue, emailValue, passwordValue, userId) {
-            this.name = nameValue;
-            this.email = emailValue;
-            this.password = passwordValue;
-            this.userId = userId;
-            this.spaces = [new Space(true, 'Моё пространство')];
-        }
-    }
 
     function overlayClickHandler(evt) {
         if (evt.target.contains(overlayRef.current)) {
@@ -37,6 +29,7 @@ function AuthAndReg(props) {
 
     useEffect(() => {
         setNameValue('');
+        setSurnameValue('')
         setEmailValue('');
         setPasswordValue('');
         setIsError(false);
@@ -51,25 +44,23 @@ function AuthAndReg(props) {
                 returnSecureToken: true
             });
 
-            const token = response.data.idToken;
+            const tokenData = {
+                token: response.data.idToken,
+                refreshToken: response.data.refreshToken,
+                expiresIn: new Date().getTime() + response.data.expiresIn * 1000
+            }
             const userId = response.data.localId;
-            const refreshToken = response.data.refreshToken;
 
-            const data = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/users/${userId}.json?auth=${token}`);
-            const userName = data.data.name;
+            const data = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/users/${userId}.json?auth=${tokenData.token}`);
+            const userData = new UserDataLocal(data.data.name, data.data.surname, data.data.sex, userId);
             const spaces = data.data.spaces;
             const activeSpace = spaces.filter(item => item.isActive === true);
 
-            props.updateToken(token);
-            props.updateSpaces(spaces);
-            props.updateActiveSpace(activeSpace[0]);
-            props.updateIsLogined(true);
-            props.updateUserName(userName);
-            props.closeModal();
+            updateStates(tokenData, userData, spaces, activeSpace[0]);
 
-            updateLocalStorage(token, userId, userName, refreshToken, spaces, activeSpace[0]);
             history.replace(`/${activeSpace[0].id}/`);
         } catch (err) {
+            console.log('err: ', err);
             setIsError(true);
         }
     }
@@ -83,47 +74,55 @@ function AuthAndReg(props) {
                 returnSecureToken: true
             });
 
-            const token = response.data.idToken;
+            const tokenData = {
+                token: response.data.idToken,
+                refreshToken: response.data.refreshToken,
+                expiresIn: new Date().getTime() + response.data.expiresIn * 1
+            }
+
             const userId = response.data.localId;
-            const refreshToken = response.data.refreshToken;
-            const userData = new UserData(nameValue, emailValue, passwordValue, userId);
+            const initialSpace = [new Space('Моё пространство', '', { name: nameValue, surname: surnameValue, sex: sexValue, id: userId }, true)];
+            const userDataToSend = new UserDataServer(nameValue, surnameValue, sexValue, emailValue, passwordValue, userId);
+            userDataToSend.spaces = initialSpace;
+            const userData = new UserDataLocal(nameValue, surnameValue, sexValue, userId);
 
-            await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/users/${userId}.json?auth=${token}`, userData);
+            await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/users/${userId}.json?auth=${tokenData.token}`, userDataToSend);
 
-            props.updateToken(token);
-            props.updateSpaces(userData.spaces);
-            props.updateActiveSpace(userData.spaces[0]);
-            props.closeModal();
-            props.updateIsLogined(true);
-            props.updateUserName(nameValue);
-            updateLocalStorage(token, userId, nameValue, refreshToken, userData.spaces, userData.spaces[0]);
-            history.replace(`/${userData.spaces[0].id}/`);
+            updateStates(tokenData, userData, initialSpace, initialSpace[0]);
+
+            history.replace(`/${initialSpace[0].id}/`);
         } catch (err) {
             setIsError(true);
         }
     }
 
-    function updateLocalStorage(token, userId, nameValue, refreshToken, spaces, activeSpace) {
-        localStorage.setItem('token', token);
-        localStorage.setItem('userId', userId);
-        localStorage.setItem('userName', nameValue);
-        localStorage.setItem('refreshToken', refreshToken);
-        localStorage.setItem('spaces', JSON.stringify(spaces));
-        localStorage.setItem('activeSpace', JSON.stringify(activeSpace));
+    function updateStates(tokenData, userData, spaces, activeSpace) {
+        props.updateTokenData(tokenData);
+        props.updateUserData(userData);
+        props.updateSpaces(spaces, activeSpace);
+        props.updateIsLogined(true);
     }
 
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
-            <div className={classes.Modal} style={{ width: '450px' }}>
+            <div className={classes.Modal} style={{ width: '470px' }}>
                 <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
                 {props.isRegModalCurrent
                     ? <React.Fragment>
                         <h2>Регистрация</h2>
                         {isError ? <p className={classes.error}>Данная почта уже существует</p> : null}
                         <form onSubmit={regSubmitHandler}>
-                            <Input type='text' placeholder='Имя' value={nameValue} onChange={evt => setNameValue(evt.target.value)} autoFocus />
-                            <Input type='email' placeholder='Email' value={emailValue} onChange={evt => setEmailValue(evt.target.value)} />
-                            <Input type='password' placeholder='Пароль' value={passwordValue} onChange={evt => setPasswordValue(evt.target.value)} />
+                            <Input type='text' label='Имя' value={nameValue} onChange={evt => setNameValue(evt.target.value)} autoFocus required />
+                            <Input type='text' label='Фамилия' value={surnameValue} onChange={evt => setSurnameValue(evt.target.value)} required />
+                            <div className={classes.radio}>
+                                <span>Пол:</span>
+                                <input id='male' type='radio' name='sex' value='male' onChange={evt => setSexValue(evt.target.value)} required />
+                                <label htmlFor='male'>Мужской</label>
+                                <input id='female' type='radio' name='sex' value='female' onChange={evt => setSexValue(evt.target.value)} required />
+                                <label htmlFor='female'>Женский</label>
+                            </div>
+                            <Input type='email' label='Email' value={emailValue} onChange={evt => setEmailValue(evt.target.value)} required />
+                            <Input type='password' label='Пароль' value={passwordValue} onChange={evt => setPasswordValue(evt.target.value)} required />
                             <div className={classes.buttons}>
                                 <Button cls='primary' text='Зарегистрироваться' type='submit'></Button>
                             </div>
@@ -133,8 +132,8 @@ function AuthAndReg(props) {
                         <h2>Вход</h2>
                         {isError ? <p className={classes.error}>Неверный email и/или пароль</p> : null}
                         <form onSubmit={loginSubmitHandler}>
-                            <Input type='email' placeholder='Email' value={emailValue} onChange={evt => setEmailValue(evt.target.value)} autoFocus />
-                            <Input type='password' placeholder='Пароль' value={passwordValue} onChange={evt => setPasswordValue(evt.target.value)} />
+                            <Input type='email' label='Email' value={emailValue} onChange={evt => setEmailValue(evt.target.value)} autoFocus required />
+                            <Input type='password' label='Пароль' value={passwordValue} onChange={evt => setPasswordValue(evt.target.value)} required />
                             <div className={classes.buttons}>
                                 <Button cls='primary' text='Войти' type='submit'></Button>
                             </div>
