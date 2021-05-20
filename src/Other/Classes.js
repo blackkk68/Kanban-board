@@ -9,10 +9,9 @@ export class Space {
 }
 
 export class UserDataServer {
-    constructor(name, surname, sex, email, password, id) {
+    constructor(name, surname, email, password, id) {
         this.name = name;
         this.surname = surname;
-        this.sex = sex;
         this.email = email;
         this.password = password;
         this.id = id;
@@ -20,10 +19,9 @@ export class UserDataServer {
 }
 
 export class UserDataLocal {
-    constructor(name, surname, sex, id) {
+    constructor(name, surname, id) {
         this.name = name;
         this.surname = surname;
-        this.sex = sex;
         this.id = id;
     }
 }

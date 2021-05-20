@@ -71,16 +71,10 @@
                 align-items: center;
                 cursor: pointer;
 
-                .userIcon {
-                    display: block;
+                svg {
                     width: 60px;
                     height: 60px;
                     padding-bottom: 5px;
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                    }
                 }
 
                 span {

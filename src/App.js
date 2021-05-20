@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import Header from './Components/Header/Header';
 import Board from './Components/Board/Board';
@@ -23,6 +23,9 @@ const App = observer(() => {
   function logOut() {
     setIsLogined(false);
     localStorage.clear();
+  }
+
+  if (!isLogined) {
     history.replace('/login');
   }
 

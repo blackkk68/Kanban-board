@@ -24,7 +24,7 @@ function Input(props) {
                     <input
                         id={htmlFor}
                         name={props.name}
-                        className={classes.input}
+                        className={`${classes.input} ${props.isValid === false ? classes.invalid : ''}`}
                         value={props.value}
                         type={props.type}
                         onClick={props.onClick}
@@ -33,7 +33,10 @@ function Input(props) {
                         required={props.required}
                         readOnly={props.readOnly}
                         placeholder={props.placeholder}
-                        disabled={props.disabled} />
+                        disabled={props.disabled}
+                        onBlur={props.onBlur}
+                        onFocus={props.onFocus} />
+                    {props.isValid === false ? <span className={classes.error}>{props.errorMessage}</span> : null}
                 </React.Fragment>
                 : <React.Fragment>
                     <label htmlFor={htmlFor} className={classes.label}>{props.label}</label>

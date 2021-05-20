@@ -27,7 +27,7 @@ function GreetingScreen(props) {
             <div className={classes.GreetingScreen}>
                 <div className={classes.textContainer}>
                     <h1>Добро пожаловать!</h1>
-                    <p>Канбан доска - ваш удобный помощник в планировании и решении рабочих дел! Заходи и пользуйся временем с умом!</p>
+                    <p>Канбан доска - твой удобный помощник в планировании и решении рабочих дел. Заходи и пользуйся временем с умом!</p>
                     <div className={classes.buttons}>
                         <Button cls='auth' text='Регистрация' onClick={regClickHandler} />
                         <Button cls='auth' text='Вход' onClick={enterClickHandler} />

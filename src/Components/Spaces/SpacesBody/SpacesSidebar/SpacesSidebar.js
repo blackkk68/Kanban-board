@@ -3,9 +3,7 @@ import classes from './SpacesSidebar.module.scss';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import Input from '../../../../Plugins/Input/Input';
 import ClearIcon from '@material-ui/icons/Clear';
-import man from '../../../../Img/man.svg';
-import woman from '../../../../Img/woman.svg';
-import { Icon } from '@material-ui/core';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AddNewUser from '../../../Modals/AddNewUser';
 import spacesStore from '../../../../Store/spaces';
 
@@ -78,16 +76,13 @@ function SpacesSidebar(props) {
                         {users.map(item => {
                             return (
                                 <li key={item.id}>
-                                    <Icon className={classes.userIcon}>
-                                        <img src={item.sex === 'male' ? man : woman} alt='Иконка пользователя' />
-                                    </Icon>
+                                    <AccountCircleIcon />
                                     <span>{`${item.name} ${item.surname}`}</span>
-                                    <span></span>
                                 </li>
                             )
                         })}
                         <li onClick={addUserClickHandler}>
-                            <PersonAddOutlinedIcon style={{ width: '60px', height: '60px', paddingBottom: '5px' }} />
+                            <PersonAddOutlinedIcon />
                             <span>Пригласить</span>
                         </li>
                     </ul>

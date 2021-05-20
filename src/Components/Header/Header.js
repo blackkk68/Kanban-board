@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import classes from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
-import { Icon } from '@material-ui/core';
 import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import AccountTreeOutlinedIcon from '@material-ui/icons/AccountTreeOutlined';
 import PermContactCalendarOutlinedIcon from '@material-ui/icons/PermContactCalendarOutlined';
-import man from '../../Img/man.svg';
-import woman from '../../Img/woman.svg';
 import userDataStore from '../../Store/userData';
 import spacesStore from '../../Store/spaces';
 
@@ -37,9 +35,7 @@ function Header(props) {
             <header className={`${classes.Header} ${isHeaderOpen ? classes.open : ''}`}>
                 <MenuOutlinedIcon className={classes.burger} onClick={toggleHeader} />
                 <div className={classes.authorization}>
-                    <Icon className={classes.userIcon}>
-                        <img src={userDataStore.userData.sex === 'male' ? man : woman} alt='Иконка пользователя' />
-                    </Icon>
+                    <AccountCircleIcon />
                     <span className={classes.userName} onClick={logOutHandler}>{`${userDataStore.userData.name} ${userDataStore.userData.surname}`}</span>
                 </div>
                 <div className={classes.spaces}>
