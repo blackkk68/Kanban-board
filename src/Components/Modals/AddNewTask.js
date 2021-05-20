@@ -4,6 +4,8 @@ import SelectClient from '../../Plugins/SelectClient/SelectClient';
 import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
+import columnsStore from '../../Store/columns';
+import { Task } from '../../Other/Classes';
 
 function AddNewTask(props) {
     const [taskHeading, setTaskHeading] = useState('');
@@ -34,33 +36,11 @@ function AddNewTask(props) {
         setPriority(priority);
     }
 
-    class Task {
-        constructor(options) {
-            this.heading = options.taskHeading;
-            this.text = options.taskText;
-            this.comment = options.taskComment;
-            this.id = new Date().getTime();
-            this.client = options.client;
-            this.priority = options.priority;
-        }
-    }
-
     function addNewTask() {
-        if (taskHeading) {
-            const columns = JSON.parse(localStorage.getItem('columns'));
-            const colIndex = columns.findIndex(item => {
-                return item.id === props.colId
-            });
-            if (!columns[colIndex].tasks) {
-                columns[colIndex].tasks = [];
-            }
-            const tasks = columns[colIndex].tasks;
-            const newTask = new Task({ taskHeading, taskText, taskComment, client, priority });
-            tasks.push(newTask);
-            props.updateColumns(columns);
-            props.closeAddNewTaskModal(false);
-            resetStates();
-        }
+        const newTask = new Task({ taskHeading, taskText, taskComment, client, priority });
+        columnsStore.addTask(props.colId, newTask);
+        resetStates();
+        props.closeAddNewTaskModal(false);
     }
 
     function crossClickHandler() {

@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
-import { Space } from '../../StaticData';
+import { Space } from '../../Other/Classes';
+import spacesStore from '../../Store/spaces';
 
 function AddNewTask(props) {
     const spaces = JSON.parse(localStorage.getItem('spaces'));
@@ -29,9 +30,9 @@ function AddNewTask(props) {
     function addSpace() {
         const newSpace = new Space(titleValue, descriptionValue, userData, false);
         spaces.push(newSpace);
-        props.updateSpaces(spaces);
-        resetStates();
+        spacesStore.updateSpacesServerData(spaces);
         props.toggleAddNewSpaceModal();
+        resetStates();
     }
 
     function overlayClickHandler(evt) {

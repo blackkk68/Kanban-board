@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classes from './AddNewColumn.module.scss';
 import Plus from '../../../Plugins/Plus/Plus';
+import columnsStore from '../../../Store/columns';
 
 
-function AddNewColumn(props) {
-    const columns = JSON.parse(localStorage.getItem('columns'));
-    const newColIndex = columns ? ++columns.length : 1;
+function AddNewColumn() {
+    const newColIndex = columnsStore.columns.length + 1;
     const [inputValue, setInputValue] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const componentRef = useRef(null);
@@ -35,17 +35,11 @@ function AddNewColumn(props) {
 
     function addColumn() {
         const newColumn = new Column(inputValue);
-        const columns = JSON.parse(localStorage.getItem('columns'));
-        if (!!columns) {
-            columns.push(newColumn);
-            props.updateColumns(columns);
-        } else {
-            props.updateColumns([newColumn]);
-        }
+        columnsStore.addColumn(newColumn);
     }
 
     function plusClickHandler() {
-        if (columns.length <= 6) {
+        if (columnsStore.columns.length <= 6) {
             if (inputValue) {
                 addColumn();
                 setIsOpen(false);

@@ -9,6 +9,8 @@ import AccountTreeOutlinedIcon from '@material-ui/icons/AccountTreeOutlined';
 import PermContactCalendarOutlinedIcon from '@material-ui/icons/PermContactCalendarOutlined';
 import man from '../../Img/man.svg';
 import woman from '../../Img/woman.svg';
+import userDataStore from '../../Store/userData';
+import spacesStore from '../../Store/spaces';
 
 function Header(props) {
     const [isHeaderOpen, setIsHeaderOpen] = useState(false);
@@ -22,7 +24,7 @@ function Header(props) {
     }
 
     function logOutHandler() {
-        props.updateIsLogined(false);
+        props.logOut();
         setIsHeaderOpen(false);
     }
 
@@ -36,29 +38,29 @@ function Header(props) {
                 <MenuOutlinedIcon className={classes.burger} onClick={toggleHeader} />
                 <div className={classes.authorization}>
                     <Icon className={classes.userIcon}>
-                        <img src={props.userData.sex === 'male' ? man : woman} alt='Иконка пользователя' />
+                        <img src={userDataStore.userData.sex === 'male' ? man : woman} alt='Иконка пользователя' />
                     </Icon>
-                    <span className={classes.userName} onClick={logOutHandler}>{`${props.userData.name} ${props.userData.surname}`}</span>
+                    <span className={classes.userName} onClick={logOutHandler}>{`${userDataStore.userData.name} ${userDataStore.userData.surname}`}</span>
                 </div>
                 <div className={classes.spaces}>
-                    <span className={classes.currentSpace}>{props.activeSpace.title}</span>
+                    <span className={classes.currentSpace}>{spacesStore.activeSpace.title}</span>
                 </div>
                 <nav className={classes.navigation}>
                     <ul>
                         <li onClick={() => setIsHeaderOpen(false)}>
-                            <NavLink to={`/${props.activeSpace.id}/`} exact activeClassName={classes.active}>
+                            <NavLink to={`/${spacesStore.activeSpace.id}/`} exact activeClassName={classes.active}>
                                 <DashboardOutlinedIcon />
                                 <span>Доска заданий</span>
                             </NavLink>
                         </li>
                         <li onClick={() => setIsHeaderOpen(false)}>
-                            <NavLink to={`/${props.activeSpace.id}/clients`} activeClassName={classes.active}>
+                            <NavLink to={`/${spacesStore.activeSpace.id}/clients`} activeClassName={classes.active}>
                                 <PermContactCalendarOutlinedIcon />
                                 <span>Клиенты</span>
                             </NavLink>
                         </li>
                         <li onClick={() => setIsHeaderOpen(false)}>
-                            <NavLink to={`/${props.activeSpace.id}/archive`} activeClassName={classes.active}>
+                            <NavLink to={`/${spacesStore.activeSpace.id}/archive`} activeClassName={classes.active}>
                                 <ArchiveOutlinedIcon />
                                 <span>Архив</span>
                             </NavLink>

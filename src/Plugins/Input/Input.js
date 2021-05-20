@@ -12,6 +12,10 @@ function Input(props) {
         }
     }, [props.style]);
 
+    function textareaFocusHandler(evt) {
+        evt.target.selectionStart = evt.target.value.length;
+    }
+
     return (
         <div className={classes.InputContainer}>
             {props.type
@@ -46,7 +50,8 @@ function Input(props) {
                         readOnly={props.readOnly}
                         style={props.style}
                         placeholder={props.placeholder}
-                        disabled={props.disabled} />
+                        disabled={props.disabled}
+                        onFocus={textareaFocusHandler} />
                 </React.Fragment>
             }
         </div>

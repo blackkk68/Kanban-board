@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
+import clients from '../../Store/clients';
 
 function AddNewClient(props) {
     const [companyTitle, setCompanyTitle] = useState('');
@@ -25,11 +26,11 @@ function AddNewClient(props) {
     }
 
     function addNewClient() {
-        const clients = JSON.parse(localStorage.getItem('clients'));
         const newClient = new Client({ companyTitle, contact, phone, email, address, comment });
-        clients.push(newClient);
-        clients.sort((a, b) => a.companyTitle > b.companyTitle);
-        props.updateClients(clients);
+        // clients.push(newClient);
+        // clients.sort((a, b) => a.companyTitle > b.companyTitle);
+        clients.addClient(newClient);
+        //props.updateClients(clients);
     }
 
     function resetStates() {

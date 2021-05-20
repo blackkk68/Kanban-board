@@ -4,6 +4,8 @@ import SelectClient from '../../Plugins/SelectClient/SelectClient';
 import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
+import columnsStore from '../../Store/columns';
+import archiveStore from '../../Store/archive';
 
 function UpdateArchiveTask(props) {
     const archive = JSON.parse(localStorage.getItem('archive'));
@@ -20,8 +22,7 @@ function UpdateArchiveTask(props) {
     function removeTask() {
         const taskIndex = archive.findIndex(item => item.id === props.taskId);
         archive.splice(taskIndex, 1);
-        props.updateArchive(archive);
-        localStorage.setItem('archive', JSON.stringify(archive));
+        archiveStore.updateArchiveServerData(archive);
     }
 
     function overlayClickHandler(evt) {
@@ -39,13 +40,18 @@ function UpdateArchiveTask(props) {
         evt.preventDefault();
     }
 
-    function restoreHandler() {
+    function restoreTask() {
         if (!column.tasks) {
             column.tasks = [];
         }
         column.tasks.push(task);
-        props.updateColumns(columns);
-        deleteHandler();
+        columnsStore.updateColumnsServerData(columns);
+    }
+
+    function restoreHandler() {
+        restoreTask();
+        removeTask();
+        props.closeModal();
     }
 
     return (

@@ -7,139 +7,59 @@ import Archive from './Components/Archive/Archive';
 import Spaces from './Components/Spaces/Spaces';
 import GreetingScreen from './Components/GreetingScreen/GreetingScreen';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { leastColumns } from './StaticData';
+import spacesStore from './Store/spaces';
+import tokenDataStore from './Store/tokenData';
+import columnsStore from './Store/columns';
+import clientsStore from './Store/clients';
+import archiveStore from './Store/archive';
+import { leastColumns } from './Other/Data';
+import { observer } from 'mobx-react';
 import axios from 'axios';
-import { updateToken } from './UpdateToken';
 
-function App() {
+const App = observer(() => {
   const [isLogined, setIsLogined] = useState(localStorage.getItem('userData') ? true : false);
-  const [columns, setColumns] = useState(localStorage.getItem('columns') ? JSON.parse(localStorage.getItem('columns')) : leastColumns);
-  const [clients, setClients] = useState(localStorage.getItem('clients') ? JSON.parse(localStorage.getItem('clients')) : []);
-  const [archive, setArchive] = useState(localStorage.getItem('archive') ? JSON.parse(localStorage.getItem('archive')) : []);
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
-  const [spaces, setSpaces] = useState(localStorage.getItem('spaces') ? JSON.parse(localStorage.getItem('spaces')) : []);
-  const [activeSpace, setActiveSpace] = useState(localStorage.getItem('activeSpace') ? JSON.parse(localStorage.getItem('activeSpace')) : '');
-  const [tokenData, setTokenData] = useState(localStorage.getItem('tokenData') ? JSON.parse(localStorage.getItem('tokenData')) : {});
   const history = useHistory();
 
-  function updateIsLogined(bool) {
-    setIsLogined(bool);
+  function logOut() {
+    setIsLogined(false);
+    localStorage.clear();
+    history.replace('/login');
   }
 
-  function updateUserData(userData) {
-    localStorage.setItem('userData', JSON.stringify(userData));
-    setUserData(userData);
+  async function setDataFromServer() {
+    const columnsData = await axios.get(`
+    https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spacesStore.activeSpace.id}/columns.json?auth=${tokenDataStore.tokenData.token}`);
+    const newColumns = columnsData.data ? columnsData.data : leastColumns;
+    columnsStore.updateColumns(newColumns);
+
+    const clientsData = await axios.get(`
+    https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spacesStore.activeSpace.id}/clients.json?auth=${tokenDataStore.tokenData.token}`);
+    const newClients = clientsData.data ? clientsData.data : [];
+    clientsStore.updateClients(newClients);
+
+    const archiveData = await axios.get(`
+    https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spacesStore.activeSpace.id}/archive.json?auth=${tokenDataStore.tokenData.token}`);
+    const newArchive = archiveData.data ? archiveData.data : [];
+    archiveStore.updateArchive(newArchive);
+
+    setIsLogined(true);
   }
-
-  function updateTokenData(tokenData) {
-    localStorage.setItem('tokenData', JSON.stringify(tokenData));
-    setTokenData(tokenData);
-  }
-
-  async function updateColumns(newColumns) {
-    try {
-      updateTokenData(updateToken(tokenData));
-      setColumns(newColumns);
-      await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${activeSpace.id}/columns.json`, newColumns);
-      localStorage.setItem('columns', JSON.stringify(newColumns));
-    } catch (err) {
-      console.error('err: ', err);
-    }
-  }
-
-  async function updateClients(newClients) {
-    try {
-      updateTokenData(updateToken(tokenData));
-      setClients(newClients);
-      await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${activeSpace.id}/clients.json`, newClients);
-      localStorage.setItem('clients', JSON.stringify(newClients));
-    } catch (err) {
-      console.error('err: ', err);
-    }
-  }
-
-  async function updateArchive(newArchive) {
-    try {
-      updateTokenData(updateToken(tokenData));
-      setArchive(newArchive);
-      await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${activeSpace.id}/archive.json`, newArchive);
-      localStorage.setItem('archive', JSON.stringify(newArchive));
-    } catch (err) {
-      console.error('err: ', err);
-    }
-  }
-
-  async function updateSpaces(newSpaces, newActiveSpace) {
-    const userId = JSON.parse(localStorage.getItem('userData')).id;
-    console.log(userData);
-    try {
-      updateTokenData(updateToken(tokenData));
-      setSpaces(newSpaces);
-      await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/users/${userId}/spaces.json`, newSpaces);
-      localStorage.setItem('spaces', JSON.stringify(newSpaces));
-      if (newActiveSpace) {
-        setActiveSpace(newActiveSpace);
-        localStorage.setItem('activeSpace', JSON.stringify(newActiveSpace));
-      }
-    } catch (err) {
-      console.error('err: ', err);
-    }
-  }
-
-  useEffect(() => {
-    if (isLogined) {
-      updateTokenData(updateToken(tokenData));
-      async function setDataFromServer() {
-        const colsData = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${activeSpace.id}/columns.json?auth=${tokenData.token}`);
-        const newColumns = colsData.data ? colsData.data : leastColumns;
-        setColumns(newColumns);
-        localStorage.setItem('columns', JSON.stringify(newColumns));
-
-        const clientsData = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${activeSpace.id}/clients.json?auth=${tokenData.token}`);
-        const newClients = clientsData.data ? clientsData.data : [];
-        setClients(newClients);
-        localStorage.setItem('clients', JSON.stringify(newClients));
-
-        const archiveData = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${activeSpace.id}/archive.json?auth=${tokenData.token}`);
-        const newArchive = archiveData.data ? archiveData.data : [];
-        setArchive(newArchive);
-        localStorage.setItem('archive', JSON.stringify(newArchive));
-      }
-      setDataFromServer();
-    } else {
-      localStorage.clear();
-      history.replace('/login');
-    }
-  }, [isLogined, activeSpace]);
 
   return isLogined
     ? <React.Fragment>
-      <Header userData={userData} isLogined={isLogined} updateIsLogined={updateIsLogined} activeSpace={activeSpace} />
+      <Header isLogined={isLogined} logOut={logOut} />
       <main>
         <Switch>
-          <Route exact
-            path={`/${activeSpace.id}/clients`}
-            render={() => <Clients clients={clients} updateClients={updateClients} isLogined={isLogined} />} />
-          <Route exact
-            path={`/${activeSpace.id}/archive`}
-            render={() => <Archive isLogined={isLogined} archive={archive} updateArchive={updateArchive} updateColumns={updateColumns} />} />
-          <Route exact
-            path='/spaces'
-            render={() => <Spaces spaces={spaces} activeSpace={activeSpace} updateSpaces={updateSpaces} />} />
-          <Route exact
-            path={`/${activeSpace.id}/`}
-            render={() => <Board isLogined={isLogined} columns={columns} updateColumns={updateColumns} updateArchive={updateArchive} />} />
+          <Route exact path='/spaces' render={() => <Spaces setDataFromServer={setDataFromServer} />} />
+          <Route exact path={`/${spacesStore.activeSpace.id}/clients`} render={() => <Clients />} />
+          <Route exact path={`/${spacesStore.activeSpace.id}/archive`} render={() => <Archive />} />
+          <Route exact path={`/${spacesStore.activeSpace.id}/`} render={() => <Board />} />
         </Switch>
       </main>
     </React.Fragment>
-    : <Route path='/login'
-      render={() => <GreetingScreen
-        updateIsLogined={updateIsLogined}
-        updateUserData={updateUserData}
-        updateSpaces={updateSpaces}
-        updateTokenData={updateTokenData} />
-      }
+    : <Route path='/login' render={() => <GreetingScreen setDataFromServer={setDataFromServer} />
+    }
     />
-}
+});
 
 export default App;

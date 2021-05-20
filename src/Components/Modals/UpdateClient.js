@@ -2,11 +2,10 @@ import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
+import clients from '../../Store/clients';
 
 function UpdateClient(props) {
-    const clients = JSON.parse(localStorage.getItem('clients'));
-    const currentClientIndex = clients.findIndex(item => item.id === props.clientId);
-    const client = clients[currentClientIndex];
+    const client = clients.clients.filter(item => item.id === props.clientId)[0];
     const [companyTitle, setCompanyTitle] = useState(client.companyTitle);
     const [contact, setContact] = useState(client.contact);
     const [phone, setPhone] = useState(client.phone);
@@ -22,7 +21,7 @@ function UpdateClient(props) {
         client.email = email;
         client.address = address;
         client.comment = comment;
-        props.updateClients(clients);
+        clients.updateClient(client);
     }
 
     function overlayClickHandler(evt) {
@@ -38,9 +37,7 @@ function UpdateClient(props) {
     }
 
     function deleteClient() {
-        clients.splice(currentClientIndex, 1);
-        props.updateClients(clients);
-        props.closeModal();
+        clients.removeClient(client);
     }
 
     function submitHandler(evt) {

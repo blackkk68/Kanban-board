@@ -1,20 +1,3 @@
-export const leastColumns = [
-    {
-        id: 123456789,
-        heading: 'В работу',
-        tasks: null,
-        index: 1,
-        deletable: false
-    },
-    {
-        id: 1234567890,
-        heading: 'Выполнено',
-        tasks: null,
-        index: 2,
-        deletable: false
-    }
-];
-
 export class Space {
     constructor(title, description, users, isActive) {
         this.title = title;
@@ -42,5 +25,15 @@ export class UserDataLocal {
         this.surname = surname;
         this.sex = sex;
         this.id = id;
+    }
+}
+export class Task {
+    constructor(options) {
+        this.heading = options.taskHeading;
+        this.text = options.taskText;
+        this.comment = options.taskComment;
+        this.id = new Date().getTime();
+        this.client = options.client;
+        this.priority = options.priority;
     }
 }

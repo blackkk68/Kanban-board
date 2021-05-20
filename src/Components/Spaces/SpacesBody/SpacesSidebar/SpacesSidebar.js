@@ -7,6 +7,7 @@ import man from '../../../../Img/man.svg';
 import woman from '../../../../Img/woman.svg';
 import { Icon } from '@material-ui/core';
 import AddNewUser from '../../../Modals/AddNewUser';
+import spacesStore from '../../../../Store/spaces';
 
 function SpacesSidebar(props) {
     const spaces = JSON.parse(localStorage.getItem('spaces'));
@@ -32,7 +33,7 @@ function SpacesSidebar(props) {
     function updateSpaces() {
         currentSpace.title = titleValue;
         currentSpace.description = descriptionValue;
-        props.updateSpaces(spaces, currentSpace.isActive ? currentSpace : null);
+        spacesStore.updateSpaces(spaces);
     }
 
     function addUserClickHandler() {
@@ -50,6 +51,7 @@ function SpacesSidebar(props) {
         currentSpace.isActive = true;
         updateSpaces();
         setIsCurrentSpaceActive(true);
+        props.setDataFromServer();
     }
 
     return (

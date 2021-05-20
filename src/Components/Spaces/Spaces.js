@@ -40,7 +40,7 @@ function Spaces(props) {
         toggleContextMenu();
     }
 
-    function addSpaceWithCodeClickHandeler() {
+    function addSpaceWithCodeClickHandler() {
         toggleAddSpaceWithCodeModal();
         toggleContextMenu();
     }
@@ -57,18 +57,18 @@ function Spaces(props) {
                         ? <div className={classes.contextMenu} ref={contextMenuRef}>
                             <ul>
                                 <li onClick={addNewSpaceClickHandler}>Добавить новое</li>
-                                <li onClick={addSpaceWithCodeClickHandeler}>Добавить по коду</li>
+                                <li onClick={addSpaceWithCodeClickHandler}>Добавить по коду</li>
                             </ul>
                         </div>
                         : null}
                 </div>
-                <SpacesBody spaces={props.spaces} activeSpace={props.activeSpace} updateSpaces={props.updateSpaces} updateActiveSpace={props.updateActiveSpace} />
+                <SpacesBody setDataFromServer={props.setDataFromServer} />
             </section>
             {isAddNewSpaceModalOpen
-                ? <AddNewSpace toggleAddNewSpaceModal={toggleAddNewSpaceModal} updateSpaces={props.updateSpaces} />
+                ? <AddNewSpace toggleAddNewSpaceModal={toggleAddNewSpaceModal} />
                 : null}
             {isAddSpaceWithCodeOpen
-                ? <AddSpaceWithCode toggleAddSpaceWithCodeModal={toggleAddSpaceWithCodeModal} updateSpaces={props.updateSpaces} />
+                ? <AddSpaceWithCode toggleAddSpaceWithCodeModal={toggleAddSpaceWithCodeModal} />
                 : null}
         </React.Fragment>
     )

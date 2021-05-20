@@ -38,14 +38,7 @@ function GreetingScreen(props) {
                 </div>
             </div>
             {isAuthModalOpen
-                ? <AuthAndReg
-                    closeModal={closeModal}
-                    isRegModalCurrent={isRegModalCurrent}
-                    updateIsLogined={props.updateIsLogined}
-                    updateUserData={props.updateUserData}
-                    updateSpaces={props.updateSpaces}
-                    updateActiveSpace={props.updateActiveSpace}
-                    updateTokenData={props.updateTokenData} />
+                ? <AuthAndReg closeModal={closeModal} isRegModalCurrent={isRegModalCurrent} setDataFromServer={props.setDataFromServer} />
                 : null}
         </React.Fragment>
     )

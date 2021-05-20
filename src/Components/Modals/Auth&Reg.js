@@ -3,8 +3,11 @@ import classes from './Modal.module.scss';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
 import { useHistory } from 'react-router-dom';
-import { UserDataServer, UserDataLocal, Space } from '../../StaticData';
+import { UserDataServer, UserDataLocal, Space } from '../../Other/Classes';
 import axios from 'axios';
+import userDataStore from '../../Store/userData';
+import tokenDataStore from '../../Store/tokenData';
+import spacesStore from '../../Store/spaces';
 
 function AuthAndReg(props) {
     const [nameValue, setNameValue] = useState('');
@@ -54,11 +57,11 @@ function AuthAndReg(props) {
             const data = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/users/${userId}.json?auth=${tokenData.token}`);
             const userData = new UserDataLocal(data.data.name, data.data.surname, data.data.sex, userId);
             const spaces = data.data.spaces;
-            const activeSpace = spaces.filter(item => item.isActive === true);
+            const activeSpace = spaces.find(item => item.isActive === true);
 
-            updateStates(tokenData, userData, spaces, activeSpace[0]);
+            updateStore(userData, tokenData, spaces);
 
-            history.replace(`/${activeSpace[0].id}/`);
+            history.replace(`/${activeSpace.id}/`);
         } catch (err) {
             console.log('err: ', err);
             setIsError(true);
@@ -88,7 +91,7 @@ function AuthAndReg(props) {
 
             await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/users/${userId}.json?auth=${tokenData.token}`, userDataToSend);
 
-            updateStates(tokenData, userData, initialSpace, initialSpace[0]);
+            updateStore(userData, tokenData, initialSpace);
 
             history.replace(`/${initialSpace[0].id}/`);
         } catch (err) {
@@ -96,11 +99,11 @@ function AuthAndReg(props) {
         }
     }
 
-    function updateStates(tokenData, userData, spaces, activeSpace) {
-        props.updateTokenData(tokenData);
-        props.updateUserData(userData);
-        props.updateSpaces(spaces, activeSpace);
-        props.updateIsLogined(true);
+    function updateStore(userData, tokenData, spaces) {
+        userDataStore.updateUserData(userData);
+        tokenDataStore.updateTokenData(tokenData);
+        spacesStore.updateSpaces(spaces);
+        props.setDataFromServer();
     }
 
     return (

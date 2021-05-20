@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import classes from './Modal.module.scss';
 import Button from '../../Plugins/Button/Button';
+import columnsStore from '../../Store/columns';
 
 function Confirm(props) {
     const overlayRef = useRef(null);
@@ -12,10 +13,7 @@ function Confirm(props) {
     }
 
     function removeColumn() {
-        const columns = JSON.parse(localStorage.getItem('columns'));
-        const colIndex = columns.findIndex(item => item.id === props.colId);
-        columns.splice(colIndex, 1);
-        props.updateColumns(columns);
+        columnsStore.removeColumn(props.colId);
         props.closeModal();
     }
 

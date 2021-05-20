@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import classes from './SpacesBody.module.scss';
 import SpacesSidebar from './SpacesSidebar/SpacesSidebar';
+import spacesStore from '../../../Store/spaces';
+import CheckIcon from '@material-ui/icons/Check';
 
 function SpacesBody(props) {
     const [clickedSpaceIndex, setClickedSpaceIndex] = useState('');
@@ -20,7 +22,7 @@ function SpacesBody(props) {
     return (
         <div className={classes.SpacesBody}>
             <ul className={classes.list}>
-                {props.spaces.map((item, index) => {
+                {spacesStore.spaces.map((item, index) => {
                     return (
                         <li className={classes.item} key={item.id} onClick={() => spaceClickHandler(index)}>
                             <div>
@@ -29,8 +31,8 @@ function SpacesBody(props) {
                                     ? <span className={classes.description}>{item.description}</span>
                                     : null}
                             </div>
-                            {item.id === props.activeSpace.id
-                                ? <i className="fa fa-check" aria-hidden="true"></i>
+                            {item.id === spacesStore.activeSpace.id
+                                ? <CheckIcon />
                                 : null}
                         </li>
                     )
@@ -41,7 +43,7 @@ function SpacesBody(props) {
                     clickedSpaceIndex={clickedSpaceIndex}
                     closeSidebar={closeSidebar}
                     isSidebarOpen={isSidebarOpen}
-                    updateSpaces={props.updateSpaces} />
+                    setDataFromServer={props.setDataFromServer} />
                 : null}
         </div>
     )

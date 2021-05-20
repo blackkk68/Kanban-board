@@ -53,35 +53,26 @@ function Board(props) {
                 <h1 className={classes.heading}>Доска задач</h1>
                 <div className={classes.buttons}>
                     <Search setColumnsSearch={setColumnsSearch} />
-                    <AddNewColumn updateColumns={props.updateColumns} />
+                    <AddNewColumn />
                 </div>
             </div>
             <BoardBody
                 searchValue={searchValue}
-                columns={props.columns}
-                updateColumns={props.updateColumns}
                 openAddNewTaskModal={openAddNewTaskModal}
                 openCurrentTaskModal={openCurrentTaskModal}
                 openConfirmModal={openConfirmModal} />
             {isAddNewTaskModalOpen
-                ? <AddNewTask
-                    colId={currentColumnId}
-                    closeAddNewTaskModal={closeAddNewTaskModal}
-                    updateColumns={props.updateColumns} />
+                ? <AddNewTask colId={currentColumnId} closeAddNewTaskModal={closeAddNewTaskModal} />
                 : null}
             {isCurrentTaskModalOpen
                 ? <UpdateTask
-                    updateColumns={props.updateColumns}
                     closeCurrentTaskModal={closeCurrentTaskModal}
                     colId={currentColumnId}
                     taskId={currentTaskId}
                     updateArchive={props.updateArchive} />
                 : null}
             {isConfirmModalOpen
-                ? <Confirm
-                    closeModal={closeConfirmModal}
-                    colId={currentColumnId}
-                    updateColumns={props.updateColumns} />
+                ? <Confirm closeModal={closeConfirmModal} colId={currentColumnId} />
                 : null}
         </section>
     )

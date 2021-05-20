@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import classes from './ColumnHeader.module.scss';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import columnsStore from '../../../../../Store/columns';
 
 function ColumnHeader(props) {
     const [isHeading, setIsHeading] = useState(true);
@@ -21,7 +22,7 @@ function ColumnHeader(props) {
         const columns = JSON.parse(localStorage.getItem('columns'));
         const colIndex = columns.findIndex(item => item.id === props.id);
         columns[colIndex].heading = evt.target.value;
-        props.updateColumns(columns);
+        columnsStore.updateColumns(columns);
     }
 
     return (

@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
 import SelectClient from '../../Plugins/SelectClient/SelectClient';
-import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
+import SelectPriority from '../../Plugins/SelectPriority/SelectPriority';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
+import columnsStore from '../../Store/columns';
+import archiveStore from '../../Store/archive';
 
 function UpdateTask(props) {
     const archive = JSON.parse(localStorage.getItem('archive')) || [];
@@ -24,8 +26,8 @@ function UpdateTask(props) {
         task.comment = taskComment;
         task.client = client;
         task.priority = priority;
+        columnsStore.updateColumnsServerData(columns);
         props.closeCurrentTaskModal(false);
-        props.updateColumns(columns);
     }
 
     function updateClient(client) {
@@ -41,8 +43,8 @@ function UpdateTask(props) {
         const archiveItem = tasks.splice(taskIndex, 1)[0];
         archiveItem.columnId = props.colId;
         archive.push(archiveItem);
-        props.updateArchive(archive);
-        props.updateColumns(columns);
+        archiveStore.updateArchiveServerData(archive);
+        columnsStore.updateColumnsServerData(columns);
     }
 
     function overlayClickHandler(evt) {
@@ -78,7 +80,7 @@ function UpdateTask(props) {
                         label='Описание'
                         value={taskText}
                         onChange={evt => setTaskText(evt.target.value)} />
-                    <SelectPrioprity currentValue={priority} updatePriority={updatePriority} />
+                    <SelectPriority currentValue={priority} updatePriority={updatePriority} />
                     <SelectClient currentValue={client} updateClient={updateClient} />
                     <Input
                         style={{ height: '56px' }}

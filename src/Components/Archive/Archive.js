@@ -3,11 +3,12 @@ import classes from './Archive.module.scss';
 import Search from '../../Plugins/Search/Search';
 import ArchiveBody from './ArchiveBody/ArchiveBody';
 import UpdateArchivedTask from '../Modals/UpdateArchivedTask';
+import archiveStore from '../../Store/archive';
 
-function Archive(props) {
+function Archive() {
     const [searchValue, setSearchValue] = useState('');
     const regexp = new RegExp(`${searchValue}`, 'gi');
-    const filteredArchive = props.archive.filter(item => item.heading.match(regexp));
+    const filteredArchive = archiveStore.archive.filter(item => item.heading.match(regexp));
     const [isUpdateArchivedTaskModalOpen, setIsUpdateArchivedTaskModalOpen] = useState(false);
     const [currentItemId, setCurrentItemId] = useState('');
 
@@ -34,7 +35,7 @@ function Archive(props) {
                 <ArchiveBody archive={filteredArchive} openModal={openModal} />
             </section>
             {isUpdateArchivedTaskModalOpen
-                ? <UpdateArchivedTask taskId={currentItemId} closeModal={closeModal} updateArchive={props.updateArchive} updateColumns={props.updateColumns} />
+                ? <UpdateArchivedTask taskId={currentItemId} closeModal={closeModal} />
                 : null}
         </React.Fragment>
     )

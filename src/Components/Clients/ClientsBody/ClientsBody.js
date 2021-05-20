@@ -2,6 +2,7 @@ import React from 'react'
 import classes from './ClientsBody.module.scss';
 import Icon from '@material-ui/core/Icon';
 import plus from '../../../Img/no-clients-plus.svg';
+import clients from '../../../Store/clients';
 
 function ClientsBody(props) {
     function clientClickHandler(clientId) {
@@ -14,7 +15,7 @@ function ClientsBody(props) {
 
     return (
         <section className={classes.ClientsBody}>
-            {props.clients.length
+            {clients.clients.length
                 ? <React.Fragment>
                     <div className={classes.clientsListHeader}>
                         <p>Компания</p>

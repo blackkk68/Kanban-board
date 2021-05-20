@@ -1,12 +1,11 @@
 import React from 'react';
 import classes from './BoardBody.module.scss';
-import ColumnHeader from './ColumnHeader/ColumnHeader';
-import ColumnElements from './ColumnElements/ColumnElements';
-import AddBoxOutlinedIcon from '@material-ui/icons/AddBoxOutlined';
-import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { observer } from 'mobx-react';
+import columnsStore from '../../../Store/columns';
+import Columns from './Columns/Columns';
 
-function BoardBody(props) {
+const BoardBody = observer(props => {
     function onDragEnd(result) {
         const { destination, source, type } = result;
 
@@ -38,54 +37,20 @@ function BoardBody(props) {
             const column = columns.splice(source.index, 1)[0];
             columns.splice(destination.index, 0, column);
         }
-        props.updateColumns(columns);
+        columnsStore.updateColumnsServerData(columns);
     }
-
-    const cls = [classes.first, classes.second, classes.third, classes.fourth, classes.fifth, classes.sixth, classes.seventh];
-    const columns = props.columns.length
-        ? props.columns.map((item, index) => {
-            return (
-                <Draggable draggableId={String(item.id)} index={index} key={item.id}>
-                    {provided => {
-                        return (
-                            <div className={`${classes.column} ${cls[item.index - 1]}`}
-                                key={item.id}
-                                {...provided.draggableProps}
-                                ref={provided.innerRef}
-                                {...provided.dragHandleProps}>
-                                <ColumnHeader
-                                    id={item.id}
-                                    heading={item.heading}
-                                    updateColumns={props.updateColumns} />
-                                <ColumnElements
-                                    tasks={item.tasks ? item.tasks : []}
-                                    columnId={item.id}
-                                    updateColumns={props.updateColumns}
-                                    openCurrentTaskModal={props.openCurrentTaskModal}
-                                    searchValue={props.searchValue} />
-                                <div className={classes.actions}>
-                                    {item.deletable
-                                        ? <DeleteOutlineOutlinedIcon className={classes.trash} onClick={() => props.openConfirmModal(item.id)} />
-                                        : <span />}
-                                    <AddBoxOutlinedIcon className={classes.plus} onClick={() => props.openAddNewTaskModal(item.id)} />
-                                </div>
-                            </div>
-                        )
-                    }}
-                </Draggable>
-            )
-        })
-        : null;
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId='columns' direction='horizontal' type='column'>
                 {provided => {
                     return (
-                        <section className={classes.BoardBody}
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}>
-                            {columns}
+                        <section className={classes.BoardBody} {...provided.droppableProps} ref={provided.innerRef}>
+                            <Columns
+                                openConfirmModal={props.openConfirmModal}
+                                openAddNewTaskModal={props.openAddNewTaskModal}
+                                openCurrentTaskModal={props.openCurrentTaskModal}
+                                searchValue={props.searchValue} />
                             {provided.placeholder}
                         </section>
                     )
@@ -93,6 +58,6 @@ function BoardBody(props) {
             </Droppable>
         </DragDropContext >
     )
-}
+});
 
 export default BoardBody;

@@ -16,6 +16,10 @@ function Confirm(props) {
         }
     }
 
+    function copyClickHandler() {
+        navigator.clipboard.writeText(codeFieldRef.current.textContent)
+    }
+
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal} style={{ width: '420px' }}>
@@ -26,7 +30,7 @@ function Confirm(props) {
                     <div style={codeField} ref={codeFieldRef}>{props.currentSpace.id}</div>
                     <i className='fa fa-clone'
                         style={{ position: 'absolute', top: '10px', right: '12px', cursor: 'pointer' }}
-                        onClick={() => navigator.clipboard.writeText(codeFieldRef.current.textContent)}></i>
+                        onClick={copyClickHandler}></i>
                 </div>
             </div>
         </div>
