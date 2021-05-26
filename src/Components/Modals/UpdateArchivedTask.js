@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import classes from './Modal.module.scss';
-import SelectClient from '../../Plugins/SelectClient/SelectClient';
-import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
+import CloseIcon from '@material-ui/icons/Close';
+import SelectClient from '../../Plugins/Selects/SelectClient';
+import SelectPrioprity from '../../Plugins/Selects/SelectPriority';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
 import columnsStore from '../../Store/columns';
@@ -11,7 +12,7 @@ function UpdateArchiveTask(props) {
     const archive = JSON.parse(localStorage.getItem('archive'));
     const columns = JSON.parse(localStorage.getItem('columns'));
     const task = archive.find(item => item.id === props.taskId);
-    const column = columns.find(item => item.id === task.columnId);
+    const column = columns.find(item => item.id === task.columnId) || columns[0];
     const taskHeading = task.heading;
     const taskText = task.text;
     const taskComment = task.comment;
@@ -57,7 +58,7 @@ function UpdateArchiveTask(props) {
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal}>
-                <i className={`fa fa-times ${classes.cross}`} onClick={() => props.closeModal()}></i>
+                <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
                 <h2>Задача</h2>
                 <form onSubmit={submitHandler}>
                     <Input

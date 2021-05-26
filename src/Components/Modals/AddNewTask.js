@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
-import SelectClient from '../../Plugins/SelectClient/SelectClient';
-import SelectPrioprity from '../../Plugins/SelectPriority/SelectPriority';
+import CloseIcon from '@material-ui/icons/Close';
+import SelectClient from '../../Plugins/Selects/SelectClient';
+import SelectPriority from '../../Plugins/Selects/SelectPriority';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
 import columnsStore from '../../Store/columns';
@@ -64,7 +65,7 @@ function AddNewTask(props) {
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal} style={{ width: '500px' }}>
-                <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
+                <CloseIcon className={classes.cross} onClick={crossClickHandler} />
                 <h2>Новая задача</h2>
                 <form onSubmit={submitHandler} onKeyDown={keyHandler}>
                     <Input
@@ -77,7 +78,7 @@ function AddNewTask(props) {
                         value={taskText}
                         onChange={evt => setTaskText(evt.target.value)}
                         label='Описание' />
-                    <SelectPrioprity addPriority={addPriority} />
+                    <SelectPriority addPriority={addPriority} />
                     <SelectClient addClient={addClient} />
                     <Input
                         style={{ height: '56px' }}

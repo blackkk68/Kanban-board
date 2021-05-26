@@ -18,67 +18,114 @@
 
     .buttons {
         display: flex;
-        align-items: center;
-        gap: 50px;
+        justify-content: space-between;
 
-        .cross {
+        svg {
             cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+    }
+
+    .disabled {
+        color: lighten(#5f6080, 25%);
+        cursor: initial !important;
+    }
+
+    .users {
+        margin-top: 35px;
+
+        p {
+            opacity: 0.7;
         }
 
-        .activateButton {
-            cursor: pointer;
+        .usersList {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            background: white;
             border: none;
-            background: lightskyblue;
             border-radius: 5px;
-            padding: 10px;
-            font-family: inherit;
-            color: white;
+            box-shadow: 0 0 3px 1px lighten(#5f6080, 40%);
+            box-sizing: border-box;
 
-            &:hover {
-                box-shadow: 0 0 1px 0 darken(lightskyblue, 45%);
-            }
+            li {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+                border-bottom: 1px solid lighten(#5f6080, 40%);
 
-            &:active {
-                box-shadow: inset 0 0 1px 0 darken(lightskyblue, 45%);
-            }
+                .user {
+                    display: flex;
+                    align-items: center;
 
-            &.disabled {
-                cursor: initial;
-                background: lightgray;
+                    svg {
+                        width: 50px;
+                        height: 50px;
+                        padding-right: 10px;
+                    }
 
-                &:hover {
-                    box-shadow: none;
+                    span {
+                        font-size: 20px;
+                        padding: 5px;
+                    }
                 }
 
-                &:active {
-                    box-shadow: none;
+                .trash {
+                    width: 30px;
+                    height: 30px;
+                    padding-right: 10px;
+                    cursor: pointer;
+                }
+
+                &.addUser {
+                    cursor: pointer;
+                    transition: background 0.2s ease-in-out;
+
+                    &:hover {
+                        background-color: rgb(232, 239, 241);
+                    }
                 }
             }
         }
     }
 
-    .users {
-        .usersList {
-            padding: 0;
+    .contextMenu {
+        position: absolute;
+        background: #f7f8fc;
+        top: 60px;
+        right: 35px;
+        z-index: 1;
+        border-radius: 5px;
+        box-shadow: 0 0 7px 1px darken(#f7f8fc, 15%);
+        overflow: hidden;
+
+        ul {
             list-style: none;
-            display: flex;
-            gap: 25px;
+            padding: 0;
+            margin: 0;
 
             li {
-                max-width: 100px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+                height: 35px;
+                padding: 10px;
                 cursor: pointer;
+                text-align: center;
+                border-bottom: 1px solid lighten(#5f6080, 35%);
+                box-sizing: border-box;
 
-                svg {
-                    width: 60px;
-                    height: 60px;
-                    padding-bottom: 5px;
+                &:last-child {
+                    border-bottom: none;
                 }
 
-                span {
-                    text-align: center;
+                &:hover {
+                    background: darken(#f7f8fc, 5%);
+                }
+
+                &:active {
+                    box-shadow: inset 0 0 3px 0 darken(#f7f8fc, 15%);
                 }
             }
         }

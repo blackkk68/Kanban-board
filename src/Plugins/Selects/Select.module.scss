@@ -2,14 +2,13 @@
     width: 100%;
     position: relative;
     cursor: pointer;
-    z-index: 2;
 
     .cross {
         position: absolute;
         font-size: 18px;
         padding: 3px;
-        right: 5px;
-        bottom: 6px;
+        right: 7px;
+        top: 27px;
         color: #999ab3;
         transition: color 0.1s ease-in;
 
@@ -24,8 +23,8 @@
         border: 1px solid #999ab3;
         width: 100%;
         position: absolute;
-        font-size: 10px;
-        margin-left: 1px;
+        top: 57px;
+        z-index: 1;
 
         &.hidden {
             display: none;
@@ -36,6 +35,10 @@
             margin: 0;
             list-style: none;
             max-height: 100px;
+
+            &.scrollable {
+                overflow-y: scroll;
+            }
 
             li {
                 padding: 5px 15px;

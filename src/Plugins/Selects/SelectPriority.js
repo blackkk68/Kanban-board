@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import classes from './SelectPriority.module.scss';
+import CloseIcon from '@material-ui/icons/Close';
+import classes from './Select.module.scss';
 import Input from '../Input/Input';
 
 function Select(props) {
@@ -48,7 +49,7 @@ function Select(props) {
         <div className={classes.Select} ref={ref}>
             <div className={classes.SelectInput}>
                 <Input onClick={inputClickHandler} value={inputValue} label='Приоритет' readOnly />
-                {inputValue && !props.disabled ? <i className={`fa fa-times ${classes.cross}`} onClick={resetSelect} id='cross'></i> : null}
+                {inputValue && !props.disabled ? <CloseIcon className={classes.cross} onClick={resetSelect} /> : null}
             </div>
             <div className={`${classes.selectOptions} ${isSelectOpen ? '' : classes.hidden}`}>
                 <ul className={classes.optionsList}>

@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
-import SelectClient from '../../Plugins/SelectClient/SelectClient';
-import SelectPriority from '../../Plugins/SelectPriority/SelectPriority';
+import CloseIcon from '@material-ui/icons/Close';
+import SelectClient from '../../Plugins/Selects/SelectClient';
+import SelectPriority from '../../Plugins/Selects/SelectPriority';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
 import columnsStore from '../../Store/columns';
@@ -67,7 +68,7 @@ function UpdateTask(props) {
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal} style={{ width: '500px' }}>
-                <i className={`fa fa-times ${classes.cross}`} onClick={() => updateTask()}></i>
+                <CloseIcon className={classes.cross} onClick={() => updateTask()} />
                 <h2>Задача</h2>
                 <form onKeyDown={keyHandler}>
                     <Input

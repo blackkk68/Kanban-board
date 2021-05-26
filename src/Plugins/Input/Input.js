@@ -54,7 +54,8 @@ function Input(props) {
                         style={props.style}
                         placeholder={props.placeholder}
                         disabled={props.disabled}
-                        onFocus={textareaFocusHandler} />
+                        onFocus={textareaFocusHandler}
+                        onBlur={props.onBlur} />
                 </React.Fragment>
             }
         </div>

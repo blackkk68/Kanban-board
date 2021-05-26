@@ -1,10 +1,11 @@
 export class Space {
-    constructor(title, description, users, isActive) {
+    constructor(title, description, users, creatorId, isDeletable = true) {
         this.title = title;
         this.description = description;
         this.id = Math.random().toString(36).substr(2, 9) + new Date().getTime();
         this.users = [users];
-        this.isActive = isActive;
+        this.creatorId = creatorId;
+        this.isDeletable = isDeletable;
     }
 }
 

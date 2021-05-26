@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
+import CloseIcon from '@material-ui/icons/Close';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
 import { Space } from '../../Other/Classes';
@@ -28,7 +29,7 @@ function AddNewTask(props) {
     }
 
     function addSpace() {
-        const newSpace = new Space(titleValue, descriptionValue, userData, false);
+        const newSpace = new Space(titleValue, descriptionValue, userData, userData.id);
         spaces.push(newSpace);
         spacesStore.updateSpacesServerData(spaces);
         props.toggleAddNewSpaceModal();
@@ -51,7 +52,7 @@ function AddNewTask(props) {
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal} style={{ width: '500px' }}>
-                <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
+                <CloseIcon className={classes.cross} onClick={crossClickHandler} />
                 <h2>Новое пространство</h2>
                 <form onSubmit={submitHandler} onKeyDown={keyHandler}>
                     <Input

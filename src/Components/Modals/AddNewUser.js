@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import classes from './Modal.module.scss';
+import CloseIcon from '@material-ui/icons/Close';
 
 function Confirm(props) {
     const overlayRef = useRef(null);
@@ -17,13 +18,14 @@ function Confirm(props) {
     }
 
     function copyClickHandler() {
-        navigator.clipboard.writeText(codeFieldRef.current.textContent)
+        navigator.clipboard.writeText(codeFieldRef.current.textContent);
+        props.closeModal();
     }
 
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal} style={{ width: '420px' }}>
-                <i className={`fa fa-times ${classes.cross}`} onClick={() => props.closeModal()}></i>
+                <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
                 <h2>Пригласить пользователя</h2>
                 <p>Отправьте данный код человеку, которого хотите пригласить</p>
                 <div style={{ position: 'relative', width: '95%', alignSelf: 'center' }}>

@@ -23,9 +23,6 @@ const App = observer(() => {
   function logOut() {
     setIsLogined(false);
     localStorage.clear();
-  }
-
-  if (!isLogined) {
     history.replace('/login');
   }
 
@@ -60,9 +57,7 @@ const App = observer(() => {
         </Switch>
       </main>
     </React.Fragment>
-    : <Route path='/login' render={() => <GreetingScreen setDataFromServer={setDataFromServer} />
-    }
-    />
+    : <Route path='/login' render={() => <GreetingScreen setDataFromServer={setDataFromServer} />} />
 });
 
 export default App;

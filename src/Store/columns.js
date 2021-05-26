@@ -15,8 +15,8 @@ class Columns {
     }
 
     removeColumn(columnId) {
-        const index = this.columns.findIndex(item => item.id === columnId);
-        this.columns.splice(index, 1);
+        const newColumns = this.columns.filter(item => item.id !== columnId);
+        this.columns = newColumns;
         this.updateColumnsServerData();
     }
 

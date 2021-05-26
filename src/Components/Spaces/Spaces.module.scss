@@ -41,17 +41,15 @@
                 margin: 0;
 
                 li {
-                    padding: 12px;
+                    height: 35px;
+                    padding: 10px;
                     cursor: pointer;
                     text-align: center;
-
-                    &:first-child {
-                        padding-bottom: 6px;
-                        border-bottom: 1px solid lighten(#5f6080, 35%);
-                    }
+                    border-bottom: 1px solid lighten(#5f6080, 35%);
+                    box-sizing: border-box;
 
                     &:last-child {
-                        padding-top: 6px;
+                        border-bottom: none;
                     }
 
                     &:hover {

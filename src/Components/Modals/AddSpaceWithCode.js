@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
+import CloseIcon from '@material-ui/icons/Close';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
 import axios from 'axios';
+import spacesStore from '../../Store/spaces';
 
 function AddNewTask(props) {
-    const spaces = JSON.parse(localStorage.getItem('spaces'));
+    const spaces = spacesStore.spaces.slice();
     const userData = JSON.parse(localStorage.getItem('userData'));
     const [codeValue, setCodeValue] = useState('');
     const overlayRef = useRef(null);
@@ -15,30 +17,23 @@ function AddNewTask(props) {
         addSpace();
     }
 
-    function resetStates() {
-        setCodeValue('');
-    }
-
     function crossClickHandler() {
         props.toggleAddSpaceWithCodeModal();
-        resetStates();
     }
 
     async function addSpace() {
-        const token = localStorage.getItem('token');
-        const data = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${codeValue}.json?auth=${token}`);
-        const newSpace = data.data.spaceData;
-        newSpace.users.push(userData);
+        const tokenData = JSON.parse(localStorage.getItem('tokenData'));
+        const newSpaceData = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${codeValue}/spaceData.json?auth=${tokenData.token}`);
+        const newSpace = newSpaceData.data;
+        newSpace.users.push({ name: userData.name, surname: userData.surname, id: userData.id });
         spaces.push(newSpace);
-        props.updateSpaces(spaces);
-        resetStates();
+        spacesStore.updateSpacesServerData(spaces);
         props.toggleAddSpaceWithCodeModal();
     }
 
     function overlayClickHandler(evt) {
         if (evt.target.contains(overlayRef.current)) {
             props.toggleAddSpaceWithCodeModal();
-            resetStates();
         }
     }
 
@@ -51,7 +46,7 @@ function AddNewTask(props) {
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal} style={{ width: '500px' }}>
-                <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
+                <CloseIcon className={classes.cross} onClick={crossClickHandler} />
                 <h2>Добавить по коду</h2>
                 <form onSubmit={submitHandler} onKeyDown={keyHandler}>
                     <Input

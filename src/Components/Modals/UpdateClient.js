@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
+import CloseIcon from '@material-ui/icons/Close';
 import clients from '../../Store/clients';
 
 function UpdateClient(props) {
@@ -49,7 +50,7 @@ function UpdateClient(props) {
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal}>
-                <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
+                <CloseIcon className={classes.cross} onClick={crossClickHandler} />
                 <h2>Редактировать данные клиента</h2>
                 <form onSubmit={submitHandler}>
                     <Input

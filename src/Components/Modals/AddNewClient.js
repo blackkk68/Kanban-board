@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
+import CloseIcon from '@material-ui/icons/Close';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
 import clients from '../../Store/clients';
@@ -62,7 +63,7 @@ function AddNewClient(props) {
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal}>
-                <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
+                <CloseIcon className={classes.cross} onClick={crossClickHandler} />
                 <h2>Новый клиент</h2>
                 <form onSubmit={submitHandler}>
                     <Input

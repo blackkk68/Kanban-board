@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import classes from './Modal.module.scss';
 import Input from '../../Plugins/Input/Input';
 import Button from '../../Plugins/Button/Button';
+import CloseIcon from '@material-ui/icons/Close';
 import { useHistory } from 'react-router-dom';
 import { UserDataServer, UserDataLocal, Space } from '../../Other/Classes';
 import axios from 'axios';
@@ -89,13 +90,26 @@ function AuthAndReg(props) {
 
                 const data = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/users/${userId}.json?auth=${tokenData.token}`);
                 const userData = new UserDataLocal(data.data.name, data.data.surname, userId);
-                const spaces = data.data.spaces;
-                const activeSpace = spaces.find(item => item.isActive === true);
+                const userSpaces = data.data.spaces;
+                const userActiveSpace = userSpaces.find(item => item.isActive === true);
 
-                updateStore(userData, tokenData, spaces);
+                const spaces = [];
+                for (let userSpace of userSpaces) {
+                    const spaceData = await axios.get(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${userSpace.id}/spaceData.json?auth=${tokenData.token}`);
+                    if (spaceData && spaceData.data.users.find(item => item.id === userData.id)) {
+                        spaces.push(spaceData.data);
+                    }
+                }
+                const activeSpace = spaces.find(item => item.id === userActiveSpace.id) || spaces[0];
+
+                tokenDataStore.updateTokenData(tokenData);
+                spacesStore.updateSpaces(spaces);
+                spacesStore.updateActiveSpace(activeSpace);
+                userDataStore.updateUserData(userData);
+                props.setDataFromServer();
                 history.replace(`/${activeSpace.id}/`);
             } catch (err) {
-                console.log('err: ', err);
+                console.error('err: ', err);
                 setError('Неверный email и/или пароль');
             }
         } else {
@@ -120,16 +134,19 @@ function AuthAndReg(props) {
                 }
 
                 const userId = response.data.localId;
-                const initialSpace = [new Space('Моё пространство', '', { name: nameValue, surname: surnameValue, id: userId }, true)];
-                const userDataToSend = new UserDataServer(nameValue, surnameValue, emailValue, passwordValue, userId);
-                userDataToSend.spaces = initialSpace;
                 const userData = new UserDataLocal(nameValue, surnameValue, userId);
+                const initialSpace = [new Space('Моё пространство', '', userData, userId, false)];
+                const userDataToSend = new UserDataServer(nameValue, surnameValue, emailValue, passwordValue, userId);
 
                 await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/users/${userId}.json?auth=${tokenData.token}`, userDataToSend);
 
-                updateStore(userData, tokenData, initialSpace);
+                tokenDataStore.updateTokenData(tokenData);
+                userDataStore.updateUserData(userData);
+                spacesStore.updateSpacesServerData(initialSpace, initialSpace[0]);
+                props.setDataFromServer();
                 history.replace(`/${initialSpace[0].id}/`);
             } catch (err) {
+                console.error('err: ', err);
                 setError('Данный email уже зарегистрирован');
             }
         } else {
@@ -137,17 +154,10 @@ function AuthAndReg(props) {
         }
     }
 
-    function updateStore(userData, tokenData, spaces) {
-        userDataStore.updateUserData(userData);
-        tokenDataStore.updateTokenData(tokenData);
-        spacesStore.updateSpaces(spaces);
-        props.setDataFromServer();
-    }
-
     return (
         <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
             <div className={classes.Modal} style={{ width: '470px' }}>
-                <i className={`fa fa-times ${classes.cross}`} onClick={crossClickHandler}></i>
+                <CloseIcon className={classes.cross} onClick={crossClickHandler} />
                 {props.isRegModalCurrent
                     ? <React.Fragment>
                         <h2>Регистрация</h2>

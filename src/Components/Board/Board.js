@@ -5,7 +5,7 @@ import AddNewColumn from './AddNewColumn/AddNewColumn';
 import Search from '../../Plugins/Search/Search';
 import AddNewTask from '../Modals/AddNewTask';
 import UpdateTask from '../Modals/UpdateTask';
-import Confirm from '../Modals/Confirm';
+import Confirm from '../Modals/ConfirmRemoveColumn';
 
 function Board(props) {
     const [isAddNewTaskModalOpen, setIsAddNewTaskModalOpen] = useState(false);

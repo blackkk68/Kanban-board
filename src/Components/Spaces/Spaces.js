@@ -1,15 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import classes from './Spaces.module.scss';
 import SpacesBody from './SpacesBody/SpacesBody';
 import AddNewSpace from '../Modals/AddNewSpace';
 import AddSpaceWithCode from '../Modals/AddSpaceWithCode';
 import Plus from '../../Plugins/Plus/Plus';
+import ConfirmLeaveSpace from '../Modals/ConfirmLeaveSpace';
+import ConfirmRemoveUser from '../Modals/ConfirmRemoveUser';
+import ConfirmRemoveSpace from '../Modals/ConfirmRemoveSpace';
 
 function Spaces(props) {
+    const [isConfirmLeaveSpaceModalOpen, setIsConfirmLeaveSpaceModalOpen] = useState(false);
+    const [isConfirmRemoveUserModalOpen, setIsConfirmRemoveUserModalOpen] = useState(false);
+    const [isConfirmRemoveSpaceModalOpen, setIsConfirmRemoveSpaceModalOpen] = useState(false);
     const [isAddNewSpaceModalOpen, setIsAddNewSpaceModalOpen] = useState(false);
     const [isAddSpaceWithCodeOpen, setIsAddSpaceWithCodeOpen] = useState(false);
     const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
-    const contextMenuRef = useRef(null);
+    const [clickedSpaceIndex, setClickedSpaceIndex] = useState(null);
+    const [removingUserId, setRemovingUserId] = useState(null);
 
     useEffect(() => {
         function closeContextMenu() {
@@ -35,12 +42,28 @@ function Spaces(props) {
         isAddSpaceWithCodeOpen ? setIsAddSpaceWithCodeOpen(false) : setIsAddSpaceWithCodeOpen(true);
     }
 
-    function addNewSpaceClickHandler() {
+    function toggleConfirmLeaveSpaceModal(spaceIndex) {
+        isConfirmLeaveSpaceModalOpen ? setIsConfirmLeaveSpaceModalOpen(false) : setIsConfirmLeaveSpaceModalOpen(true);
+        setClickedSpaceIndex(spaceIndex);
+    }
+
+    function toggleConfirmRemoveSpaceModal(spaceIndex) {
+        isConfirmRemoveSpaceModalOpen ? setIsConfirmRemoveSpaceModalOpen(false) : setIsConfirmRemoveSpaceModalOpen(true);
+        setClickedSpaceIndex(spaceIndex);
+    }
+
+    function toggleConfirmRemoveUserModal(userId, spaceIndex) {
+        setRemovingUserId(userId);
+        setClickedSpaceIndex(spaceIndex);
+        isConfirmRemoveUserModalOpen ? setIsConfirmRemoveUserModalOpen(false) : setIsConfirmRemoveUserModalOpen(true);
+    }
+
+    function addNewSpace() {
         toggleAddNewSpaceModal();
         toggleContextMenu();
     }
 
-    function addSpaceWithCodeClickHandler() {
+    function addSpaceWithCode() {
         toggleAddSpaceWithCodeModal();
         toggleContextMenu();
     }
@@ -54,21 +77,34 @@ function Spaces(props) {
                         <Plus onClick={toggleContextMenu} />
                     </div>
                     {isContextMenuOpen
-                        ? <div className={classes.contextMenu} ref={contextMenuRef}>
+                        ? <div className={classes.contextMenu}>
                             <ul>
-                                <li onClick={addNewSpaceClickHandler}>Добавить новое</li>
-                                <li onClick={addSpaceWithCodeClickHandler}>Добавить по коду</li>
+                                <li onClick={addNewSpace}>Добавить новое</li>
+                                <li onClick={addSpaceWithCode}>Добавить по коду</li>
                             </ul>
                         </div>
                         : null}
                 </div>
-                <SpacesBody setDataFromServer={props.setDataFromServer} />
+                <SpacesBody
+                    setDataFromServer={props.setDataFromServer}
+                    toggleConfirmLeaveSpaceModal={toggleConfirmLeaveSpaceModal}
+                    toggleConfirmRemoveSpaceModal={toggleConfirmRemoveSpaceModal}
+                    toggleConfirmRemoveUserModal={toggleConfirmRemoveUserModal} />
             </section>
             {isAddNewSpaceModalOpen
                 ? <AddNewSpace toggleAddNewSpaceModal={toggleAddNewSpaceModal} />
                 : null}
             {isAddSpaceWithCodeOpen
                 ? <AddSpaceWithCode toggleAddSpaceWithCodeModal={toggleAddSpaceWithCodeModal} />
+                : null}
+            {isConfirmLeaveSpaceModalOpen
+                ? <ConfirmLeaveSpace setDataFromServer={props.setDataFromServer} clickedSpaceIndex={clickedSpaceIndex} closeModal={toggleConfirmLeaveSpaceModal} />
+                : null}
+            {isConfirmRemoveUserModalOpen
+                ? <ConfirmRemoveUser clickedSpaceIndex={clickedSpaceIndex} removingUserId={removingUserId} closeModal={toggleConfirmRemoveUserModal} />
+                : null}
+            {isConfirmRemoveSpaceModalOpen
+                ? <ConfirmRemoveSpace setDataFromServer={props.setDataFromServer} clickedSpaceIndex={clickedSpaceIndex} closeModal={toggleConfirmRemoveSpaceModal} />
                 : null}
         </React.Fragment>
     )

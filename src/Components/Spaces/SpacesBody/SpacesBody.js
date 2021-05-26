@@ -23,19 +23,21 @@ function SpacesBody(props) {
         <div className={classes.SpacesBody}>
             <ul className={classes.list}>
                 {spacesStore.spaces.map((item, index) => {
-                    return (
-                        <li className={classes.item} key={item.id} onClick={() => spaceClickHandler(index)}>
-                            <div>
-                                <span className={classes.title}>{item.title}</span>
-                                {item.description.length
-                                    ? <span className={classes.description}>{item.description}</span>
+                    if (item) {
+                        return (
+                            <li className={classes.item} key={item.id} onClick={() => spaceClickHandler(index)}>
+                                <div>
+                                    <span className={classes.title}>{item.title}</span>
+                                    {item.description.length
+                                        ? <span className={classes.description}>{item.description}</span>
+                                        : null}
+                                </div>
+                                {item.id === spacesStore.activeSpace.id
+                                    ? <CheckIcon />
                                     : null}
-                            </div>
-                            {item.id === spacesStore.activeSpace.id
-                                ? <CheckIcon />
-                                : null}
-                        </li>
-                    )
+                            </li>
+                        )
+                    }
                 })}
             </ul>
             {isSidebarOpen
@@ -43,7 +45,10 @@ function SpacesBody(props) {
                     clickedSpaceIndex={clickedSpaceIndex}
                     closeSidebar={closeSidebar}
                     isSidebarOpen={isSidebarOpen}
-                    setDataFromServer={props.setDataFromServer} />
+                    setDataFromServer={props.setDataFromServer}
+                    toggleConfirmLeaveSpaceModal={props.toggleConfirmLeaveSpaceModal}
+                    toggleConfirmRemoveUserModal={props.toggleConfirmRemoveUserModal}
+                    toggleConfirmRemoveSpaceModal={props.toggleConfirmRemoveSpaceModal} />
                 : null}
         </div>
     )
