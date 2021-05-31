@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import classes from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
+import SettingsIcon from '@material-ui/icons/Settings';
 import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import AccountTreeOutlinedIcon from '@material-ui/icons/AccountTreeOutlined';
 import PermContactCalendarOutlinedIcon from '@material-ui/icons/PermContactCalendarOutlined';
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import AccountSettings from '../Modals/AccountsSettings/AccountSettings';
 import userDataStore from '../../Store/userData';
 import spacesStore from '../../Store/spaces';
 
 function Header(props) {
     const [isHeaderOpen, setIsHeaderOpen] = useState(false);
+    const [isAccountSettingsModalOpen, setIsAccountSettingsModalOpen] = useState(false);
+
+    function toggleAccountSettingsModal() {
+        isAccountSettingsModalOpen ? setIsAccountSettingsModalOpen(false) : setIsAccountSettingsModalOpen(true);
+    }
 
     function toggleHeader() {
         setIsHeaderOpen(isHeaderOpen ? false : true);
@@ -21,24 +28,21 @@ function Header(props) {
         setIsHeaderOpen(false);
     }
 
-    function logOutHandler() {
-        props.logOut();
-        setIsHeaderOpen(false);
+    function settingsClickHandler() {
+        closeHeader();
+        toggleAccountSettingsModal();
     }
 
     return (
         <React.Fragment>
-            <div
-                className={`${classes.overlay} ${isHeaderOpen ? classes.open : classes.hidden}`}
-                onClick={closeHeader}>
-            </div>
+            <div className={`${classes.overlay} ${isHeaderOpen ? classes.open : classes.hidden}`} onClick={closeHeader} />
             <header className={`${classes.Header} ${isHeaderOpen ? classes.open : ''}`}>
                 <MenuOutlinedIcon className={classes.burger} onClick={toggleHeader} />
-                <div className={classes.authorization}>
-                    <AccountCircleIcon />
-                    <span className={classes.userName} onClick={logOutHandler}>{`${userDataStore.userData.name} ${userDataStore.userData.surname}`}</span>
-                </div>
-                <div className={classes.spaces}>
+                <div className={classes.account}>
+                    <div className={classes.authorization}>
+                        <i className="fa fa-user-o" />
+                        <span className={classes.userName}>{`${userDataStore.userData.name} ${userDataStore.userData.surname}`}</span>
+                    </div>
                     <span className={classes.currentSpace}>{spacesStore.activeSpace.title}</span>
                 </div>
                 <nav className={classes.navigation}>
@@ -69,7 +73,20 @@ function Header(props) {
                         </li>
                     </ul>
                 </nav>
+                <div className={classes.options}>
+                    <div className={classes.settings} onClick={settingsClickHandler}>
+                        <SettingsIcon />
+                        <span>Настройки</span>
+                    </div>
+                    <div className={classes.exit} onClick={() => props.logOut()}>
+                        <ExitToAppOutlinedIcon />
+                        <span>Выход</span>
+                    </div>
+                </div>
             </header>
+            {isAccountSettingsModalOpen
+                ? <AccountSettings closeModal={toggleAccountSettingsModal} />
+                : null}
         </React.Fragment >
     )
 }

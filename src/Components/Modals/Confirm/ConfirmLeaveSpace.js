@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import classes from './Modal.module.scss';
-import Button from '../../Plugins/Button/Button';
+import Button from '../../../Plugins/Button/Button';
 import CloseIcon from '@material-ui/icons/Close';
-import spacesStore from '../../Store/spaces';
+import spacesStore from '../../../Store/spaces';
 
 function ConfirmLeaveSpace(props) {
     const userData = JSON.parse(localStorage.getItem('userData'));

@@ -10,11 +10,10 @@ export class Space {
 }
 
 export class UserDataServer {
-    constructor(name, surname, email, password, id) {
+    constructor(name, surname, email, id) {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.password = password;
         this.id = id;
     }
 }

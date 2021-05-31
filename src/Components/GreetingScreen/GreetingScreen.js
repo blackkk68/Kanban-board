@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './GreetingScreen.module.scss';
 import Button from '../../Plugins/Button/Button';
-import AuthAndReg from '../Modals/Auth&Reg';
+import AuthAndReg from '../Modals/Auth&Reg/Auth&Reg';
 import greetScreenImg from '../../Img/greet-img.png';
 
 function GreetingScreen(props) {

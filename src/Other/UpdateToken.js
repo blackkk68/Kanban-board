@@ -13,7 +13,7 @@ export async function updateToken(tokenData) {
             const newTokenData = {
                 token: response.data['id_token'],
                 refreshToken: response.data['refresh_token'],
-                expiresIn: new Date().getTime() + response.data['expires_in'] * 1
+                expiresIn: new Date().getTime() + response.data['expires_in'] * 1000
             }
             return newTokenData;
         }

@@ -1,4 +1,6 @@
 import { makeAutoObservable } from "mobx";
+import { updateToken } from '../Other/UpdateToken';
+import tokenDataStore from './tokenData';
 import spaces from './spaces';
 import axios from 'axios';
 
@@ -36,11 +38,12 @@ class Columns {
 
     updateColumnsServerData = async (updatedColumns) => {
         try {
+            updateToken();
             if (updatedColumns) {
                 this.columns = updatedColumns;
             }
             localStorage.setItem('columns', JSON.stringify(this.columns));
-            await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spaces.activeSpace.id}/columns.json`, this.columns);
+            await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spaces.activeSpace.id}/columns.json?auth=${tokenDataStore.tokenData.token}`, this.columns);
         } catch (err) {
             console.error('err: ', err);
         }

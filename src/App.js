@@ -21,10 +21,19 @@ const App = observer(() => {
   const history = useHistory();
 
   function logOut() {
+    history.replace('/login');
     setIsLogined(false);
     localStorage.clear();
-    history.replace('/login');
   }
+
+  window.addEventListener('load', () => {
+    if (isLogined && history.location.pathname.indexOf(`/${spacesStore.activeSpace.id}/`) === -1) {
+      history.replace(`/${spacesStore.activeSpace.id}/`);
+    }
+    if (!isLogined) {
+      history.replace('/login');
+    }
+  })
 
   async function setDataFromServer() {
     const columnsData = await axios.get(`
@@ -50,10 +59,10 @@ const App = observer(() => {
       <Header isLogined={isLogined} logOut={logOut} />
       <main>
         <Switch>
+          <Route exact path={`/${spacesStore.activeSpace.id}/`} component={Board} />
+          <Route exact path={`/${spacesStore.activeSpace.id}/clients`} component={Clients} />
+          <Route exact path={`/${spacesStore.activeSpace.id}/archive`} component={Archive} />
           <Route exact path='/spaces' render={() => <Spaces setDataFromServer={setDataFromServer} />} />
-          <Route exact path={`/${spacesStore.activeSpace.id}/clients`} render={() => <Clients />} />
-          <Route exact path={`/${spacesStore.activeSpace.id}/archive`} render={() => <Archive />} />
-          <Route exact path={`/${spacesStore.activeSpace.id}/`} render={() => <Board />} />
         </Switch>
       </main>
     </React.Fragment>

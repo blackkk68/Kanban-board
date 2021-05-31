@@ -4,9 +4,9 @@ import SpacesBody from './SpacesBody/SpacesBody';
 import AddNewSpace from '../Modals/AddNewSpace';
 import AddSpaceWithCode from '../Modals/AddSpaceWithCode';
 import Plus from '../../Plugins/Plus/Plus';
-import ConfirmLeaveSpace from '../Modals/ConfirmLeaveSpace';
-import ConfirmRemoveUser from '../Modals/ConfirmRemoveUser';
-import ConfirmRemoveSpace from '../Modals/ConfirmRemoveSpace';
+import ConfirmLeaveSpace from '../Modals/Confirm/ConfirmLeaveSpace';
+import ConfirmRemoveUser from '../Modals/Confirm/ConfirmRemoveUser';
+import ConfirmRemoveSpace from '../Modals/Confirm/ConfirmRemoveSpace';
 
 function Spaces(props) {
     const [isConfirmLeaveSpaceModalOpen, setIsConfirmLeaveSpaceModalOpen] = useState(false);

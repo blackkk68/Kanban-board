@@ -1,4 +1,6 @@
 import { makeAutoObservable } from "mobx";
+import { updateToken } from '../Other/UpdateToken';
+import tokenDataStore from './tokenData';
 import spaces from './spaces';
 import axios from 'axios';
 
@@ -36,7 +38,8 @@ class Clients {
 
     updateClientsServerData = async () => {
         try {
-            await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spaces.activeSpace.id}/clients.json`, this.clients);
+            updateToken();
+            await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spaces.activeSpace.id}/clients.json?auth=${tokenDataStore.tokenData.token}`, this.clients);
             localStorage.setItem('clients', JSON.stringify(this.clients));
         } catch (err) {
             console.error('err: ', err);

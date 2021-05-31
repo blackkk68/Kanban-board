@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import classes from './Modal.module.scss';
-import Button from '../../Plugins/Button/Button';
+import Button from '../../../Plugins/Button/Button';
 import CloseIcon from '@material-ui/icons/Close';
-import columnsStore from '../../Store/columns';
-import archiveStore from '../../Store/archive';
+import columnsStore from '../../../Store/columns';
+import archiveStore from '../../../Store/archive';
 
 function Confirm(props) {
     const overlayRef = useRef(null);

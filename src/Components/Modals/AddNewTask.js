@@ -73,6 +73,7 @@ function AddNewTask(props) {
                         onChange={evt => setTaskHeading(evt.target.value)}
                         label='Название'
                         autoFocus={true}
+                        maxLength={50}
                         required />
                     <Input
                         value={taskText}

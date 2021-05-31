@@ -10,9 +10,9 @@
     z-index: 10;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 50px;
-    padding-top: 50px;
+    padding: 50px 0;
 
     &.open {
         transform: translateX(0);
@@ -33,29 +33,32 @@
         transition: 0.3s ease-in-out;
     }
 
-    .authorization {
+    .account {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        width: auto;
-        max-width: 200px;
-        gap: 10px;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 15px;
 
-        svg {
-            width: 70px;
-            height: 70px;
+        .authorization {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+
+            i {
+                font-size: 50px;
+            }
+
+            .userName {
+                font-size: 30px;
+                line-height: 35px;
+                text-transform: capitalize;
+            }
         }
 
-        .userName {
-            //text-align: center;
-            font-size: 30px;
-            line-height: 35px;
-            cursor: pointer;
-            text-transform: capitalize;
+        .currentSpace {
+            text-align: center;
         }
-    }
-
-    .spaces {
     }
 
     .navigation {
@@ -98,9 +101,41 @@
                     }
 
                     span {
+                        padding-top: 2px;
                         font-size: 20px;
                     }
                 }
+            }
+        }
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        .settings,
+        .exit {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px;
+            gap: 5px;
+            transition: color 0.1s ease-in-out;
+
+            &:hover {
+                color: lighten(#5f6080, 20%);
+            }
+
+            svg {
+                width: 27px;
+                height: 27px;
+            }
+
+            span {
+                padding-top: 2px;
+                font-size: 20px;
             }
         }
     }

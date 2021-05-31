@@ -22,8 +22,9 @@ function SpacesBody(props) {
     return (
         <div className={classes.SpacesBody}>
             <ul className={classes.list}>
-                {spacesStore.spaces.map((item, index) => {
-                    if (item) {
+                {spacesStore.spaces
+                    .filter(item => item)
+                    .map((item, index) => {
                         return (
                             <li className={classes.item} key={item.id} onClick={() => spaceClickHandler(index)}>
                                 <div>
@@ -37,8 +38,8 @@ function SpacesBody(props) {
                                     : null}
                             </li>
                         )
-                    }
-                })}
+                    })
+                }
             </ul>
             {isSidebarOpen
                 ? <SpacesSidebar
