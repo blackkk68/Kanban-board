@@ -41,16 +41,15 @@ function SpacesBody(props) {
                     })
                 }
             </ul>
-            {isSidebarOpen
-                ? <SpacesSidebar
-                    clickedSpaceIndex={clickedSpaceIndex}
-                    closeSidebar={closeSidebar}
-                    isSidebarOpen={isSidebarOpen}
-                    setDataFromServer={props.setDataFromServer}
-                    toggleConfirmLeaveSpaceModal={props.toggleConfirmLeaveSpaceModal}
-                    toggleConfirmRemoveUserModal={props.toggleConfirmRemoveUserModal}
-                    toggleConfirmRemoveSpaceModal={props.toggleConfirmRemoveSpaceModal} />
-                : null}
+            <SpacesSidebar
+                clickedSpaceIndex={clickedSpaceIndex}
+                closeSidebar={closeSidebar}
+                isSidebarOpen={isSidebarOpen}
+                setDataFromServer={props.setDataFromServer}
+                toggleConfirmLeaveSpaceModal={props.toggleConfirmLeaveSpaceModal}
+                toggleConfirmRemoveUserModal={props.toggleConfirmRemoveUserModal}
+                toggleConfirmRemoveSpaceModal={props.toggleConfirmRemoveSpaceModal}
+                toggleAddUserModal={props.toggleAddUserModal} />
         </div>
     )
 }

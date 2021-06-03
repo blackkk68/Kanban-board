@@ -3,6 +3,7 @@ import classes from './GreetingScreen.module.scss';
 import Button from '../../Plugins/Button/Button';
 import AuthAndReg from '../Modals/Auth&Reg/Auth&Reg';
 import greetScreenImg from '../../Img/greet-img.png';
+import Modal from '../../HOC/Modal/Modal';
 
 function GreetingScreen(props) {
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -37,9 +38,9 @@ function GreetingScreen(props) {
                     <img src={greetScreenImg} alt='Логотип' />
                 </div>
             </div>
-            {isAuthModalOpen
-                ? <AuthAndReg closeModal={closeModal} isRegModalCurrent={isRegModalCurrent} setDataFromServer={props.setDataFromServer} />
-                : null}
+            <Modal isModalOpen={isAuthModalOpen}>
+                <AuthAndReg closeModal={closeModal} isRegModalCurrent={isRegModalCurrent} setDataFromServer={props.setDataFromServer} />
+            </Modal>
         </React.Fragment>
     )
 }

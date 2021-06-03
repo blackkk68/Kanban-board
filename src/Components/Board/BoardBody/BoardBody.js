@@ -49,7 +49,7 @@ const BoardBody = observer(props => {
                             <Columns
                                 openConfirmModal={props.openConfirmModal}
                                 openAddNewTaskModal={props.openAddNewTaskModal}
-                                openCurrentTaskModal={props.openCurrentTaskModal}
+                                openUpdateTaskModal={props.openUpdateTaskModal}
                                 searchValue={props.searchValue} />
                             {provided.placeholder}
                         </section>

@@ -3,13 +3,14 @@ import classes from './Board.module.scss';
 import BoardBody from './BoardBody/BoardBody';
 import AddNewColumn from './AddNewColumn/AddNewColumn';
 import Search from '../../Plugins/Search/Search';
-import AddNewTask from '../Modals/AddNewTask';
-import UpdateTask from '../Modals/UpdateTask';
+import AddNewTask from '../Modals/Tasks/AddNewTask';
+import UpdateTask from '../Modals/Tasks/UpdateTask';
 import Confirm from '../Modals/Confirm/ConfirmRemoveColumn';
+import Modal from '../../HOC/Modal/Modal';
 
-function Board(props) {
+function Board() {
     const [isAddNewTaskModalOpen, setIsAddNewTaskModalOpen] = useState(false);
-    const [isCurrentTaskModalOpen, setIsCurrentTaskModalOpen] = useState(false);
+    const [isUpdateTaskModalOpen, setIsUpdateTaskModalOpen] = useState(false);
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [currentColumnId, setCurrentColumnId] = useState('');
     const [currentTaskId, setCurrentTaskId] = useState('');
@@ -24,18 +25,18 @@ function Board(props) {
         setCurrentColumnId(colId);
     }
 
-    function closeAddNewTaskModal(bool) {
-        setIsAddNewTaskModalOpen(bool);
+    function closeAddNewTaskModal() {
+        setIsAddNewTaskModalOpen(false);
     }
 
-    function openCurrentTaskModal(colId, taskId) {
-        setIsCurrentTaskModalOpen(true);
+    function openUpdateTaskModal(colId, taskId) {
+        setIsUpdateTaskModalOpen(true);
         setCurrentColumnId(colId);
-        setCurrentTaskId(taskId)
+        setCurrentTaskId(taskId);
     }
 
-    function closeCurrentTaskModal() {
-        setIsCurrentTaskModalOpen(false);
+    function closeUpdateTaskModal() {
+        setIsUpdateTaskModalOpen(false);
     }
 
     function openConfirmModal(colId) {
@@ -59,21 +60,17 @@ function Board(props) {
             <BoardBody
                 searchValue={searchValue}
                 openAddNewTaskModal={openAddNewTaskModal}
-                openCurrentTaskModal={openCurrentTaskModal}
+                openUpdateTaskModal={openUpdateTaskModal}
                 openConfirmModal={openConfirmModal} />
-            {isAddNewTaskModalOpen
-                ? <AddNewTask colId={currentColumnId} closeAddNewTaskModal={closeAddNewTaskModal} />
-                : null}
-            {isCurrentTaskModalOpen
-                ? <UpdateTask
-                    closeCurrentTaskModal={closeCurrentTaskModal}
-                    colId={currentColumnId}
-                    taskId={currentTaskId}
-                    updateArchive={props.updateArchive} />
-                : null}
-            {isConfirmModalOpen
-                ? <Confirm closeModal={closeConfirmModal} colId={currentColumnId} />
-                : null}
+            <Modal isModalOpen={isConfirmModalOpen} closeModal={closeConfirmModal}>
+                <Confirm closeModal={closeConfirmModal} colId={currentColumnId} />
+            </Modal>
+            <Modal isModalOpen={isAddNewTaskModalOpen} closeModal={closeAddNewTaskModal}>
+                <AddNewTask closeModal={closeAddNewTaskModal} colId={currentColumnId} />
+            </Modal>
+            <Modal isModalOpen={isUpdateTaskModalOpen} closeModal={closeUpdateTaskModal}>
+                <UpdateTask closeModal={closeUpdateTaskModal} colId={currentColumnId} taskId={currentTaskId} />
+            </Modal>
         </section>
     )
 }

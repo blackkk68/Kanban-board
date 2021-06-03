@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classes from './SpacesSidebar.module.scss';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import Input from '../../../../Plugins/Input/Input';
@@ -6,36 +6,32 @@ import ClearIcon from '@material-ui/icons/Clear';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import AddNewUser from '../../../Modals/AddNewUser';
 import spacesStore from '../../../../Store/spaces';
+import { Transition } from 'react-transition-group';
+import ContextMenu from './ContextMenu/ContextMenu';
 
 function SpacesSidebar(props) {
     const userData = JSON.parse(localStorage.getItem('userData'));
     const activeSpace = { ...spacesStore.activeSpace };
     const spaces = spacesStore.spaces.slice();
     const currentSpace = spaces[props.clickedSpaceIndex];
-    const isUserCreator = userData.id === currentSpace.creatorId;
+    const isUserCreator = currentSpace ? userData.id === currentSpace.creatorId : null;
     const [isCurrentSpaceActive, setIsCurrentSpaceActive] = useState('');
     const [titleValue, setTitleValue] = useState('');
     const [descriptionValue, setDescriptionValue] = useState('');
     const [users, setUsers] = useState([]);
-    const [isAddUserOpen, setIsAddUserOpen] = useState(false);
     const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
+    const [sidebarTransitionClass, setSidebarTransitionClass] = useState(null);
+    const contextMenuTogglerRef = useRef(null);
+    const sidebarRef = useRef(null);
 
     useEffect(() => {
-        if (isContextMenuOpen) {
-            document.addEventListener('click', toggleContextMenu);
+        if (currentSpace) {
+            setTitleValue(currentSpace.title);
+            setDescriptionValue(currentSpace.description);
+            setUsers(currentSpace.users);
+            setIsCurrentSpaceActive(currentSpace.id === activeSpace.id);
         }
-        return () => {
-            document.removeEventListener('click', toggleContextMenu);
-        }
-    }, [isContextMenuOpen]);
-
-    useEffect(() => {
-        setTitleValue(currentSpace.title);
-        setDescriptionValue(currentSpace.description);
-        setUsers(currentSpace.users);
-        setIsCurrentSpaceActive(currentSpace.id === activeSpace.id);
     }, [props.clickedSpaceIndex]);
 
     function crossClickHandler() {
@@ -53,18 +49,19 @@ function SpacesSidebar(props) {
         spacesStore.updateSpacesServerData(spaces, newActiveSpace);
     }
 
+    function toggleContextMenu() {
+        setIsContextMenuOpen(!isContextMenuOpen);
+    }
+
+    function removeUser(userId) {
+        props.toggleConfirmRemoveUserModal(userId, props.clickedSpaceIndex);
+        props.closeSidebar();
+    }
+
     function activateSpace() {
         updateSpaces(currentSpace);
         setIsCurrentSpaceActive(true);
         props.setDataFromServer();
-    }
-
-    function toggleAddUserModal() {
-        isAddUserOpen ? setIsAddUserOpen(false) : setIsAddUserOpen(true);
-    }
-
-    function toggleContextMenu() {
-        isContextMenuOpen ? setIsContextMenuOpen(false) : setIsContextMenuOpen(true);
     }
 
     function leaveSpace() {
@@ -77,30 +74,34 @@ function SpacesSidebar(props) {
         props.closeSidebar();
     }
 
-    function removeUser(userId) {
-        props.toggleConfirmRemoveUserModal(userId, props.clickedSpaceIndex);
-        props.closeSidebar();
-    }
-
     return (
-        <React.Fragment>
-            <div className={`${classes.SpacesSidebar} ${props.isSidebalOpen ? classes.open : ''}`}>
+        <Transition
+            in={props.isSidebarOpen}
+            timeout={{ exit: 200 }}
+            mountOnEnter
+            unmountOnExit
+            nodeRef={sidebarRef}
+            onExiting={() => setSidebarTransitionClass(classes.exiting)}
+            onEntered={() => setSidebarTransitionClass(classes.entered)}
+            onEntering={() => setSidebarTransitionClass(classes.entering)}>
+            <div className={`${classes.SpacesSidebar} ${sidebarTransitionClass}`} ref={sidebarRef}>
                 <div className={classes.buttons}>
                     <ClearIcon onClick={crossClickHandler} />
-                    <MoreVertIcon className={isCurrentSpaceActive && isUserCreator && !currentSpace.isDeletable ? classes.disabled : ''} onClick={toggleContextMenu} />
+                    <MoreVertIcon
+                        className={isCurrentSpaceActive && isUserCreator && !currentSpace.isDeletable ? classes.disabled : ''}
+                        onClick={() => isCurrentSpaceActive && isUserCreator && !currentSpace.isDeletable ? null : setIsContextMenuOpen(!isContextMenuOpen)}
+                        ref={contextMenuTogglerRef} />
                 </div>
-                {isContextMenuOpen
-                    ? <div className={classes.contextMenu}>
-                        <ul>
-                            {isCurrentSpaceActive
-                                ? null
-                                : <li onClick={activateSpace}>Активировать</li>}
-                            {isUserCreator
-                                ? currentSpace.isDeletable ? <li onClick={removeSpace}>Удалить</li> : null
-                                : <li onClick={leaveSpace}>Покинуть</li>}
-                        </ul>
-                    </div>
-                    : null}
+                <ContextMenu
+                    isContextMenuOpen={isContextMenuOpen}
+                    toggleContextMenu={toggleContextMenu}
+                    activateSpace={activateSpace}
+                    leaveSpace={leaveSpace}
+                    removeSpace={removeSpace}
+                    isCurrentSpaceActive={isCurrentSpaceActive}
+                    currentSpace={currentSpace}
+                    isUserCreator={isUserCreator}
+                    contextMenuToggler={contextMenuTogglerRef.current} />
                 <div className={classes.inputs}>
                     <Input
                         label='Название'
@@ -131,7 +132,7 @@ function SpacesSidebar(props) {
                                 </li>
                             )
                         })}
-                        <li className={classes.addUser} onClick={toggleAddUserModal}>
+                        <li className={classes.addUser} onClick={() => props.toggleAddUserModal(currentSpace)}>
                             <div className={classes.user}>
                                 <PersonAddOutlinedIcon />
                                 <span>Пригласить</span>
@@ -140,10 +141,7 @@ function SpacesSidebar(props) {
                     </ul>
                 </div>
             </div>
-            {isAddUserOpen
-                ? <AddNewUser currentSpace={currentSpace} closeModal={toggleAddUserModal} />
-                : null}
-        </React.Fragment>
+        </Transition>
     )
 }
 

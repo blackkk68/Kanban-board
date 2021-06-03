@@ -31,6 +31,14 @@ class Columns {
         this.updateColumnsServerData();
     }
 
+    removeTask(columnId, taskId) {
+        const column = this.columns.find(item => item.id === columnId);
+        const tasks = column.tasks;
+        const taskIndex = tasks.findIndex(item => item.id === taskId);
+        tasks.splice(taskIndex, 1);
+        this.updateColumnsServerData();
+    }
+
     updateColumns(newColumns) {
         this.columns = newColumns.slice();
         localStorage.setItem('columns', JSON.stringify(this.columns));
@@ -42,8 +50,8 @@ class Columns {
             if (updatedColumns) {
                 this.columns = updatedColumns;
             }
-            localStorage.setItem('columns', JSON.stringify(this.columns));
             await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spaces.activeSpace.id}/columns.json?auth=${tokenDataStore.tokenData.token}`, this.columns);
+            localStorage.setItem('columns', JSON.stringify(this.columns));
         } catch (err) {
             console.error('err: ', err);
         }

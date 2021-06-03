@@ -11,6 +11,11 @@ class Archive {
 
     archive = localStorage.getItem('archive') ? JSON.parse(localStorage.getItem('archive')) : [];
 
+    addItem(item) {
+        this.archive.push(item);
+        this.updateArchiveServerData();
+    }
+
     updateArchive(newArchive) {
         this.archive = newArchive.slice();
         localStorage.setItem('archive', JSON.stringify(this.archive));
@@ -19,7 +24,9 @@ class Archive {
     updateArchiveServerData = async (updatedArchive) => {
         try {
             updateToken();
-            this.archive = updatedArchive;
+            if (updatedArchive) {
+                this.archive = updatedArchive;
+            }
             await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spaces.activeSpace.id}/archive.json?auth=${tokenDataStore.tokenData.token}`, this.archive);
             localStorage.setItem('archive', JSON.stringify(this.archive));
         } catch (err) {

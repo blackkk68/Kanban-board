@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import classes from './Clients.module.scss';
 import ClientsBody from './ClientsBody/ClientsBody';
 import Search from '../../Plugins/Search/Search';
-import AddNewClient from '../Modals/AddNewClient';
-import UpdateClient from '../Modals/UpdateClient';
+import AddNewClient from '../Modals/Clients/AddNewClient';
+import UpdateClient from '../Modals/Clients/UpdateClient';
 import Plus from '../../Plugins/Plus/Plus';
 import clients from '../../Store/clients';
+import Modal from '../../HOC/Modal/Modal';
 
 function Clients() {
     const [searchValue, setSearchValue] = useState('');
@@ -54,12 +55,12 @@ function Clients() {
                 openUpdateClientModal={openUpdateClientModal}
                 openAddClientModal={openAddClientModal}
             />
-            {isAddClientModalOpen
-                ? <AddNewClient closeModal={closeAddClientModal} />
-                : null}
-            {isUpdateClientModalOpen
-                ? <UpdateClient closeModal={closeUpdateClientModal} clientId={currentClientId} />
-                : null}
+            <Modal isModalOpen={isAddClientModalOpen}>
+                <AddNewClient closeModal={closeAddClientModal} />
+            </Modal>
+            <Modal isModalOpen={isUpdateClientModalOpen}>
+                <UpdateClient closeModal={closeUpdateClientModal} clientId={currentClientId} />
+            </Modal>
         </section>
     )
 }

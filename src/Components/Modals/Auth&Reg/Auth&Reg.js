@@ -29,18 +29,16 @@ function AuthAndReg(props) {
     }
 
     return (
-        <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
-            <div className={classes.Modal} style={{ width: '450px' }}>
-                {isPasswordForgotten ? <ArrowBackIosIcon className={classes.arrow} onClick={recallPassword} /> : null}
-                <CloseIcon className={classes.cross} onClick={crossClickHandler} />
-                {props.isRegModalCurrent
-                    ? <Registration setDataFromServer={props.setDataFromServer} />
-                    : isPasswordForgotten
-                        ? <RestorePassword closeModal={props.closeModal} />
-                        : <Login setDataFromServer={props.setDataFromServer} forgotPassword={forgotPassword} />
-                }
-            </div>
-        </div >
+        <div className={classes.Container} style={{ width: '450px' }}>
+            {isPasswordForgotten ? <ArrowBackIosIcon className={classes.arrow} onClick={recallPassword} /> : null}
+            <CloseIcon className={classes.cross} onClick={crossClickHandler} />
+            {props.isRegModalCurrent
+                ? <Registration setDataFromServer={props.setDataFromServer} />
+                : isPasswordForgotten
+                    ? <RestorePassword closeModal={props.closeModal} />
+                    : <Login setDataFromServer={props.setDataFromServer} forgotPassword={forgotPassword} />
+            }
+        </div>
     )
 }
 

@@ -29,15 +29,13 @@ function ConfirmRemoveSpace(props) {
     }
 
     return (
-        <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
-            <div className={classes.Modal} style={{ width: '420px' }}>
-                <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
-                <h2>Удалить это пространство?</h2>
-                <p>Вы уверены, что хотите удалить пространство? Все данные, содержащиеся в нем, будут потеряны.</p>
-                <div className={classes.buttons}>
-                    <Button cls='delete' text={'Удалить'} onClick={removeSpace}></Button>
-                    <Button cls='cancel' text={'Отмена'} onClick={() => props.closeModal()}></Button>
-                </div>
+        <div className={classes.Container} style={{ width: '420px' }}>
+            <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
+            <h2>Удалить это пространство?</h2>
+            <p>Вы уверены, что хотите удалить пространство? Все данные, содержащиеся в нем, будут потеряны.</p>
+            <div className={classes.buttons}>
+                <Button cls='delete' text={'Удалить'} onClick={removeSpace}></Button>
+                <Button cls='cancel' text={'Отмена'} onClick={() => props.closeModal()}></Button>
             </div>
         </div>
     )

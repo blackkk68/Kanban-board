@@ -36,7 +36,7 @@ function ColumnElements(props) {
     })
 
     function elemClickHandler(taskId) {
-        props.openCurrentTaskModal(props.columnId, taskId);
+        props.openUpdateTaskModal(props.columnId, taskId);
     }
 
     return (

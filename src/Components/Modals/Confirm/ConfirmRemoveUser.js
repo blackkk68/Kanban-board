@@ -24,15 +24,13 @@ function ConfirmRemoveUser(props) {
     }
 
     return (
-        <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
-            <div className={classes.Modal} style={{ width: '420px' }}>
-                <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
-                <h2>Удалить пользоваетля?</h2>
-                <p>Вы уверены, что хотите удалить пользователя? Он потеряет доступ к этому пространству.</p>
-                <div className={classes.buttons}>
-                    <Button cls='delete' text={'Удалить'} onClick={removeUser}></Button>
-                    <Button cls='cancel' text={'Отмена'} onClick={() => props.closeModal()}></Button>
-                </div>
+        <div className={classes.Container} style={{ width: '420px' }}>
+            <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
+            <h2>Удалить пользоваетля?</h2>
+            <p>Вы уверены, что хотите удалить пользователя? Он потеряет доступ к этому пространству.</p>
+            <div className={classes.buttons}>
+                <Button cls='delete' text={'Удалить'} onClick={removeUser}></Button>
+                <Button cls='cancel' text={'Отмена'} onClick={() => props.closeModal()}></Button>
             </div>
         </div>
     )

@@ -25,7 +25,7 @@ const Columns = observer((props) => {
                             <ColumnElements
                                 tasks={item.tasks ? item.tasks : []}
                                 columnId={item.id}
-                                openCurrentTaskModal={props.openCurrentTaskModal}
+                                openUpdateTaskModal={props.openUpdateTaskModal}
                                 searchValue={props.searchValue} />
                             <div className={classes.actions}>
                                 {item.deletable

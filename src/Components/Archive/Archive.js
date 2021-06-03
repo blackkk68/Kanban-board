@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import classes from './Archive.module.scss';
 import Search from '../../Plugins/Search/Search';
 import ArchiveBody from './ArchiveBody/ArchiveBody';
-import UpdateArchivedTask from '../Modals/UpdateArchivedTask';
+import UpdateArchivedTask from '../Modals/Tasks/UpdateArchivedTask';
 import archiveStore from '../../Store/archive';
+import Modal from '../../HOC/Modal/Modal';
 
 function Archive() {
     const [searchValue, setSearchValue] = useState('');
@@ -34,9 +35,9 @@ function Archive() {
                 </div>
                 <ArchiveBody archive={filteredArchive} openModal={openModal} />
             </section>
-            {isUpdateArchivedTaskModalOpen
-                ? <UpdateArchivedTask taskId={currentItemId} closeModal={closeModal} />
-                : null}
+            <Modal isModalOpen={isUpdateArchivedTaskModalOpen}>
+                <UpdateArchivedTask taskId={currentItemId} closeModal={closeModal} />
+            </Modal>
         </React.Fragment>
     )
 }

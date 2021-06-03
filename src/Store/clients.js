@@ -13,6 +13,7 @@ class Clients {
 
     addClient(newClient) {
         this.clients.push(newClient);
+        this.clients.sort((a, b) => a.companyTitle > b.companyTitle);
         this.updateClientsServerData();
     }
 

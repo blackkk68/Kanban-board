@@ -31,15 +31,13 @@ function ConfirmLeaveSpace(props) {
     }
 
     return (
-        <div className={classes.Overlay} onClick={overlayClickHandler} ref={overlayRef}>
-            <div className={classes.Modal} style={{ width: '420px' }}>
-                <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
-                <h2>Покинуть это пространство?</h2>
-                <p>Вы уверены, что хотите покинуть пространство? Вернуться в него может быть затруднительно.</p>
-                <div className={classes.buttons}>
-                    <Button cls='delete' text={'Покинуть'} onClick={leaveSpace}></Button>
-                    <Button cls='cancel' text={'Отмена'} onClick={() => props.closeModal()}></Button>
-                </div>
+        <div className={classes.Container} style={{ width: '420px' }}>
+            <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
+            <h2>Покинуть это пространство?</h2>
+            <p>Вы уверены, что хотите покинуть пространство? Вернуться в него может быть затруднительно.</p>
+            <div className={classes.buttons}>
+                <Button cls='delete' text={'Покинуть'} onClick={leaveSpace}></Button>
+                <Button cls='cancel' text={'Отмена'} onClick={() => props.closeModal()}></Button>
             </div>
         </div>
     )
