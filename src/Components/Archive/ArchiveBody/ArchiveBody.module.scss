@@ -1,5 +1,6 @@
 .ArchiveBody {
     padding: 70px 150px;
+
     .list {
         list-style: none;
         margin: 0;
@@ -7,7 +8,7 @@
 
         .item {
             cursor: pointer;
-            border-bottom: 1px solid #d5d6e0;
+            border-bottom: 1px solid #5f6080;
             padding: 10px;
             width: 90%;
             transition: background 0.1s ease-in-out;
@@ -16,19 +17,17 @@
                 display: inline-block;
                 width: 35%;
                 text-overflow: ellipsis;
-                font-weight: 600;
             }
 
             .taskText {
                 display: inline-block;
                 width: 65%;
                 text-overflow: ellipsis;
-                font-weight: 400;
             }
 
             &:hover {
                 border-radius: 5px;
-                background: #d2ebf1;
+                background: darken(#f7f8fc, 5%);
             }
         }
     }

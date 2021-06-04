@@ -46,7 +46,11 @@ function SpacesSidebar(props) {
     function updateSpaces(newActiveSpace = activeSpace) {
         currentSpace.title = titleValue;
         currentSpace.description = descriptionValue;
-        spacesStore.updateSpacesServerData(spaces, newActiveSpace);
+        if (isCurrentSpaceActive) {
+            spacesStore.updateSpacesServerData(spaces, currentSpace);
+        } else {
+            spacesStore.updateSpacesServerData(spaces, newActiveSpace);
+        }
     }
 
     function closeContextMenu() {

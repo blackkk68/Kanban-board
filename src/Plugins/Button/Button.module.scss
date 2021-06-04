@@ -1,6 +1,6 @@
 .Button {
     padding: 10px 15px;
-    font-size: 17px;
+    font-size: 0.8rem;
     font-family: inherit;
     border-radius: 5px;
     background: none;
@@ -45,6 +45,7 @@ $auth-color: #531f6e;
 
 .Button.auth {
     color: $auth-color;
+    font-size: 1.5rem;
     border: 2px solid $auth-color;
 
     &:hover {

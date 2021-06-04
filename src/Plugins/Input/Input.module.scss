@@ -16,7 +16,7 @@
         color: inherit;
         outline: none;
         font-family: inherit;
-        font-size: 19px;
+        font-size: 0.95rem;
         text-overflow: ellipsis;
         padding: 0;
         margin: 0;
@@ -31,18 +31,54 @@
     }
 
     .label {
+        font-size: 0.85rem;
         opacity: 0.7;
     }
 
     .passwordVisibility {
         position: absolute;
-        top: 27px;
+        top: 26px;
         right: 12px;
         cursor: pointer;
+
+        svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
     }
 
     .error {
-        font-size: 12px;
+        font-size: 0.6rem;
         color: crimson;
+    }
+}
+
+@media (max-width: 1199px) {
+    .InputContainer {
+        min-height: 70px;
+
+        .passwordVisibility {
+            top: 25px;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .InputContainer {
+        min-height: 65px;
+
+        .passwordVisibility {
+            top: 24px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .InputContainer {
+        min-height: 60px;
+
+        .passwordVisibility {
+            top: 23px;
+        }
     }
 }

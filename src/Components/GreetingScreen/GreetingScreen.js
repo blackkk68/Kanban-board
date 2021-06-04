@@ -30,11 +30,15 @@ function GreetingScreen(props) {
                     <h1>Добро пожаловать!</h1>
                     <p>Канбан доска - твой удобный помощник в планировании и решении рабочих дел. Заходи и пользуйся временем с умом!</p>
                     <div className={classes.buttons}>
-                        <Button cls='auth' text='Регистрация' onClick={regClickHandler} />
-                        <Button cls='auth' text='Вход' onClick={enterClickHandler} />
+                        <div className={classes.button}>
+                            <Button cls='auth' text='Регистрация' onClick={regClickHandler} />
+                        </div>
+                        <div className={classes.button}>
+                            <Button cls='auth' text='Вход' onClick={enterClickHandler} />
+                        </div>
                     </div>
                 </div>
-                <div>
+                <div className={classes.img}>
                     <img src={greetScreenImg} alt='Логотип' />
                 </div>
             </div>

@@ -22,7 +22,7 @@ function AuthAndReg(props) {
     }
 
     return (
-        <div className={classes.Container} style={{ width: '450px' }}>
+        <div className={classes.Container}>
             {isPasswordForgotten ? <ArrowBackIosIcon className={classes.arrow} onClick={recallPassword} /> : null}
             <CloseIcon className={classes.cross} onClick={crossClickHandler} />
             {props.isRegModalCurrent

@@ -1,42 +1,106 @@
 .GreetingScreen {
-    position: fixed;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
-    gap: 50px;
+    justify-content: space-evenly;
     align-items: center;
     background: linear-gradient(45deg, #aac4ff 0%, #c98ab7 30%, #f6f2c5 60%, #bf59eb 100%);
     z-index: 10;
 
     .textContainer {
-        margin-left: 150px;
+        width: 45%;
+        max-width: 750px;
+        padding: 5px;
+        display: flex;
+        gap: 45px;
+        flex-direction: column;
+        align-items: flex-start;
 
         h1 {
             color: #531f6e;
-            font-size: 60px;
-            width: 200px;
+            font-size: 3.2rem;
             text-transform: uppercase;
+            padding: 0;
             margin: 0;
+            max-width: 700px;
         }
 
         p {
-            font-size: 30px;
-            width: 750px;
+            font-size: 1.7rem;
             line-height: 40px;
-            margin-bottom: 35px;
+            padding: 0;
+            margin: 0;
         }
 
         .buttons {
             display: flex;
             gap: 35px;
-
-            button {
-                font-size: 25px;
-            }
         }
     }
 
-    img {
-        width: 750px;
+    .img {
+        width: 45%;
+        max-width: 750px;
+        padding: 5px;
+
+        img {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 1199px) {
+    .GreetingScreen {
+        .textContainer {
+            gap: 25px;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .GreetingScreen {
+        flex-direction: column;
+        flex-flow: column-reverse;
+        justify-content: space-evenly;
+
+        .textContainer {
+            width: 70%;
+            align-items: center;
+
+            h1,
+            p {
+                text-align: center;
+            }
+
+            .buttons {
+                width: 100%;
+                justify-content: center;
+                gap: 10px;
+
+                .button {
+                    width: 50%;
+
+                    &:first-child {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+
+        .img {
+            width: 65%;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .GreetingScreen {
+        .textContainer {
+            .buttons {
+                .button {
+                    width: auto;
+                }
+            }
+        }
     }
 }

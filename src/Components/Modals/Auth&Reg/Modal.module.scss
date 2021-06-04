@@ -1,6 +1,6 @@
 .Container {
     background: #f7f8fc;
-    width: 520px;
+    width: 470px;
     height: auto;
     border-radius: 15px;
     box-sizing: border-box;
@@ -12,7 +12,7 @@
     .arrow {
         cursor: pointer;
         position: absolute;
-        top: 25px;
+        top: 27px;
         left: 25px;
         width: 17px;
         height: 17px;
@@ -30,7 +30,7 @@
 
     h2 {
         text-align: center;
-        font-size: 25px;
+        font-size: 1.4rem;
         padding: 5px;
         margin-top: 15px;
         margin-bottom: 0;
@@ -54,9 +54,11 @@
 
     .forgotPassword {
         cursor: pointer;
+        transition: color 0.1s ease-in-out;
+        font-size: 0.9rem;
 
         &:hover {
-            text-decoration: underline;
+            color: lighten(#5f6080, 20%);
         }
     }
 
@@ -74,10 +76,35 @@
 
     .error {
         height: 18px;
+
         span {
+            font-size: 0.8rem;
             display: block;
             text-align: center;
             color: crimson;
+        }
+    }
+}
+
+@media (max-width: 1199px) {
+    .Container {
+        width: 425px;
+    }
+}
+
+@media (max-width: 991px) {
+    .Container {
+        width: 425px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Container {
+        width: 350px;
+        padding: 10px;
+
+        .buttons {
+            margin-bottom: 10px;
         }
     }
 }
