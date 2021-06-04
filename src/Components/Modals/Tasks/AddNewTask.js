@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import classes from './Modal.module.scss';
 import CloseIcon from '@material-ui/icons/Close';
 import SelectClient from '../../../Plugins/Selects/SelectClient';
@@ -14,7 +14,6 @@ function AddNewTask(props) {
     const [taskComment, setTaskComment] = useState('');
     const [client, setClient] = useState('');
     const [priority, setPriority] = useState('');
-    const overlayRef = useRef(null);
 
     function addClient(client) {
         setClient(client);
@@ -32,12 +31,6 @@ function AddNewTask(props) {
 
     function crossClickHandler() {
         props.closeModal();
-    }
-
-    function overlayClickHandler(evt) {
-        if (evt.target.contains(overlayRef.current)) {
-            props.closeModal();
-        }
     }
 
     function keyHandler(evt) {

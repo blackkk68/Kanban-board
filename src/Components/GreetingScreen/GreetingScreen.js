@@ -38,7 +38,7 @@ function GreetingScreen(props) {
                     <img src={greetScreenImg} alt='Логотип' />
                 </div>
             </div>
-            <Modal isModalOpen={isAuthModalOpen}>
+            <Modal isModalOpen={isAuthModalOpen} closeModal={closeModal}>
                 <AuthAndReg closeModal={closeModal} isRegModalCurrent={isRegModalCurrent} setDataFromServer={props.setDataFromServer} />
             </Modal>
         </React.Fragment>

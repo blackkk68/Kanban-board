@@ -11,6 +11,7 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import AccountSettings from '../Modals/AccountsSettings/AccountSettings';
 import userDataStore from '../../Store/userData';
 import spacesStore from '../../Store/spaces';
+import Modal from '../../HOC/Modal/Modal';
 
 function Header(props) {
     const [isHeaderOpen, setIsHeaderOpen] = useState(false);
@@ -84,9 +85,9 @@ function Header(props) {
                     </div>
                 </div>
             </header>
-            {isAccountSettingsModalOpen
-                ? <AccountSettings closeModal={toggleAccountSettingsModal} />
-                : null}
+            <Modal isModalOpen={isAccountSettingsModalOpen} closeModal={toggleAccountSettingsModal}>
+                <AccountSettings closeModal={toggleAccountSettingsModal} />
+            </Modal>
         </React.Fragment >
     )
 }

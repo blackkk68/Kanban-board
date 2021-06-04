@@ -35,7 +35,7 @@ function Archive() {
                 </div>
                 <ArchiveBody archive={filteredArchive} openModal={openModal} />
             </section>
-            <Modal isModalOpen={isUpdateArchivedTaskModalOpen}>
+            <Modal isModalOpen={isUpdateArchivedTaskModalOpen} closeModal={closeModal}>
                 <UpdateArchivedTask taskId={currentItemId} closeModal={closeModal} />
             </Modal>
         </React.Fragment>

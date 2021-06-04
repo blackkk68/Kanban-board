@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import classes from './Modal.module.scss';
 import Button from '../../../Plugins/Button/Button';
 import CloseIcon from '@material-ui/icons/Close';
@@ -6,21 +6,6 @@ import columnsStore from '../../../Store/columns';
 import archiveStore from '../../../Store/archive';
 
 function Confirm(props) {
-    const modalRef = useRef(null);
-
-    // useEffect(() => {
-    //     function clockOutsideHandler(evt) {
-    //         if (props.isModalOpen && !evt.target.contains(modalRef.current)) {
-    //             props.closeModal();
-    //             console.log('Hey');
-    //         }
-    //     }
-    //     document.addEventListener('click', clockOutsideHandler);
-    //     return () => {
-    //         document.removeEventListener('click', clockOutsideHandler);
-    //     }
-    // }, [props.isModalOpen]);
-
     function removeColumn() {
         const columns = columnsStore.columns.slice();
         const column = columns.find(item => item.id === props.colId);
@@ -35,7 +20,7 @@ function Confirm(props) {
     }
 
     return (
-        <div className={classes.Container} style={{ width: '420px' }} ref={modalRef}>
+        <div className={classes.Container} style={{ width: '420px' }}>
             <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
             <h2>Удалить этап?</h2>
             <p>Вы уверены, что хотите удалить этап? Все задачи будут помещены в архив.</p>

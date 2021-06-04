@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import classes from './Modal.module.scss';
 import CloseIcon from '@material-ui/icons/Close';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -8,13 +8,6 @@ import Registration from './Registration';
 
 function AuthAndReg(props) {
     const [isPasswordForgotten, setIsPasswordForgotten] = useState(false);
-    const overlayRef = useRef(null);
-
-    function overlayClickHandler(evt) {
-        if (evt.target.contains(overlayRef.current)) {
-            props.closeModal();
-        }
-    }
 
     function crossClickHandler() {
         props.closeModal();

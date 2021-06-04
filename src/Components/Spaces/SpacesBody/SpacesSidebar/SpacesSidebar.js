@@ -8,7 +8,7 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import spacesStore from '../../../../Store/spaces';
 import { Transition } from 'react-transition-group';
-import ContextMenu from './ContextMenu/ContextMenu';
+import ContextMenu from '../../../../HOC/ContextMenu/ContextMenu';
 
 function SpacesSidebar(props) {
     const userData = JSON.parse(localStorage.getItem('userData'));
@@ -22,7 +22,7 @@ function SpacesSidebar(props) {
     const [users, setUsers] = useState([]);
     const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
     const [sidebarTransitionClass, setSidebarTransitionClass] = useState(null);
-    const contextMenuTogglerRef = useRef(null);
+    const kebabRef = (null);
     const sidebarRef = useRef(null);
 
     useEffect(() => {
@@ -49,8 +49,16 @@ function SpacesSidebar(props) {
         spacesStore.updateSpacesServerData(spaces, newActiveSpace);
     }
 
-    function toggleContextMenu() {
-        setIsContextMenuOpen(!isContextMenuOpen);
+    function closeContextMenu() {
+        if (isContextMenuOpen) {
+            setIsContextMenuOpen(false);
+        }
+    }
+
+    function openContextMenu() {
+        if (!isContextMenuOpen) {
+            setIsContextMenuOpen(true);
+        }
     }
 
     function removeUser(userId) {
@@ -61,16 +69,19 @@ function SpacesSidebar(props) {
     function activateSpace() {
         updateSpaces(currentSpace);
         setIsCurrentSpaceActive(true);
+        closeContextMenu();
         props.setDataFromServer();
     }
 
     function leaveSpace() {
         props.toggleConfirmLeaveSpaceModal(props.clickedSpaceIndex);
+        closeContextMenu();
         props.closeSidebar();
     }
 
     function removeSpace() {
         props.toggleConfirmRemoveSpaceModal(props.clickedSpaceIndex);
+        closeContextMenu();
         props.closeSidebar();
     }
 
@@ -89,19 +100,17 @@ function SpacesSidebar(props) {
                     <ClearIcon onClick={crossClickHandler} />
                     <MoreVertIcon
                         className={isCurrentSpaceActive && isUserCreator && !currentSpace.isDeletable ? classes.disabled : ''}
-                        onClick={() => isCurrentSpaceActive && isUserCreator && !currentSpace.isDeletable ? null : setIsContextMenuOpen(!isContextMenuOpen)}
-                        ref={contextMenuTogglerRef} />
+                        onClick={isCurrentSpaceActive && isUserCreator && !currentSpace.isDeletable ? null : openContextMenu}
+                        ref={kebabRef} />
                 </div>
-                <ContextMenu
-                    isContextMenuOpen={isContextMenuOpen}
-                    toggleContextMenu={toggleContextMenu}
-                    activateSpace={activateSpace}
-                    leaveSpace={leaveSpace}
-                    removeSpace={removeSpace}
-                    isCurrentSpaceActive={isCurrentSpaceActive}
-                    currentSpace={currentSpace}
-                    isUserCreator={isUserCreator}
-                    contextMenuToggler={contextMenuTogglerRef.current} />
+                <ContextMenu isContextMenuOpen={isContextMenuOpen} closeContextMenu={closeContextMenu}>
+                    <ul className={classes.contextMenu}>
+                        <li className={isCurrentSpaceActive ? classes.disabled : ''} onClick={isCurrentSpaceActive ? null : activateSpace}>Активировать</li>
+                        {isUserCreator
+                            ? <li className={currentSpace.isDeletable ? '' : classes.disabled} onClick={currentSpace.isDeletable ? removeSpace : null}>Удалить</li>
+                            : <li onClick={leaveSpace}>Покинуть</li>}
+                    </ul>
+                </ContextMenu>
                 <div className={classes.inputs}>
                     <Input
                         label='Название'

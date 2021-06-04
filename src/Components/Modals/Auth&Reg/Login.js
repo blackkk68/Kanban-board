@@ -85,7 +85,6 @@ function Login(props) {
                     label='Email'
                     value={emailValue}
                     onChange={emailChangeHandler}
-                    autoFocus
                     isValid={isEmailValid}
                     errorMessage='Введите корректный email' />
                 <Input

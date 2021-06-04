@@ -1,0 +1,21 @@
+.ContextMenu {
+    position: absolute;
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+    z-index: 1;
+
+    &.exiting {
+        opacity: 0;
+        transform: translateY(-10px) translateX(10px);
+    }
+
+    &.entered {
+        opacity: 1;
+        transform: translateY(0) translateX(0);
+    }
+
+    &.entering {
+        opacity: 0;
+        transform: translateY(-10px) translateX(10px);
+    }
+}

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import classes from './Modal.module.scss';
 import CloseIcon from '@material-ui/icons/Close';
 import Input from '../../../Plugins/Input/Input';
@@ -12,7 +12,6 @@ function AddNewClient(props) {
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [comment, setComment] = useState('');
-    const overlayRef = useRef(null);
 
     class Client {
         constructor(options) {
@@ -30,12 +29,6 @@ function AddNewClient(props) {
         const newClient = new Client({ companyTitle, contact, phone, email, address, comment });
         clients.addClient(newClient);
         props.closeModal();
-    }
-
-    function overlayClickHandler(evt) {
-        if (evt.target.contains(overlayRef.current)) {
-            props.closeModal();
-        }
     }
 
     function crossClickHandler() {

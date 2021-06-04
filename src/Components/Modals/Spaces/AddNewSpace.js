@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import classes from './Modal.module.scss';
 import CloseIcon from '@material-ui/icons/Close';
 import Input from '../../../Plugins/Input/Input';
@@ -11,7 +11,6 @@ function AddNewTask(props) {
     const userData = JSON.parse(localStorage.getItem('userData'));
     const [titleValue, setTitleValue] = useState('');
     const [descriptionValue, setDescriptionValue] = useState('');
-    const overlayRef = useRef(null);
 
     function resetStates() {
         setTitleValue('');
@@ -19,7 +18,7 @@ function AddNewTask(props) {
     }
 
     function crossClickHandler() {
-        props.toggleAddNewSpaceModal();
+        props.closeModal();
         resetStates();
     }
 
@@ -27,15 +26,8 @@ function AddNewTask(props) {
         const newSpace = new Space(titleValue, descriptionValue, userData, userData.id);
         spaces.push(newSpace);
         spacesStore.updateSpacesServerData(spaces);
-        props.toggleAddNewSpaceModal();
+        props.closeModal();
         resetStates();
-    }
-
-    function overlayClickHandler(evt) {
-        if (evt.target.contains(overlayRef.current)) {
-            props.toggleAddNewSpaceModal();
-            resetStates();
-        }
     }
 
     function keyHandler(evt) {

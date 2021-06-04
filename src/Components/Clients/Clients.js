@@ -55,10 +55,10 @@ function Clients() {
                 openUpdateClientModal={openUpdateClientModal}
                 openAddClientModal={openAddClientModal}
             />
-            <Modal isModalOpen={isAddClientModalOpen}>
+            <Modal isModalOpen={isAddClientModalOpen} closeModal={closeAddClientModal}>
                 <AddNewClient closeModal={closeAddClientModal} />
             </Modal>
-            <Modal isModalOpen={isUpdateClientModalOpen}>
+            <Modal isModalOpen={isUpdateClientModalOpen} closeModal={closeUpdateClientModal}>
                 <UpdateClient closeModal={closeUpdateClientModal} clientId={currentClientId} />
             </Modal>
         </section>

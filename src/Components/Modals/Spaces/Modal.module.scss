@@ -47,4 +47,23 @@
         justify-content: space-around;
         margin-top: 10px;
     }
+
+    .codeField {
+        position: relative;
+        width: 95%;
+        align-self: center;
+
+        div {
+            background: #c5d6db;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        i {
+            position: absolute;
+            top: 11px;
+            right: 12px;
+            cursor: pointer;
+        }
+    }
 }

@@ -1,18 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import classes from './Modal.module.scss';
 import Button from '../../../Plugins/Button/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import spacesStore from '../../../Store/spaces';
 
 function ConfirmRemoveUser(props) {
-    const overlayRef = useRef(null);
-
-    function overlayClickHandler(evt) {
-        if (evt.target.contains(overlayRef.current)) {
-            props.closeModal();
-        }
-    }
-
     function removeUser() {
         const spaces = spacesStore.spaces.slice();
         const currentSpace = spaces[props.clickedSpaceIndex];

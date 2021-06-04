@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import classes from './Modal.module.scss';
 import CloseIcon from '@material-ui/icons/Close';
 import SelectClient from '../../../Plugins/Selects/SelectClient';
@@ -18,18 +18,11 @@ function UpdateArchiveTask(props) {
     const taskComment = task.comment;
     const client = task.client;
     const priority = task.priority;
-    const overlayRef = useRef(null);
 
     function removeTask() {
         const taskIndex = archive.findIndex(item => item.id === props.taskId);
         archive.splice(taskIndex, 1);
         archiveStore.updateArchiveServerData(archive);
-    }
-
-    function overlayClickHandler(evt) {
-        if (evt.target.contains(overlayRef.current)) {
-            props.closeModal();
-        }
     }
 
     function deleteHandler() {

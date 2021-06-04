@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import classes from './Modal.module.scss';
 import Button from '../../../Plugins/Button/Button';
 import CloseIcon from '@material-ui/icons/Close';
@@ -8,13 +8,6 @@ function ConfirmLeaveSpace(props) {
     const userData = JSON.parse(localStorage.getItem('userData'));
     const spaces = spacesStore.spaces.slice();
     const activeSpace = { ...spacesStore.activeSpace };
-    const overlayRef = useRef(null);
-
-    function overlayClickHandler(evt) {
-        if (evt.target.contains(overlayRef.current)) {
-            props.closeModal();
-        }
-    }
 
     function leaveSpace() {
         const currentSpace = spaces[props.clickedSpaceIndex];

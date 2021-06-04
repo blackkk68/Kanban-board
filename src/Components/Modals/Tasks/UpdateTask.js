@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import classes from './Modal.module.scss';
 import CloseIcon from '@material-ui/icons/Close';
 import SelectClient from '../../../Plugins/Selects/SelectClient';
@@ -18,7 +18,6 @@ function UpdateTask(props) {
     const [taskComment, setTaskComment] = useState(task.comment);
     const [client, setClient] = useState(task.client);
     const [priority, setPriority] = useState(task.priority);
-    const overlayRef = useRef(null);
 
     function updateTask() {
         task.heading = taskHeading;
@@ -42,12 +41,6 @@ function UpdateTask(props) {
         archiveStore.addItem(task);
         columnsStore.removeTask(props.colId, props.taskId);
         props.closeModal();
-    }
-
-    function overlayClickHandler(evt) {
-        if (evt.target.contains(overlayRef.current)) {
-            updateTask();
-        }
     }
 
     function keyHandler(evt) {

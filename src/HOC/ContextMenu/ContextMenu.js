@@ -3,20 +3,20 @@ import classes from './ContextMenu.module.scss';
 import { Transition } from 'react-transition-group';
 
 function ContextMenu(props) {
-    const [contextMenuTransitionClass, setContextMenuClass] = useState(null);
+    const [contextMenuClass, setContextMenuClass] = useState(null);
     const contextMenuRef = useRef(null);
 
     useEffect(() => {
-        function toggleMenu(evt) {
-            if (props.isContextMenuOpen && !contextMenuRef.current.contains(evt.target) && !props.plusRef.contains(evt.target)) {
-                props.toggleContextMenu();
+        function closeMenu(evt) {
+            if (contextMenuClass === classes.entered && !contextMenuRef.current.contains(evt.target)) {
+                props.closeContextMenu();
             }
         }
-        document.addEventListener('click', toggleMenu);
+        document.addEventListener('click', closeMenu);
         return () => {
-            document.removeEventListener('click', toggleMenu);
+            document.removeEventListener('click', closeMenu);
         }
-    }, [props.isContextMenuOpen]);
+    }, [contextMenuClass])
 
     return (
         <Transition
@@ -28,10 +28,9 @@ function ContextMenu(props) {
             onExiting={() => setContextMenuClass(classes.exiting)}
             onEntered={() => setContextMenuClass(classes.entered)}
             onEntering={() => setContextMenuClass(classes.entering)}>
-            <ul className={`${classes.ContextMenu} ${contextMenuTransitionClass}`} ref={contextMenuRef}>
-                <li onClick={() => props.addNewSpace()}>Добавить новое</li>
-                <li onClick={() => props.addSpaceWithCode()}>Добавить по коду</li>
-            </ul>
+            <div className={`${classes.ContextMenu} ${contextMenuClass}`} ref={contextMenuRef}>
+                {props.children}
+            </div>
         </Transition>
     )
 }

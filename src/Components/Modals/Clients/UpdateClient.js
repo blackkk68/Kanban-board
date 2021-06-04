@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import classes from './Modal.module.scss';
 import Input from '../../../Plugins/Input/Input';
 import Button from '../../../Plugins/Button/Button';
@@ -6,7 +6,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import clientsStore from '../../../Store/clients';
 
 function UpdateClient(props) {
-    console.log('props: ', props);
     const clients = JSON.parse(localStorage.getItem('clients'));
     const client = clients.filter(item => item.id === props.clientId)[0];
     const [companyTitle, setCompanyTitle] = useState(client.companyTitle);
@@ -15,7 +14,6 @@ function UpdateClient(props) {
     const [email, setEmail] = useState(client.email);
     const [address, setAddress] = useState(client.address);
     const [comment, setComment] = useState(client.comment);
-    const overlayRef = useRef(null);
 
     function updateClient() {
         client.companyTitle = companyTitle;
@@ -26,13 +24,6 @@ function UpdateClient(props) {
         client.comment = comment;
         clientsStore.updateClient(client);
         props.closeModal();
-    }
-
-    function overlayClickHandler(evt) {
-        if (evt.target.contains(overlayRef.current)) {
-            updateClient();
-            props.closeModal();
-        }
     }
 
     function crossClickHandler() {
