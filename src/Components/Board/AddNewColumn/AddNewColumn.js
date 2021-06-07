@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classes from './AddNewColumn.module.scss';
-import Plus from '../../../Plugins/Plus/Plus';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import columnsStore from '../../../Store/columns';
 
 
@@ -69,7 +69,7 @@ function AddNewColumn() {
                 ref={inputRef}
                 readOnly={!isOpen}
                 onKeyDown={keyHandler} />
-            <Plus onClick={plusClickHandler} />
+            <AddCircleOutlineIcon className={classes.plus} onClick={plusClickHandler} />
         </div>
     )
 }

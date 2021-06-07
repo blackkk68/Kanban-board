@@ -1,5 +1,5 @@
 .Board {
-    height: 100vh;
+    min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr;
 
@@ -14,7 +14,7 @@
 
         .heading {
             margin: 0;
-            font-size: 37px;
+            font-size: 2rem;
             text-align: left;
         }
 
@@ -22,6 +22,40 @@
             display: flex;
             align-items: center;
             gap: 5px;
+        }
+    }
+}
+
+@media (max-width: 1199px) {
+    html,
+    body {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 991px) {
+    .Board {
+        .header {
+            padding: 15px 35px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .Board {
+        .header {
+            padding: 10px 25px;
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .Board {
+        .header {
+            flex-direction: column;
+            gap: 10px;
         }
     }
 }

@@ -2,17 +2,21 @@ import React from 'react';
 import classes from './ArchiveBody.module.scss';
 import Icon from '@material-ui/core/Icon';
 import plus from '../../../Img/empty-box.svg';
+import archiveStore from '../../../Store/archive';
 
 function ArchiveBody(props) {
+    const regexp = new RegExp(`${props.searchValue}`, 'gi');
+    const filteredArchive = archiveStore.archive.filter(item => item.heading.match(regexp));
+
     function itemClickHandler(taskId) {
         props.openModal(taskId);
     }
 
     return (
         <div className={classes.ArchiveBody}>
-            {props.archive.length
+            {archiveStore.archive.length
                 ? <ul className={classes.list}>
-                    {props.archive.map(item => {
+                    {filteredArchive.map(item => {
                         return (
                             <li className={classes.item} key={item.id} onClick={() => itemClickHandler(item.id)}>
                                 <span className={classes.taskHeading}>{item.heading}</span>

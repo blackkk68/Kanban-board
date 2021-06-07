@@ -13,7 +13,7 @@ function Input(props) {
     function changeHandler(evt) {
         props.onChange(evt);
         if (textAreaRef.current) {
-            textAreaRef.current.style.height = props.style ? '56px' : '35px';
+            textAreaRef.current.style.height = props.style ? '56px' : 'auto';
             textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
         }
     }

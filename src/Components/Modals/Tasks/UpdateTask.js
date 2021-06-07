@@ -38,6 +38,7 @@ function UpdateTask(props) {
     }
 
     function removeTask() {
+        task.columnId = props.colId;
         archiveStore.addItem(task);
         columnsStore.removeTask(props.colId, props.taskId);
         props.closeModal();

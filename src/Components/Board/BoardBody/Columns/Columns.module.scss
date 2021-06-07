@@ -1,4 +1,5 @@
 .Column {
+    min-width: 300px;
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -8,6 +9,8 @@
     box-sizing: border-box;
     position: relative;
     margin-right: 35px;
+    padding: 1.2rem;
+    padding-top: 0.5rem;
 
     &::after {
         content: '';
@@ -15,6 +18,8 @@
         border-top-left-radius: 5px;
         position: absolute;
         width: 100%;
+        top: 0;
+        left: 0;
         height: 5px;
     }
 
@@ -41,7 +46,7 @@
     }
 
     ul {
-        padding: 0 25px;
+        padding: 0;
     }
 
     .actions {
@@ -50,12 +55,30 @@
 
         .plus,
         .trash {
-            width: 30px;
-            height: 30px;
+            width: 1.5rem;
+            height: 1.5rem;
             align-self: flex-end;
             cursor: pointer;
-            padding: 25px;
-            padding-top: 0;
+            padding: 0;
         }
+    }
+}
+
+@media (max-width: 1199px) {
+    .Column {
+        min-width: 290px;
+    }
+}
+
+@media (max-width: 991px) {
+    .Column {
+        min-width: 270px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Column {
+        min-width: 100%;
+        margin-right: 0;
     }
 }

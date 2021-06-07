@@ -8,8 +8,8 @@
     }
 
     .searchInput {
-        font-size: 30px;
-        line-height: 40px;
+        font-size: 1.5rem;
+        line-height: 2rem;
         border-radius: 10px;
         border: none;
         outline: none;
@@ -28,7 +28,9 @@
 
     .cross,
     .searchIcon {
-        font-size: 45px;
+        width: 2.2rem;
+        height: 2.2rem;
+        padding: 0;
         cursor: pointer;
         color: #5f6080;
         transition: color 0.1s ease-in;
@@ -41,11 +43,40 @@
     }
 
     .cross {
-        font-size: 42px;
         visibility: hidden;
 
         &.shown {
             visibility: visible;
+        }
+    }
+}
+
+@media (max-width: 1199px) {
+    .Search {
+        .searchInput {
+            &.open {
+                width: 200px;
+            }
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .Search {
+        .searchInput {
+            &.open {
+                width: 170px;
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .Search {
+        .searchInput {
+            &.open {
+                width: 150px;
+            }
         }
     }
 }

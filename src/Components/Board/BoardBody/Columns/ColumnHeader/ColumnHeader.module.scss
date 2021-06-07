@@ -1,4 +1,5 @@
 .ColumnHeader {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,17 +7,16 @@
 
     .headerContainer {
         width: 100%;
-        height: 70px;
+        height: 3.5rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
-        padding: 10px 25px 0 25px;
 
         .heading {
-            height: 30px;
-            font-size: 27px;
-            margin: 15px 0;
+            width: 100%;
+            font-size: 1.35rem;
+            line-height: 1.5rem;
             padding: 7px 5px;
             font-family: inherit;
             font-weight: 600;
@@ -26,13 +26,12 @@
             &.input {
                 background-color: transparent;
                 border: none;
-                width: 250px;
+                width: 100%;
             }
 
             &.text {
                 border: none;
                 cursor: default;
-                max-width: 240px;
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 overflow: hidden;
@@ -42,8 +41,8 @@
 
         .pencil {
             cursor: pointer;
-            width: 30px;
-            height: 30px;
+            width: 1.5rem;
+            height: 1.5rem;
 
             &.hidden {
                 display: none;

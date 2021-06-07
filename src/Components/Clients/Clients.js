@@ -4,7 +4,7 @@ import ClientsBody from './ClientsBody/ClientsBody';
 import Search from '../../Plugins/Search/Search';
 import AddNewClient from '../Modals/Clients/AddNewClient';
 import UpdateClient from '../Modals/Clients/UpdateClient';
-import Plus from '../../Plugins/Plus/Plus';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import clients from '../../Store/clients';
 import Modal from '../../HOC/Modal/Modal';
 
@@ -44,7 +44,7 @@ function Clients() {
                 {clients.clients.length
                     ? <div className={classes.buttons}>
                         <Search setSearchClients={setSearchClients} />
-                        <Plus onClick={() => setIsAddClientModalOpen(true)} />
+                        <AddCircleOutlineIcon className={classes.plus} onClick={openAddClientModal} />
                     </div>
                     : null}
             </div>

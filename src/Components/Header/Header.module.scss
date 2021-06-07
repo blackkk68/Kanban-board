@@ -164,7 +164,7 @@
         width: 270px;
 
         .burger {
-            right: -100px;
+            right: -90px;
         }
 
         .navigation ul {
@@ -180,12 +180,17 @@
         width: 250px;
 
         .burger {
-            right: -120px;
+            top: 20px;
+            right: -95px;
         }
 
         .navigation ul {
             li {
                 margin: 10px;
+
+                a {
+                    padding: 0 5px;
+                }
             }
         }
     }
@@ -193,31 +198,14 @@
 
 @media (max-width: 767px) {
     .Header {
-        width: 225px;
-
         .burger {
-            right: -155px;
+            top: 40px;
+            right: -105px;
         }
 
         .navigation ul {
             li {
-                margin: 5px;
-            }
-        }
-    }
-}
-
-@media (max-width: 480px) {
-    .Header {
-        width: 215px;
-
-        .burger {
-            right: -165px;
-        }
-
-        .navigation ul {
-            li {
-                margin: 0;
+                margin: 5px 0;
             }
         }
     }

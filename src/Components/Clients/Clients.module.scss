@@ -22,6 +22,19 @@
             display: flex;
             align-items: center;
             gap: 9px;
+
+            .plus {
+                width: 39px;
+                height: 39px;
+                cursor: pointer;
+                color: #5f6080;
+                transition: color 0.1s ease-in;
+                border-radius: 10px;
+
+                &:hover {
+                    color: lighten(#5f6080, 20%);
+                }
+            }
         }
     }
 }

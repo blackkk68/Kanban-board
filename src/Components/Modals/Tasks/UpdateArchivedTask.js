@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Modal.module.scss';
 import CloseIcon from '@material-ui/icons/Close';
 import SelectClient from '../../../Plugins/Selects/SelectClient';
-import SelectPrioprity from '../../../Plugins/Selects/SelectPriority';
+import SelectPriority from '../../../Plugins/Selects/SelectPriority';
 import Input from '../../../Plugins/Input/Input';
 import Button from '../../../Plugins/Button/Button';
 import columnsStore from '../../../Store/columns';
@@ -57,7 +57,7 @@ function UpdateArchiveTask(props) {
                     label='Описание'
                     value={taskText}
                     readOnly />
-                <SelectPrioprity currentValue={priority} disabled={true} />
+                <SelectPriority currentValue={priority} disabled={true} />
                 <SelectClient currentValue={client} disabled={true} />
                 <Input
                     style={{ height: '56px' }}
