@@ -40,7 +40,7 @@ function AddNewTask(props) {
     }
 
     return (
-        <div className={classes.Container} style={{ width: '500px' }}>
+        <div className={classes.Container}>
             <CloseIcon className={classes.cross} onClick={crossClickHandler} />
             <h2>Новая задача</h2>
             <div className={classes.form} onKeyDown={keyHandler}>
@@ -58,13 +58,13 @@ function AddNewTask(props) {
                 <SelectPriority addPriority={addPriority} />
                 <SelectClient addClient={addClient} />
                 <Input
-                    style={{ height: '56px' }}
+                    isComment={true}
                     value={taskComment}
                     onChange={evt => setTaskComment(evt.target.value)}
                     label='Комментарий' />
-                <div className={classes.buttons}>
-                    <Button cls='primary' onClick={addNewTask} text='Добавить' style={{}} />
-                </div>
+            </div>
+            <div className={classes.buttons}>
+                <Button cls='primary' onClick={addNewTask} text='Добавить' style={{}} />
             </div>
         </div>
     )

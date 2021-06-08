@@ -29,7 +29,7 @@ function Search(props) {
         inputRef.current.focus();
     }
 
-    function inputChangeHndler(evt) {
+    function inputChangeHandler(evt) {
         setSearchValue(evt.target.value);
     }
 
@@ -52,7 +52,7 @@ function Search(props) {
                 className={`${classes.searchInput} ${isSearchInputOpen ? classes.open : ''}`}
                 ref={inputRef}
                 value={searchInputValue}
-                onChange={inputChangeHndler}
+                onChange={inputChangeHandler}
                 onBlur={searchInputBlurHandler}
                 placeholder='Искать...'
                 readOnly={!isSearchInputOpen} />

@@ -1,6 +1,6 @@
 .Container {
     background: #f7f8fc;
-    width: 520px;
+    width: 450px;
     height: auto;
     border-radius: 15px;
     box-sizing: border-box;
@@ -8,22 +8,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-
-    &.exiting {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-
-    &.entered {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    &.entering {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
 
     .cross {
         cursor: pointer;
@@ -35,7 +19,7 @@
 
     h2 {
         text-align: center;
-        font-size: 25px;
+        font-size: 1.2rem;
         padding: 5px;
         margin-top: 15px;
         margin-bottom: 0;
@@ -44,7 +28,8 @@
     p {
         text-align: center;
         line-height: 25px;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
     }
 
     .buttons {
@@ -52,5 +37,27 @@
         display: flex;
         justify-content: space-around;
         margin-top: 10px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .Container {
+        width: 400px;
+
+        .buttons {
+            margin-top: 0;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .Container {
+        width: 370px;
+    }
+}
+
+@media (max-width: 767px) {
+    .Container {
+        width: 320px;
     }
 }

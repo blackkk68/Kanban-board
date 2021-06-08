@@ -45,6 +45,46 @@
         width: 100%;
         display: flex;
         justify-content: space-around;
-        margin-top: 10px;
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .Container {
+        width: 500px;
+    }
+}
+
+@media (max-width: 991px) {
+    .Container {
+        width: 450px;
+        padding: 20px;
+
+        .buttons {
+            margin-top: 20px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .Container {
+        width: 420px;
+        padding: 15px;
+
+        .buttons {
+            margin-top: 15px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .Container {
+        width: 345px;
+        padding: 5px;
+
+        .buttons {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
     }
 }

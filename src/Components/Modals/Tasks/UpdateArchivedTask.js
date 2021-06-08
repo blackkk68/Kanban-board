@@ -60,7 +60,7 @@ function UpdateArchiveTask(props) {
                 <SelectPriority currentValue={priority} disabled={true} />
                 <SelectClient currentValue={client} disabled={true} />
                 <Input
-                    style={{ height: '56px' }}
+                    isComment={true}
                     label='Комментарий'
                     value={taskComment}
                     readOnly />

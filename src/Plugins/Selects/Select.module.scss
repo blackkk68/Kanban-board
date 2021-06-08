@@ -8,7 +8,7 @@
         font-size: 18px;
         padding: 3px;
         right: 7px;
-        top: 27px;
+        top: 29px;
         color: #999ab3;
         transition: color 0.1s ease-in;
 
@@ -23,7 +23,7 @@
         border: 1px solid #999ab3;
         width: 100%;
         position: absolute;
-        top: 57px;
+        top: 59px;
         z-index: 1;
 
         &.hidden {
@@ -54,6 +54,48 @@
 
                 &:hover {
                     background: darken(#f7f8fc, 5%);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1199px) {
+    .Select {
+        .cross {
+            top: 25px;
+        }
+
+        .selectOptions {
+            top: 54px;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .Select {
+        .cross {
+            top: 21px;
+        }
+
+        .selectOptions {
+            top: 50px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .Select {
+        .cross {
+            top: 19px;
+        }
+
+        .selectOptions {
+            top: 46px;
+
+            .optionsList {
+                li {
+                    padding: 3px 10px;
                 }
             }
         }

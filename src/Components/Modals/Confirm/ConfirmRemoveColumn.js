@@ -20,7 +20,7 @@ function Confirm(props) {
     }
 
     return (
-        <div className={classes.Container} style={{ width: '420px' }}>
+        <div className={classes.Container}>
             <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
             <h2>Удалить этап?</h2>
             <p>Вы уверены, что хотите удалить этап? Все задачи будут помещены в архив.</p>

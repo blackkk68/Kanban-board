@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classes from './Input.module.scss';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@material-ui/icons/VisibilityOffOutlined';
@@ -9,14 +9,25 @@ function Input(props) {
     const htmlFor = Math.random().toString(36);
     const textAreaRef = useRef(null);
     const inputRef = useRef(null);
+    let textareaHeight = '1.9rem';
 
-    function changeHandler(evt) {
-        props.onChange(evt);
-        if (textAreaRef.current) {
-            textAreaRef.current.style.height = props.style ? '56px' : 'auto';
-            textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
+    useEffect(() => {
+        if (window.innerWidth < 1200) {
+            textareaHeight = '2rem';
         }
-    }
+        if (window.innerWidth < 992) {
+            textareaHeight = '2.1rem';
+        }
+        if (window.innerWidth < 768) {
+            textareaHeight = '2.2rem';
+        }
+        if (textAreaRef.current) {
+            textAreaRef.current.style.height = props.isComment ? '3rem' : textareaHeight;
+            if (props.value) {
+                textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
+            }
+        }
+    }, [props.value, props.isComment]);
 
     function textareaFocusHandler(evt) {
         evt.target.selectionStart = evt.target.value.length;
@@ -75,7 +86,7 @@ function Input(props) {
                         className={classes.input}
                         value={props.value}
                         onClick={props.onClick}
-                        onChange={changeHandler}
+                        onChange={props.onChange}
                         autoFocus={props.autoFocus}
                         required={props.required}
                         readOnly={props.readOnly}

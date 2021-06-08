@@ -65,7 +65,7 @@ function AddNewClient(props) {
                     value={address}
                     onChange={evt => setAddress(evt.target.value)} />
                 <Input
-                    style={{ height: '56px' }}
+                    isComment={true}
                     label='Комментарий'
                     value={comment}
                     onChange={evt => setComment(evt.target.value)} />

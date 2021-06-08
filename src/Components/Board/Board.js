@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import classes from './Board.module.scss';
 import BoardBody from './BoardBody/BoardBody';
-import AddNewColumn from './AddNewColumn/AddNewColumn';
-import Search from '../../Plugins/Search/Search';
 import AddNewTask from '../Modals/Tasks/AddNewTask';
 import UpdateTask from '../Modals/Tasks/UpdateTask';
 import Confirm from '../Modals/Confirm/ConfirmRemoveColumn';
 import Modal from '../../HOC/Modal/Modal';
+import SectionHeader from '../../HOC/SectionHeader/SectionHeader';
 
 function Board() {
     const [isAddNewTaskModalOpen, setIsAddNewTaskModalOpen] = useState(false);
@@ -50,13 +49,7 @@ function Board() {
 
     return (
         <section className={classes.Board}>
-            <div className={classes.header}>
-                <h1 className={classes.heading}>Доска задач</h1>
-                <div className={classes.buttons}>
-                    <Search setColumnsSearch={setColumnsSearch} />
-                    <AddNewColumn />
-                </div>
-            </div>
+            <SectionHeader heading='Доска задач' setSearchValue={setColumnsSearch} />
             <BoardBody
                 searchValue={searchValue}
                 openAddNewTaskModal={openAddNewTaskModal}

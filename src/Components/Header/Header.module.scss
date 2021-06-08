@@ -187,10 +187,6 @@
         .navigation ul {
             li {
                 margin: 10px;
-
-                a {
-                    padding: 0 5px;
-                }
             }
         }
     }
@@ -207,6 +203,15 @@
             li {
                 margin: 5px 0;
             }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .Header {
+        .burger {
+            top: 40px;
+            right: -100px;
         }
     }
 }

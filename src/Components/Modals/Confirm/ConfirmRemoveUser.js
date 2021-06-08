@@ -16,7 +16,7 @@ function ConfirmRemoveUser(props) {
     }
 
     return (
-        <div className={classes.Container} style={{ width: '420px' }}>
+        <div className={classes.Container}>
             <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
             <h2>Удалить пользоваетля?</h2>
             <p>Вы уверены, что хотите удалить пользователя? Он потеряет доступ к этому пространству.</p>

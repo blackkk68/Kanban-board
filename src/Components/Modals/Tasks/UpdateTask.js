@@ -68,7 +68,7 @@ function UpdateTask(props) {
                 <SelectPriority currentValue={priority} updatePriority={updatePriority} />
                 <SelectClient currentValue={client} updateClient={updateClient} />
                 <Input
-                    style={{ height: '56px' }}
+                    isComment={true}
                     label='Комментарий'
                     value={taskComment}
                     onChange={evt => setTaskComment(evt.target.value)} />

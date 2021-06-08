@@ -22,7 +22,7 @@ function ConfirmRemoveSpace(props) {
     }
 
     return (
-        <div className={classes.Container} style={{ width: '420px' }}>
+        <div className={classes.Container}>
             <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
             <h2>Удалить это пространство?</h2>
             <p>Вы уверены, что хотите удалить пространство? Все данные, содержащиеся в нем, будут потеряны.</p>
