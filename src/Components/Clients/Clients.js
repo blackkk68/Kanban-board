@@ -5,6 +5,7 @@ import Search from '../../Plugins/Search/Search';
 import AddNewClient from '../Modals/Clients/AddNewClient';
 import UpdateClient from '../Modals/Clients/UpdateClient';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import SectionHeader from '../../HOC/SectionHeader/SectionHeader';
 import clients from '../../Store/clients';
 import Modal from '../../HOC/Modal/Modal';
 
@@ -39,15 +40,7 @@ function Clients() {
 
     return (
         <section className={classes.Clients}>
-            <div className={classes.header}>
-                <h1 className={classes.heading}>Клиенты</h1>
-                {clients.clients.length
-                    ? <div className={classes.buttons}>
-                        <Search setSearchClients={setSearchClients} />
-                        <AddCircleOutlineIcon className={classes.plus} onClick={openAddClientModal} />
-                    </div>
-                    : null}
-            </div>
+            <SectionHeader heading='Клиенты' setSearchValue={setSearchClients} plusHandler={openAddClientModal} />
             <ClientsBody
                 searchValue={searchValue}
                 isAddClientModalOpen={isAddClientModalOpen}

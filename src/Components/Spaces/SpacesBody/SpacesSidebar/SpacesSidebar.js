@@ -125,7 +125,7 @@ function SpacesSidebar(props) {
                         label='Описание'
                         value={descriptionValue}
                         onChange={evt => setDescriptionValue(evt.target.value)}
-                        style={{ height: '56px' }}
+                        isBig={true}
                         onBlur={blurHandler} />
                 </div>
                 <div className={classes.users}>

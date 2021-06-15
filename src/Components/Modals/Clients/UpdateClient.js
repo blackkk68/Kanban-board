@@ -65,7 +65,7 @@ function UpdateClient(props) {
                     value={address}
                     onChange={evt => setAddress(evt.target.value)} />
                 <Input
-                    isComment={true}
+                    isBig={true}
                     label='Комментарий'
                     value={comment}
                     onChange={evt => setComment(evt.target.value)} />

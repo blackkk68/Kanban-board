@@ -58,7 +58,7 @@ function AddNewTask(props) {
                 <SelectPriority addPriority={addPriority} />
                 <SelectClient addClient={addClient} />
                 <Input
-                    isComment={true}
+                    isBig={true}
                     value={taskComment}
                     onChange={evt => setTaskComment(evt.target.value)}
                     label='Комментарий' />

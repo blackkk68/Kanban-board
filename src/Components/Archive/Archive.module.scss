@@ -2,20 +2,4 @@
     height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr;
-
-    .header {
-        width: 87%;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #5f6080;
-        padding: 20px 45px;
-
-        .heading {
-            margin: 0;
-            font-size: 37px;
-            text-align: left;
-        }
-    }
 }

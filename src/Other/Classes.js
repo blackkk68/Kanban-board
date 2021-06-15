@@ -35,3 +35,13 @@ export class Task {
         this.priority = options.priority;
     }
 }
+
+export class Column {
+    constructor(heading, newColIndex) {
+        this.id = new Date().getTime();
+        this.heading = heading;
+        this.tasks = [];
+        this.index = newColIndex;
+        this.deletable = true;
+    }
+}

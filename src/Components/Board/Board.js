@@ -6,8 +6,10 @@ import UpdateTask from '../Modals/Tasks/UpdateTask';
 import Confirm from '../Modals/Confirm/ConfirmRemoveColumn';
 import Modal from '../../HOC/Modal/Modal';
 import SectionHeader from '../../HOC/SectionHeader/SectionHeader';
+import AddNewColumn from '../Modals/Tasks/AddNewColumn';
 
 function Board() {
+    const [isAddNewColumnsModalOpen, setIsAddNewColumnsModalOpen] = useState(false);
     const [isAddNewTaskModalOpen, setIsAddNewTaskModalOpen] = useState(false);
     const [isUpdateTaskModalOpen, setIsUpdateTaskModalOpen] = useState(false);
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
@@ -47,9 +49,17 @@ function Board() {
         setIsConfirmModalOpen(false);
     }
 
+    function openAddNewColumnsModal() {
+        setIsAddNewColumnsModalOpen(true);
+    }
+
+    function closeAddNewColumnsModal() {
+        setIsAddNewColumnsModalOpen(false);
+    }
+
     return (
         <section className={classes.Board}>
-            <SectionHeader heading='Доска задач' setSearchValue={setColumnsSearch} />
+            <SectionHeader heading='Доска задач' setSearchValue={setColumnsSearch} plusHandler={openAddNewColumnsModal} />
             <BoardBody
                 searchValue={searchValue}
                 openAddNewTaskModal={openAddNewTaskModal}
@@ -63,6 +73,9 @@ function Board() {
             </Modal>
             <Modal isModalOpen={isUpdateTaskModalOpen} closeModal={closeUpdateTaskModal}>
                 <UpdateTask closeModal={closeUpdateTaskModal} colId={currentColumnId} taskId={currentTaskId} />
+            </Modal>
+            <Modal isModalOpen={isAddNewColumnsModalOpen} closeModal={closeAddNewColumnsModal}>
+                <AddNewColumn closeModal={closeAddNewColumnsModal} />
             </Modal>
         </section>
     )

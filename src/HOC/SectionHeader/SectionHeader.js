@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './SectionHeader.module.scss';
 import Search from '../../Plugins/Search/Search';
-import AddNewColumn from '../../Components/Board/AddNewColumn/AddNewColumn';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 function SectionHeader(props) {
 
@@ -9,8 +9,8 @@ function SectionHeader(props) {
         <div className={classes.SectionHeader}>
             <h1 className={classes.heading}>{props.heading}</h1>
             <div className={classes.buttons}>
-                <Search setColumnsSearch={props.setSearchValue} />
-                <AddNewColumn />
+                {props.setSearchValue ? <Search setColumnsSearch={props.setSearchValue} /> : null}
+                {props.plusHandler ? <AddCircleOutlineIcon className={classes.plus} onClick={props.plusHandler} /> : null}
             </div>
         </div>
     )

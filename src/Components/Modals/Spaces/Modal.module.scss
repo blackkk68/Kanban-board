@@ -22,7 +22,7 @@
         font-size: 25px;
         padding: 5px;
         margin-top: 15px;
-        margin-bottom: 0;
+        margin-bottom: 5px;
     }
 
     p {
@@ -45,7 +45,25 @@
         width: 100%;
         display: flex;
         justify-content: space-around;
-        margin-top: 10px;
+        margin-top: 15px;
+    }
+
+    .modalContent {
+        display: none;
+
+        &.open {
+            display: block;
+        }
+    }
+
+    .errorMessage {
+        display: none;
+        color: crimson;
+        font-size: 0.7rem;
+
+        &.show {
+            display: block;
+        }
     }
 
     .codeField {

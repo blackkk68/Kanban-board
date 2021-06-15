@@ -22,12 +22,12 @@ function Input(props) {
             textareaHeight = '2.2rem';
         }
         if (textAreaRef.current) {
-            textAreaRef.current.style.height = props.isComment ? '3rem' : textareaHeight;
+            textAreaRef.current.style.height = props.isBig ? '3rem' : textareaHeight;
             if (props.value) {
                 textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
             }
         }
-    }, [props.value, props.isComment]);
+    }, [props.value, props.isBig]);
 
     function textareaFocusHandler(evt) {
         evt.target.selectionStart = evt.target.value.length;
