@@ -16,7 +16,7 @@ class UserData {
 
     updateUserServerData = async (newUserData) => {
         try {
-            updateToken();
+            await updateToken();
             await axios.patch(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/users/${this.userData.id}.json?auth=${tokenDataStore.tokenData.token}`, newUserData);
             this.updateUserData(newUserData);
         } catch (error) {

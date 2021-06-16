@@ -5,15 +5,15 @@
 
     .cross {
         position: absolute;
-        font-size: 18px;
+        font-size: 1rem;
         padding: 3px;
         right: 7px;
         top: 29px;
-        color: #999ab3;
+        color: #5f6080;
         transition: color 0.1s ease-in;
 
         &:hover {
-            color: #5f6080;
+            color: lighten(#5f6080, 15%);
         }
     }
 

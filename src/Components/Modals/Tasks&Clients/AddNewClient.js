@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import classes from './Modal.module.scss';
-import CloseIcon from '@material-ui/icons/Close';
 import Input from '../../../Plugins/Input/Input';
 import Button from '../../../Plugins/Button/Button';
+import { Client } from '../../../Other/Classes';
 import clients from '../../../Store/clients';
 
 function AddNewClient(props) {
@@ -13,33 +13,22 @@ function AddNewClient(props) {
     const [address, setAddress] = useState('');
     const [comment, setComment] = useState('');
 
-    class Client {
-        constructor(options) {
-            this.companyTitle = options.companyTitle;
-            this.contact = options.contact;
-            this.phone = options.phone;
-            this.email = options.email;
-            this.address = options.address;
-            this.comment = options.comment;
-            this.id = new Date().getTime();
-        }
-    }
-
     function addNewClient() {
         const newClient = new Client({ companyTitle, contact, phone, email, address, comment });
         clients.addClient(newClient);
         props.closeModal();
     }
 
-    function crossClickHandler() {
-        props.closeModal();
+    function keyHandler(evt) {
+        if (evt.code === 'Enter') {
+            addNewClient();
+        }
     }
 
     return (
         <div className={classes.Container}>
-            <CloseIcon className={classes.cross} onClick={crossClickHandler} />
             <h2>Новый клиент</h2>
-            <div className={classes.form}>
+            <div className={classes.form} onKeyDown={keyHandler}>
                 <Input
                     label='Название организации'
                     autoFocus={true}

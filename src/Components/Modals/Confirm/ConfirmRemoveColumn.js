@@ -1,11 +1,10 @@
 import React from 'react';
 import classes from './Modal.module.scss';
 import Button from '../../../Plugins/Button/Button';
-import CloseIcon from '@material-ui/icons/Close';
 import columnsStore from '../../../Store/columns';
 import archiveStore from '../../../Store/archive';
 
-function Confirm(props) {
+function ConfirmRemoveColumn(props) {
     function removeColumn() {
         const columns = columnsStore.columns.slice();
         const column = columns.find(item => item.id === props.colId);
@@ -21,7 +20,6 @@ function Confirm(props) {
 
     return (
         <div className={classes.Container}>
-            <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
             <h2>Удалить этап?</h2>
             <p>Вы уверены, что хотите удалить этап? Все задачи будут помещены в архив.</p>
             <div className={classes.buttons}>
@@ -32,4 +30,4 @@ function Confirm(props) {
     )
 }
 
-export default Confirm;
+export default ConfirmRemoveColumn;

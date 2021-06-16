@@ -9,7 +9,7 @@ import AddNewUser from '../Modals/Spaces/AddNewUser';
 import Modal from '../../HOC/Modal/Modal';
 import SectionHeader from '../../HOC/SectionHeader/SectionHeader';
 
-function Spaces(props) {
+function Spaces() {
     const [isConfirmLeaveSpaceModalOpen, setIsConfirmLeaveSpaceModalOpen] = useState(false);
     const [isConfirmRemoveUserModalOpen, setIsConfirmRemoveUserModalOpen] = useState(false);
     const [isConfirmRemoveSpaceModalOpen, setIsConfirmRemoveSpaceModalOpen] = useState(false);
@@ -51,7 +51,6 @@ function Spaces(props) {
             <section className={classes.Spaces}>
                 <SectionHeader heading='Пространства' plusHandler={toggleAddSpaceModal} />
                 <SpacesBody
-                    setDataFromServer={props.setDataFromServer}
                     toggleConfirmLeaveSpaceModal={toggleConfirmLeaveSpaceModal}
                     toggleConfirmRemoveSpaceModal={toggleConfirmRemoveSpaceModal}
                     toggleConfirmRemoveUserModal={toggleConfirmRemoveUserModal}
@@ -61,13 +60,13 @@ function Spaces(props) {
                 <AddSpace closeModal={toggleAddSpaceModal} />
             </Modal>
             <Modal isModalOpen={isConfirmLeaveSpaceModalOpen} closeModal={toggleConfirmLeaveSpaceModal}>
-                <ConfirmLeaveSpace setDataFromServer={props.setDataFromServer} clickedSpaceIndex={clickedSpaceIndex} closeModal={toggleConfirmLeaveSpaceModal} />
+                <ConfirmLeaveSpace clickedSpaceIndex={clickedSpaceIndex} closeModal={toggleConfirmLeaveSpaceModal} />
             </Modal>
             <Modal isModalOpen={isConfirmRemoveUserModalOpen} closeModal={toggleConfirmRemoveUserModal}>
                 <ConfirmRemoveUser clickedSpaceIndex={clickedSpaceIndex} removingUserId={removingUserId} closeModal={toggleConfirmRemoveUserModal} />
             </Modal>
             <Modal isModalOpen={isConfirmRemoveSpaceModalOpen} closeModal={toggleConfirmRemoveSpaceModal}>
-                <ConfirmRemoveSpace setDataFromServer={props.setDataFromServer} clickedSpaceIndex={clickedSpaceIndex} closeModal={toggleConfirmRemoveSpaceModal} />
+                <ConfirmRemoveSpace clickedSpaceIndex={clickedSpaceIndex} closeModal={toggleConfirmRemoveSpaceModal} />
             </Modal>
             <Modal isModalOpen={isAddUserModalOpen} closeModal={toggleAddUserModal}>
                 <AddNewUser currentSpace={currentSpace} closeModal={toggleAddUserModal} />

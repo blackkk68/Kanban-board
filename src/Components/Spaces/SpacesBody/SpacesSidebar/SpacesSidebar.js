@@ -74,7 +74,6 @@ function SpacesSidebar(props) {
         updateSpaces(currentSpace);
         setIsCurrentSpaceActive(true);
         closeContextMenu();
-        props.setDataFromServer();
     }
 
     function leaveSpace() {

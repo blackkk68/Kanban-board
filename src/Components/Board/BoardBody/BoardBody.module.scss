@@ -27,7 +27,7 @@
 @media (max-width: 480px) {
     .BoardBody {
         padding: 30px 30px;
-        flex-wrap: wrap;
+        flex-direction: column;
         overflow-y: auto;
         gap: 25px;
     }

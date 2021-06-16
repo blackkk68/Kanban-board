@@ -32,6 +32,7 @@
         border-radius: 15px;
         box-sizing: border-box;
         transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+        position: relative;
 
         &.exiting {
             opacity: 0;
@@ -46,6 +47,20 @@
         &.entering {
             opacity: 0;
             transform: translateY(-50px);
+        }
+
+        .cross {
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2rem;
+            z-index: 1;
+            transition: color 0.1s ease-in;
+
+            &:hover {
+                color: lighten(#5f6080, 15%);
+            }
         }
     }
 }

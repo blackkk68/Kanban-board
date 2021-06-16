@@ -7,6 +7,7 @@ import tokenDataStore from '../../../Store/tokenData';
 import spacesStore from '../../../Store/spaces';
 import { UserDataLocal } from '../../../Other/Classes';
 import { emailValidation, passwordValidation } from '../../../Other/InputsValidation';
+import { setDataFromServer } from '../../../Other/SetDataFromServer';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -62,7 +63,8 @@ function Login(props) {
             spacesStore.updateSpaces(spaces);
             spacesStore.updateActiveSpace(activeSpace);
             userDataStore.updateUserData(userData);
-            props.setDataFromServer();
+            await setDataFromServer();
+            props.logIn();
             history.replace(`/${activeSpace.id}/`);
         } catch (err) {
             console.error('err: ', err);
@@ -70,7 +72,8 @@ function Login(props) {
         }
     }
 
-    function submitClickHandler() {
+    function submitHandler(evt) {
+        evt.preventDefault();
         if (isEmailValid && isPasswordValid) {
             loginSubmitHandler();
         } else {
@@ -82,7 +85,7 @@ function Login(props) {
         <React.Fragment>
             <h2>Вход</h2>
             <div className={classes.error}>{error.length ? <span>{error}</span> : ''}</div>
-            <form>
+            <form onSubmit={submitHandler}>
                 <Input
                     type='email'
                     label='Email'
@@ -98,10 +101,10 @@ function Login(props) {
                     isValid={isPasswordValid}
                     errorMessage='Минимальная длина пароля: 6 символов' />
                 <span className={classes.forgotPassword} onClick={() => props.forgotPassword()}>Забыли пароль?</span>
+                <div className={classes.buttons}>
+                    <Button type='submit' cls='primary' text='Войти' />
+                </div>
             </form>
-            <div className={classes.buttons}>
-                <Button cls='primary' text='Войти' onClick={submitClickHandler} />
-            </div>
         </React.Fragment>
     )
 }

@@ -9,9 +9,9 @@ function Input(props) {
     const htmlFor = Math.random().toString(36);
     const textAreaRef = useRef(null);
     const inputRef = useRef(null);
-    let textareaHeight = '1.9rem';
 
     useEffect(() => {
+        let textareaHeight = '1.9rem';
         if (window.innerWidth < 1200) {
             textareaHeight = '2rem';
         }

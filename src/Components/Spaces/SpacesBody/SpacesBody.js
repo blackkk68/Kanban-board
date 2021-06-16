@@ -45,7 +45,6 @@ function SpacesBody(props) {
                 clickedSpaceIndex={clickedSpaceIndex}
                 closeSidebar={closeSidebar}
                 isSidebarOpen={isSidebarOpen}
-                setDataFromServer={props.setDataFromServer}
                 toggleConfirmLeaveSpaceModal={props.toggleConfirmLeaveSpaceModal}
                 toggleConfirmRemoveUserModal={props.toggleConfirmRemoveUserModal}
                 toggleConfirmRemoveSpaceModal={props.toggleConfirmRemoveSpaceModal}

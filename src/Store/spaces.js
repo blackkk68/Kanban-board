@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { updateToken } from '../Other/UpdateToken';
+import { setDataFromServer } from '../Other/SetDataFromServer';
 import tokenDataStore from './tokenData';
 import userDataStore from './userData';
 import axios from 'axios';
@@ -15,6 +16,7 @@ class Spaces {
     updateActiveSpace(newActiveSpace) {
         this.activeSpace = newActiveSpace;
         localStorage.setItem('activeSpace', JSON.stringify(newActiveSpace));
+        setDataFromServer();
     }
 
     updateSpaces(updatedSpaces) {
@@ -28,7 +30,7 @@ class Spaces {
 
     updateSpacesServerData = async (updatedSpaces, newActiveSpace) => {
         try {
-            updateToken();
+            await updateToken();
             const filteredUpdatedSpaces = updatedSpaces.filter(item => item && item.users.find(item => item.id === userDataStore.userData.id));
             this.updateSpaces(filteredUpdatedSpaces);
             if (newActiveSpace) {

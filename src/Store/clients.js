@@ -23,23 +23,17 @@ class Clients {
         this.updateClientsServerData();
     }
 
-    updateClient(updatedClient) {
-        this.clients.forEach(item => {
-            if (item.id === updatedClient.id) {
-                item = updatedClient;
-            }
-        })
-        this.updateClientsServerData();
-    }
-
     updateClients(newClients) {
         this.clients = newClients.slice();
         localStorage.setItem('clients', JSON.stringify(this.clients));
     }
 
-    updateClientsServerData = async () => {
+    updateClientsServerData = async (updatedClients) => {
         try {
-            updateToken();
+            if (updatedClients) {
+                this.clients = updatedClients;
+            }
+            await updateToken();
             await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spaces.activeSpace.id}/clients.json?auth=${tokenDataStore.tokenData.token}`, this.clients);
             localStorage.setItem('clients', JSON.stringify(this.clients));
         } catch (err) {

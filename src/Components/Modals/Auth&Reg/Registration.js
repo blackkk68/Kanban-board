@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 import { UserDataServer, UserDataLocal, Space } from '../../../Other/Classes';
 import { nameValidation, surnameValidation, emailValidation, passwordValidation, repeatPasswordValidation } from '../../../Other/InputsValidation';
 import VerifyEmail from './VerifyEmail';
+import { setDataFromServer } from '../../../Other/SetDataFromServer';
 import axios from 'axios';
 
 function Registration(props) {
@@ -103,7 +104,8 @@ function Registration(props) {
             tokenDataStore.updateTokenData(tokenData);
             userDataStore.updateUserData(userData);
             spacesStore.updateSpacesServerData(initialSpace, initialSpace[0]);
-            props.setDataFromServer();
+            await setDataFromServer();
+            props.logIn();
             history.replace(`/${initialSpace[0].id}/`);
         } catch (err) {
             console.error('err: ', err);

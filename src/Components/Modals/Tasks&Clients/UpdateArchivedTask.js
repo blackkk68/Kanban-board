@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './Modal.module.scss';
-import CloseIcon from '@material-ui/icons/Close';
 import SelectClient from '../../../Plugins/Selects/SelectClient';
 import SelectPriority from '../../../Plugins/Selects/SelectPriority';
 import Input from '../../../Plugins/Input/Input';
@@ -46,7 +45,6 @@ function UpdateArchiveTask(props) {
 
     return (
         <div className={classes.Container}>
-            <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
             <h2>Задача</h2>
             <div className={classes.form}>
                 <Input

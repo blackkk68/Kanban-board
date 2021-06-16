@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from './Modal.module.scss';
 import Button from '../../../Plugins/Button/Button';
-import CloseIcon from '@material-ui/icons/Close';
 import spacesStore from '../../../Store/spaces';
 
 function ConfirmLeaveSpace(props) {
@@ -25,7 +24,6 @@ function ConfirmLeaveSpace(props) {
 
     return (
         <div className={classes.Container}>
-            <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
             <h2>Покинуть это пространство?</h2>
             <p>Вы уверены, что хотите покинуть пространство? Вернуться в него может быть затруднительно.</p>
             <div className={classes.buttons}>

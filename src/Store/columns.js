@@ -46,10 +46,10 @@ class Columns {
 
     updateColumnsServerData = async (updatedColumns) => {
         try {
-            updateToken();
             if (updatedColumns) {
                 this.columns = updatedColumns;
             }
+            await updateToken();
             await axios.put(`https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spaces.activeSpace.id}/columns.json?auth=${tokenDataStore.tokenData.token}`, this.columns);
             localStorage.setItem('columns', JSON.stringify(this.columns));
         } catch (err) {

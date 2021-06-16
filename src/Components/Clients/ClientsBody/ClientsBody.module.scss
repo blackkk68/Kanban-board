@@ -1,31 +1,32 @@
 .ClientsBody {
-    padding: 50px;
+    padding: 50px 175px;
     box-sizing: border-box;
     position: relative;
 
     .clientsListHeader {
-        margin: 0 150px;
-        padding: 0 15px;
+        margin: 0;
+        padding: 0 10px;
         display: flex;
         justify-content: space-between;
 
         p {
             opacity: 0.7;
+            flex-grow: 1;
 
             &:nth-child(1) {
-                width: 30%;
+                min-width: 30%;
             }
 
             &:nth-child(2) {
-                width: 30%;
+                min-width: 30%;
             }
 
             &:nth-child(3) {
-                width: 20%;
+                min-width: 15%;
             }
 
             &:nth-child(4) {
-                width: 20%;
+                min-width: 25%;
                 text-align: right;
             }
         }
@@ -37,16 +38,17 @@
         padding: 0;
 
         .client {
-            margin: 0 150px;
+            margin: 0;
             padding: 0 15px;
             display: flex;
             justify-content: space-between;
             box-shadow: 0 0 5px 1px lighten(#5f6080, 35%);
             background: #f7f8fc;
-            border-radius: 10px;
-            margin-bottom: 1px;
+            border-radius: 5px;
+            margin-bottom: 10px;
             cursor: pointer;
             transition: background 0.1s ease-in;
+            flex-grow: 1;
 
             &:hover {
                 background: darken(#f7f8fc, 2%);
@@ -60,19 +62,19 @@
                 padding-right: 10px;
 
                 &:nth-child(1) {
-                    width: 30%;
+                    min-width: 30%;
                 }
 
                 &:nth-child(2) {
-                    width: 30%;
+                    min-width: 30%;
                 }
 
                 &:nth-child(3) {
-                    width: 20%;
+                    min-width: 15%;
                 }
 
                 &:nth-child(4) {
-                    width: 20%;
+                    min-width: 25%;
                     text-align: right;
                     padding-right: 0;
                 }
@@ -98,6 +100,106 @@
             font-size: 22px;
             line-height: 27px;
             text-align: center;
+        }
+    }
+}
+
+@media (max-width: 1199px) {
+    .ClientsBody {
+        padding: 35px 125px;
+
+        .clientsListHeader {
+            p {
+                &:nth-child(1) {
+                    min-width: 35%;
+                }
+
+                &:nth-child(2) {
+                    min-width: 35%;
+                }
+
+                &:nth-child(3) {
+                    display: none;
+                }
+
+                &:nth-child(4) {
+                    min-width: 30%;
+                }
+            }
+        }
+
+        .clientsList {
+            .client {
+                p {
+                    &:nth-child(1) {
+                        min-width: 35%;
+                    }
+
+                    &:nth-child(2) {
+                        min-width: 35%;
+                    }
+
+                    &:nth-child(3) {
+                        display: none;
+                    }
+
+                    &:nth-child(4) {
+                        min-width: 30%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .ClientsBody {
+        padding: 25px 100px;
+    }
+}
+
+@media (max-width: 767px) {
+    .ClientsBody {
+        padding: 20px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ClientsBody {
+        padding: 15px 30px;
+
+        .clientsListHeader {
+            p {
+                &:nth-child(1) {
+                    min-width: 50%;
+                }
+
+                &:nth-child(2) {
+                    min-width: 50%;
+                }
+
+                &:nth-child(4) {
+                    display: none;
+                }
+            }
+        }
+
+        .clientsList {
+            .client {
+                p {
+                    &:nth-child(1) {
+                        min-width: 50%;
+                    }
+
+                    &:nth-child(2) {
+                        min-width: 50%;
+                    }
+
+                    &:nth-child(4) {
+                        display: none;
+                    }
+                }
+            }
         }
     }
 }

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import classes from './Modal.module.scss';
 import Input from '../../../Plugins/Input/Input';
 import Button from '../../../Plugins/Button/Button';
-import CloseIcon from '@material-ui/icons/Close';
 import clientsStore from '../../../Store/clients';
 
 function UpdateClient(props) {
@@ -22,12 +21,7 @@ function UpdateClient(props) {
         client.email = email;
         client.address = address;
         client.comment = comment;
-        clientsStore.updateClient(client);
-        props.closeModal();
-    }
-
-    function crossClickHandler() {
-        updateClient();
+        clientsStore.updateClientsServerData(clients);
         props.closeModal();
     }
 
@@ -36,11 +30,16 @@ function UpdateClient(props) {
         props.closeModal();
     }
 
+    function keyHandler(evt) {
+        if (evt.code === 'Enter') {
+            updateClient();
+        }
+    }
+
     return (
         <div className={classes.Container}>
-            <CloseIcon className={classes.cross} onClick={crossClickHandler} />
             <h2>Редактировать данные клиента</h2>
-            <div className={classes.form}>
+            <div className={classes.form} onKeyDown={keyHandler}>
                 <Input
                     label='Название организации'
                     autoFocus={true} value={companyTitle}

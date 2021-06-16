@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
 import classes from './Modal.module.scss';
-import CloseIcon from '@material-ui/icons/Close';
 
-function Confirm(props) {
+function AddNewUser(props) {
     const codeFieldRef = useRef(null);
 
     function copyClickHandler() {
@@ -12,7 +11,6 @@ function Confirm(props) {
 
     return (
         <div className={classes.Container} style={{ width: '420px' }}>
-            <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
             <h2>Пригласить пользователя</h2>
             <p>Отправьте данный код человеку, которого хотите пригласить</p>
             <div className={classes.codeField}>
@@ -23,4 +21,4 @@ function Confirm(props) {
     )
 }
 
-export default Confirm;
+export default AddNewUser;

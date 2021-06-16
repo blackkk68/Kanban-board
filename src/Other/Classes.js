@@ -45,3 +45,15 @@ export class Column {
         this.deletable = true;
     }
 }
+
+export class Client {
+    constructor(options) {
+        this.companyTitle = options.companyTitle;
+        this.contact = options.contact;
+        this.phone = options.phone;
+        this.email = options.email;
+        this.address = options.address;
+        this.comment = options.comment;
+        this.id = new Date().getTime();
+    }
+}

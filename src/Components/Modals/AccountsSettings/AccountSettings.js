@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import classes from './AccountSettings.module.scss';
 import Button from '../../../Plugins/Button/Button';
 import Input from '../../../Plugins/Input/Input';
-import CloseIcon from '@material-ui/icons/Close';
 import { nameValidation, surnameValidation, passwordValidation, repeatPasswordValidation } from '../../../Other/InputsValidation';
 import userDataStore from '../../../Store/userData';
 import axios from 'axios';
@@ -70,7 +69,6 @@ function AccountSettings(props) {
 
     return (
         <div className={classes.Container}>
-            <CloseIcon className={classes.cross} onClick={() => props.closeModal()} />
             <h2>Настройки аккаунта</h2>
             <div className={classes.content}>
                 <div className={classes.userData}>

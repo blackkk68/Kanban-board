@@ -8,17 +8,15 @@ import Spaces from './Components/Spaces/Spaces';
 import GreetingScreen from './Components/GreetingScreen/GreetingScreen';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import spacesStore from './Store/spaces';
-import tokenDataStore from './Store/tokenData';
-import columnsStore from './Store/columns';
-import clientsStore from './Store/clients';
-import archiveStore from './Store/archive';
-import { leastColumns } from './Other/Data';
 import { observer } from 'mobx-react';
-import axios from 'axios';
 
 const App = observer(() => {
   const [isLogined, setIsLogined] = useState(localStorage.getItem('userData') ? true : false);
   const history = useHistory();
+
+  function logIn() {
+    setIsLogined(true);
+  }
 
   function logOut() {
     history.replace('/login');
@@ -35,25 +33,6 @@ const App = observer(() => {
     }
   })
 
-  async function setDataFromServer() {
-    const columnsData = await axios.get(`
-    https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spacesStore.activeSpace.id}/columns.json?auth=${tokenDataStore.tokenData.token}`);
-    const newColumns = columnsData.data ? columnsData.data : leastColumns;
-    columnsStore.updateColumns(newColumns);
-
-    const clientsData = await axios.get(`
-    https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spacesStore.activeSpace.id}/clients.json?auth=${tokenDataStore.tokenData.token}`);
-    const newClients = clientsData.data ? clientsData.data : [];
-    clientsStore.updateClients(newClients);
-
-    const archiveData = await axios.get(`
-    https://kanban-board-7c75b-default-rtdb.firebaseio.com/spaces/${spacesStore.activeSpace.id}/archive.json?auth=${tokenDataStore.tokenData.token}`);
-    const newArchive = archiveData.data ? archiveData.data : [];
-    archiveStore.updateArchive(newArchive);
-
-    setIsLogined(true);
-  }
-
   return isLogined
     ? <React.Fragment>
       <Header isLogined={isLogined} logOut={logOut} />
@@ -62,11 +41,11 @@ const App = observer(() => {
           <Route exact path={`/${spacesStore.activeSpace.id}/`} component={Board} />
           <Route exact path={`/${spacesStore.activeSpace.id}/clients`} component={Clients} />
           <Route exact path={`/${spacesStore.activeSpace.id}/archive`} component={Archive} />
-          <Route exact path='/spaces' render={() => <Spaces setDataFromServer={setDataFromServer} />} />
+          <Route exact path='/spaces' component={Spaces} />
         </Switch>
       </main>
     </React.Fragment>
-    : <Route path='/login' render={() => <GreetingScreen setDataFromServer={setDataFromServer} />} />
+    : <Route path='/login' render={() => <GreetingScreen logIn={logIn} />} />
 });
 
 export default App;

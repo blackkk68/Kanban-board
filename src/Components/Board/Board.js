@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import classes from './Board.module.scss';
 import BoardBody from './BoardBody/BoardBody';
-import AddNewTask from '../Modals/Tasks/AddNewTask';
-import UpdateTask from '../Modals/Tasks/UpdateTask';
+import AddNewColumn from '../Modals/Tasks&Clients/AddNewColumn';
+import AddNewTask from '../Modals/Tasks&Clients/AddNewTask';
+import UpdateTask from '../Modals/Tasks&Clients/UpdateTask';
 import Confirm from '../Modals/Confirm/ConfirmRemoveColumn';
 import Modal from '../../HOC/Modal/Modal';
 import SectionHeader from '../../HOC/SectionHeader/SectionHeader';
-import AddNewColumn from '../Modals/Tasks/AddNewColumn';
 
 function Board() {
     const [isAddNewColumnsModalOpen, setIsAddNewColumnsModalOpen] = useState(false);

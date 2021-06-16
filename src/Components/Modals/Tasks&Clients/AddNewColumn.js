@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import classes from './Modal.module.scss';
-import CloseIcon from '@material-ui/icons/Close';
 import Input from '../../../Plugins/Input/Input';
 import Button from '../../../Plugins/Button/Button';
 import columnsStore from '../../../Store/columns';
@@ -16,18 +15,14 @@ function AddNewColumn(props) {
         props.closeModal();
     }
 
-    function crossClickHandler() {
-        props.closeModal();
-    }
-
     function keyHandler(evt) {
         if (evt.code === 'Enter') {
+            addColumn();
         }
     }
 
     return (
         <div className={classes.Container}>
-            <CloseIcon className={classes.cross} onClick={crossClickHandler} />
             <h2 style={{ marginBottom: '10px' }}>Добавить этап</h2>
             <div className={classes.form} onKeyDown={keyHandler}>
                 <Input

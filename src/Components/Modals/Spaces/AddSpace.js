@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import classes from './Modal.module.scss';
-import CloseIcon from '@material-ui/icons/Close';
 import Input from '../../../Plugins/Input/Input';
 import Button from '../../../Plugins/Button/Button';
 import { Space } from '../../../Other/Classes';
@@ -15,10 +14,6 @@ function AddSpace(props) {
     const [descriptionValue, setDescriptionValue] = useState('');
     const [isAddNewSpaceActive, setIsAddNewSpaceActive] = useState(true);
     const [isErrorMessageShown, setIsErrorMessageShown] = useState(false);
-
-    function crossClickHandler() {
-        props.closeModal();
-    }
 
     function switchModal() {
         setIsAddNewSpaceActive(!isAddNewSpaceActive);
@@ -49,13 +44,13 @@ function AddSpace(props) {
 
     function keyHandler(evt) {
         if (evt.code === 'Enter') {
+            isAddNewSpaceActive ? addNewSpace() : addSpaceWithCode();
         }
     }
 
     return (
         <React.Fragment>
             <div className={classes.Container}>
-                <CloseIcon className={classes.cross} onClick={crossClickHandler} />
                 <div className={`${classes.modalContent} ${isAddNewSpaceActive ? classes.open : null}`}>
                     <h2>Новое пространство</h2>
                     <div className={classes.form} onKeyDown={keyHandler}>

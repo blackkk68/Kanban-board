@@ -23,7 +23,7 @@ class Archive {
 
     updateArchiveServerData = async (updatedArchive) => {
         try {
-            updateToken();
+            await updateToken();
             if (updatedArchive) {
                 this.archive = updatedArchive;
             }

@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import classes from './Clients.module.scss';
 import ClientsBody from './ClientsBody/ClientsBody';
-import Search from '../../Plugins/Search/Search';
-import AddNewClient from '../Modals/Clients/AddNewClient';
-import UpdateClient from '../Modals/Clients/UpdateClient';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import AddNewClient from '../Modals/Tasks&Clients/AddNewClient';
+import UpdateClient from '../Modals/Tasks&Clients/UpdateClient';
 import SectionHeader from '../../HOC/SectionHeader/SectionHeader';
 import clients from '../../Store/clients';
 import Modal from '../../HOC/Modal/Modal';
