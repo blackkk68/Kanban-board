@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './BoardBody.module.scss';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { observer } from 'mobx-react';
@@ -6,6 +6,8 @@ import columnsStore from '../../../Store/columns';
 import Columns from './Columns/Columns';
 
 const BoardBody = observer(props => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
     function onDragEnd(result) {
         const { destination, source, type } = result;
 
@@ -40,9 +42,16 @@ const BoardBody = observer(props => {
         columnsStore.updateColumnsServerData(columns);
     }
 
+    window.addEventListener('resize', setWidth);
+
+    function setWidth() {
+        setWindowWidth(window.innerWidth);
+        window.removeEventListener('resize', setWidth);
+    }
+
     return (
         <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId='columns' direction='horizontal' type='column'>
+            <Droppable droppableId='columns' direction={windowWidth <= 480 ? 'vertical' : 'horizontal'} type='column'>
                 {provided => {
                     return (
                         <section className={classes.BoardBody} {...provided.droppableProps} ref={provided.innerRef}>

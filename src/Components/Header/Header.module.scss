@@ -194,9 +194,15 @@
 
 @media (max-width: 767px) {
     .Header {
+        width: 245px;
+
+        .account {
+            margin-top: 0;
+        }
+
         .burger {
             top: 40px;
-            right: -105px;
+            right: -115px;
         }
 
         .navigation ul {
@@ -209,9 +215,11 @@
 
 @media (max-width: 480px) {
     .Header {
+        width: 240px;
+
         .burger {
             top: 40px;
-            right: -100px;
+            right: -110px;
         }
     }
 }

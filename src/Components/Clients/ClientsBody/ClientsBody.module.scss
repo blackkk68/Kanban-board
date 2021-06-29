@@ -1,4 +1,6 @@
 .ClientsBody {
+    max-width: 100vw;
+    min-width: 350px;
     padding: 50px 175px;
     box-sizing: border-box;
     position: relative;
@@ -160,7 +162,7 @@
 
 @media (max-width: 767px) {
     .ClientsBody {
-        padding: 20px 40px;
+        padding: 20px 35px;
     }
 }
 
@@ -188,11 +190,11 @@
             .client {
                 p {
                     &:nth-child(1) {
-                        min-width: 50%;
+                        max-width: 50%;
                     }
 
                     &:nth-child(2) {
-                        min-width: 50%;
+                        max-width: 50%;
                     }
 
                     &:nth-child(4) {
