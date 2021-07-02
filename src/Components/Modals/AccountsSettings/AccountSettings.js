@@ -73,10 +73,6 @@ function AccountSettings(props) {
             <div className={classes.content}>
                 <div className={classes.userData}>
                     <h3>Личные данные</h3>
-                    <div className={classes.userImg}>
-                        <i className="fa fa-user-o" />
-                        <span>Сменить изображение</span>
-                    </div>
                     <Input
                         type='text'
                         label='Имя'

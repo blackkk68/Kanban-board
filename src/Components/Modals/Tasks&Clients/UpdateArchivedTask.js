@@ -20,8 +20,7 @@ function UpdateArchiveTask(props) {
 
     function removeTask() {
         const taskIndex = archive.findIndex(item => item.id === props.taskId);
-        archive.splice(taskIndex, 1);
-        archiveStore.updateArchiveServerData(archive);
+        archiveStore.removeTask(taskIndex);
     }
 
     function deleteHandler() {

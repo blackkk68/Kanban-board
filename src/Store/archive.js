@@ -11,8 +11,13 @@ class Archive {
 
     archive = localStorage.getItem('archive') ? JSON.parse(localStorage.getItem('archive')) : [];
 
-    addItem(item) {
-        this.archive.push(item);
+    addTask(task) {
+        this.archive.push(task);
+        this.updateArchiveServerData();
+    }
+
+    removeTask(taskIndex) {
+        this.archive.splice(taskIndex, 1);
         this.updateArchiveServerData();
     }
 
