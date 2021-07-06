@@ -1,6 +1,6 @@
 .Container {
     background: #f7f8fc;
-    width: 520px;
+    width: 450px;
     height: auto;
     border-radius: 15px;
     box-sizing: border-box;
@@ -11,52 +11,23 @@
 
     h2 {
         text-align: center;
-        font-size: 25px;
-        padding: 5px;
-        margin-top: 15px;
-        margin-bottom: 5px;
+        font-size: 1.2rem;
+        margin-top: 5px;
+        margin-bottom: 0;
     }
 
     p {
         text-align: center;
         line-height: 25px;
-        margin-bottom: 30px;
-    }
-
-    .form {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 5px;
-        padding: 5px 25px;
-        box-sizing: border-box;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
     }
 
     .buttons {
         width: 100%;
         display: flex;
         justify-content: space-around;
-        margin-top: 15px;
-    }
-
-    .modalContent {
-        display: none;
-
-        &.open {
-            display: block;
-        }
-    }
-
-    .errorMessage {
-        display: none;
-        color: crimson;
-        font-size: 0.8rem;
-        margin: 0;
-
-        &.show {
-            display: block;
-        }
+        margin-top: 10px;
     }
 
     .codeField {
@@ -76,5 +47,27 @@
             right: 12px;
             cursor: pointer;
         }
+    }
+}
+
+@media (max-width: 1199px) {
+    .Container {
+        width: 400px;
+
+        .buttons {
+            margin-top: 0;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .Container {
+        width: 370px;
+    }
+}
+
+@media (max-width: 767px) {
+    .Container {
+        width: 320px;
     }
 }

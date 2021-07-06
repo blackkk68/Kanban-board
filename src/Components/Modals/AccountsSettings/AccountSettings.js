@@ -78,7 +78,6 @@ function AccountSettings(props) {
                         label='Имя'
                         value={nameValue}
                         onChange={nameChangeHandler}
-                        autoFocus
                         isValid={isNameValid}
                         errorMessage='Заполните это поле' />
                     <Input

@@ -10,7 +10,7 @@ function AddNewUser(props) {
     }
 
     return (
-        <div className={classes.Container} style={{ width: '420px' }}>
+        <div className={classes.Container}>
             <h2>Пригласить пользователя</h2>
             <p>Отправьте данный код человеку, которого хотите пригласить</p>
             <div className={classes.codeField}>

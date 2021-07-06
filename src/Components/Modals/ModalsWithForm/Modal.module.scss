@@ -11,7 +11,7 @@
 
     h2 {
         text-align: center;
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         margin-top: 5px;
         margin-bottom: 10px;
     }
@@ -30,6 +30,25 @@
         gap: 5px;
         padding: 5px 0;
         box-sizing: border-box;
+    }
+
+    .modalContent {
+        display: none;
+
+        &.open {
+            display: block;
+        }
+    }
+
+    .errorMessage {
+        display: none;
+        color: crimson;
+        font-size: 0.8rem;
+        margin: 0;
+
+        &.show {
+            display: block;
+        }
     }
 
     .buttons {
@@ -61,6 +80,10 @@
     .Container {
         width: 420px;
         padding: 15px 40px;
+
+        h2 {
+            margin-top: 10px;
+        }
 
         .buttons {
             margin-top: 15px;

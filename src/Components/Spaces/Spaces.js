@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import classes from './Spaces.module.scss';
 import SpacesBody from './SpacesBody/SpacesBody';
-import AddSpace from '../Modals/Spaces/AddSpace';
-import ConfirmLeaveSpace from '../Modals/Confirm/ConfirmLeaveSpace';
-import ConfirmRemoveUser from '../Modals/Confirm/ConfirmRemoveUser';
-import ConfirmRemoveSpace from '../Modals/Confirm/ConfirmRemoveSpace';
-import AddNewUser from '../Modals/Spaces/AddNewUser';
+import AddSpace from '../Modals/ModalsWithForm/AddSpace';
+import ConfirmLeaveSpace from '../Modals/TextModal/ConfirmLeaveSpace';
+import ConfirmRemoveUser from '../Modals/TextModal/ConfirmRemoveUser';
+import ConfirmRemoveSpace from '../Modals/TextModal/ConfirmRemoveSpace';
+import AddNewUser from '../Modals/TextModal/AddNewUser';
 import Modal from '../../HOC/Modal/Modal';
 import SectionHeader from '../../HOC/SectionHeader/SectionHeader';
 

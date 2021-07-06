@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './Archive.module.scss';
 import ArchiveBody from './ArchiveBody/ArchiveBody';
-import UpdateArchivedTask from '../Modals/Tasks&Clients/UpdateArchivedTask';
+import UpdateArchivedTask from '../Modals/ModalsWithForm/UpdateArchivedTask';
 import Modal from '../../HOC/Modal/Modal';
 import SectionHeader from '../../HOC/SectionHeader/SectionHeader';
 

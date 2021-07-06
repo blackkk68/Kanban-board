@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import classes from './Clients.module.scss';
 import ClientsBody from './ClientsBody/ClientsBody';
-import AddNewClient from '../Modals/Tasks&Clients/AddNewClient';
-import UpdateClient from '../Modals/Tasks&Clients/UpdateClient';
+import AddNewClient from '../Modals/ModalsWithForm/AddNewClient';
+import UpdateClient from '../Modals/ModalsWithForm/UpdateClient';
 import SectionHeader from '../../HOC/SectionHeader/SectionHeader';
 import clients from '../../Store/clients';
 import Modal from '../../HOC/Modal/Modal';
